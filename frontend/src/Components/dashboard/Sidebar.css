@@ -1,0 +1,135 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.sidebar {
+    width: 20%;
+    background-color: #850000;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 0px 50px 50px 0px;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    height: 100vh;
+    z-index: 1000;
+}
+
+.sidebar .list {
+    list-style-type: none;
+    padding-top: 50px;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.logo h1 {
+    margin-top: 30px;
+    margin-left: 14px;
+    color: #fff;
+    text-align: left;
+    font-size: xx-large;
+    font-weight: bolder;
+    border: none;
+}
+
+.logo .beDonor {
+    margin-top: 20px;
+    color: #850000;
+    text-align: center;
+    font-size: larger;
+    font-weight: bolder;
+    padding: 20px;
+    border-radius: 80px;
+    background-color: white;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.logo .beDonor:hover {
+    color: antiquewhite;
+    background-color: rgba(255, 255, 255, 0.383);
+    cursor: pointer;
+}
+
+.sidebar .listItem {
+    width: 100%;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #850000;
+    border: none;
+    text-align: left;
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    transition: 90ms ease-in;
+    margin-top: 5px;
+}
+
+.icon {
+    margin-right: 20px;
+    margin-top: -3px;
+}
+
+.signoutIcon {
+    margin-right: 10px;
+    /* margin-top: -3px; */
+}
+
+.sidebar .listItem:hover {
+    padding: 20px;
+    border: none;
+    text-align: center;
+    color: white;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.383);
+    cursor: pointer;
+}
+
+.signout {
+    margin-top: 200px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #850000;
+    border: none;
+    text-align: left;
+    font-weight: 500;
+    font-size: larger;
+    color: white;
+    display: flex;
+    align-items: center;
+    transition: 90ms ease-in;
+}
+
+.signout:hover {
+    padding: 20px;
+    border: none;
+    text-align: center;
+    color: antiquewhite;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.383);
+    cursor: pointer;
+}
+
+.active {
+    padding: 20px;
+    border: none;
+    text-align: center;
+    color: white;
+    border-image-repeat: 20px;
+    background-color: rgba(255, 255, 255, 0.383);
+    cursor: pointer;
+}
+
+.donorExists {
+    margin-top: 150px;
+}
