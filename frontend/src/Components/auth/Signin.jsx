@@ -90,19 +90,17 @@ const Signin = () => {
 
       setLoading(true);
       let { data } = await axios.post(
-        `https://localhost:8000/login`,
+        `http://localhost:8000/accounts/register/`,
         {
-          client_id: "0CrC6oe1segv5KpHxp9NdtMNflB1lDVi",
+          first_name: values.fname,
+          last_name: values.lname,
           email: values.email,
+          date_of_birth: values.date,
+          phone: values.number,
+          address: values.address,
+          adhaar_number: values.adhaar_number,
           password: values.password,
-          connection: "Username-Password-Authentication",
-          name: values.fname + " " + values.lname,
-          user_metadata: {
-            date: values.date,
-            number: values.number.toString(),
-            address: values.address,
-            adhaar_number: values.adhaar_number.toString(),
-          },
+          confirm_password: values.confirm_password,
         },
         {
           headers: {
