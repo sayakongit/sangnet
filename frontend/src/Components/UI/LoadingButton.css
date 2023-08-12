@@ -1,0 +1,16 @@
+.input-button:disabled {
+    background: #e7e8e9;
+    color: #9fa3a9;
+    cursor: not-allowed;
+}
+
+.loader-gif {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    background: url(https://cdn.dribbble.com/users/645440/screenshots/2830750/simple_dots.gif) no-repeat;
+    background-size: 20px 20px;
+    animation: loader 1.5s infinite ease-in-out;
+}
