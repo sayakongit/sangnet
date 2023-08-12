@@ -1,0 +1,131 @@
+.headerContainer {
+    padding: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 78vw;
+    flex-wrap: wrap;
+    margin-right: 10px;
+}
+
+.refresh {
+    all: unset;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.profileImage {
+    width: 10vw;
+    height: 10vw;
+    border-radius: 500px;
+    object-fit: contain;
+    background-color: rgb(255, 183, 0);
+}
+
+.lastUpdate {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    border-radius: 20px;
+    /* background-color: rgb(255, 248, 240); */
+    flex-wrap: wrap;
+}
+
+.updateBox {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.data {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.updateIcon {
+    cursor: pointer;
+}
+
+.updateIcon:hover {
+    color: red;
+}
+
+.updateText {
+    display: flex;
+    flex-direction: row;
+    cursor: default;
+    gap: 10px;
+    align-items: center;
+}
+
+.updateText h4 {
+    margin-left: 8px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+.name {
+    margin: 10px;
+}
+
+.editbutton {
+    margin: 10px;
+    width: 50%;
+    border: 2px solid red;
+    border-radius: 80px;
+    font-size: large;
+    padding: 10px 16px;
+    background-color: white;
+    color: red;
+    transition: all 0.3s ease;
+}
+
+.editbutton:hover {
+    background-color: red;
+    color: antiquewhite;
+    cursor: pointer;
+}
+
+.profileContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px;
+}
+
+.date {
+    margin-left: 10px;
+    color: rgba(0, 0, 0, 0.502);
+}
+
+.skiptranslate.goog-te-gadget {
+    color: #fff;
+    display: flex;
+    justify-content: flex-end;
+    visibility: hidden;
+    /* display: none; */
+}
+
+.skiptranslate.goog-te-gadget select {
+    padding: 12px 20px;
+    visibility: visible;
+    margin-right: -64px;
+    border: none;
+    outline: none;
+    border: 2px solid grey;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    /* display: inline !important; */
+}
+
+.skiptranslate.goog-te-gadget span{
+    display:none;
+}
+
+.editbutton {
+    width: 12rem;
+}
