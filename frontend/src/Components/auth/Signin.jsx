@@ -90,7 +90,7 @@ const Signin = () => {
 
       setLoading(true);
       let { data } = await axios.post(
-        `https://dev-4xds7qadrrlfysb2.us.auth0.com/dbconnections/signup`,
+        `https://localhost:8000/login`,
         {
           client_id: "0CrC6oe1segv5KpHxp9NdtMNflB1lDVi",
           email: values.email,
