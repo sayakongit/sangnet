@@ -1,0 +1,268 @@
+[
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "donationId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "donorId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "donorName",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "bloodGroup",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "donationDate",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "location",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "isUrgent",
+				"type": "bool"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "units",
+				"type": "uint256"
+			}
+		],
+		"name": "DonationRecorded",
+		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "donationCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "donations",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "donorId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "donorName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "bloodGroup",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "donationDate",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "location",
+				"type": "string"
+			},
+			{
+				"internalType": "bool",
+				"name": "isUrgent",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "units",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getDonations",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "donorId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "donorName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "bloodGroup",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "donationDate",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "location",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "isUrgent",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "units",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct BloodDonation.Donation[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "donorId",
+				"type": "uint256"
+			}
+		],
+		"name": "getDonationsForDonor",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "uint256",
+						"name": "donorId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "donorName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "bloodGroup",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "donationDate",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "location",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "isUrgent",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "units",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct BloodDonation.Donation[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "donorId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "donorName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "bloodGroup",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "donationDate",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "location",
+				"type": "string"
+			},
+			{
+				"internalType": "bool",
+				"name": "isUrgent",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "units",
+				"type": "uint256"
+			}
+		],
+		"name": "recordDonation",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	}
+]
