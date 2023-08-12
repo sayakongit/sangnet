@@ -1,0 +1,90 @@
+.request-container {
+    width: 50vw;
+    margin: auto;
+    /* background-color: antiquewhite; */
+    height: 80vh;
+    padding: 20px;
+    overflow-y: scroll;
+}
+
+.request-container::-webkit-scrollbar {
+    display: none;
+}
+
+.request-heading {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.request-form .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 16px;
+}
+
+.request-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.request-form select,
+.request-form input[type="date"],
+.request-form input[type="number"],
+.request-form textarea {
+    width: 100%;
+    padding: 20px;
+    border: black;
+    resize: vertical;
+}
+
+.request-form .submit-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #850000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.request-form .submit-button:hover {
+    background-color: #e3293e;
+}
+
+textarea {
+    background-color: #ffe4e4;
+    border-radius: 6px;
+    padding: 20px;
+}
+
+input {
+    background-color: #ffe4e4;
+    border-radius: 6px;
+    padding: 20px;
+}
+.activecls:focus{
+    outline: none;
+}
+select {
+    background-color: #ffe4e4;
+    border-radius: 6px;
+    padding: 20px;
+}
+
+option {
+    background-color: white;
+}
+.placeOfDonation{
+    border: none;
+}
+.emergencyRequirementBox{
+    display: flex;
+    align-content: center;
+}
+#emergencyRequirement{
+    margin-right: 10px;
+    margin-top: 5px;
+}
+.active{
+    text-align: left;
+}
