@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     margin-left: 285px;
-    padding: 0 18px;
 }
 
 .historyTable {
@@ -15,3 +14,11 @@
 .coloredBg:nth-child(even) {
     background-color: #ffdcdccb;
 }
+
+.historyErrorMessage {
+    padding: 20px;
+}
+
+.MuiButton-contained {
+    text-transform:capitalize !important;
+  }

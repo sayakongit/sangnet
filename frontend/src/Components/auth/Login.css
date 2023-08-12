@@ -1,86 +1,88 @@
 .form-container {
-  display: flex;
-  flex-direction: column;
-  margin-top: 50px;
-  width: 400px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    width: 400px;
 }
 
 .auth-heading {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 20px;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 20px;
 }
 
 .input-label {
-  font-size: 1rem;
-  font-weight: 400;
+    font-size: 1rem;
+    font-weight: 400;
 }
 
 .Email,
 .Password {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 10px;
-  margin: 8px 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    margin: 8px 0;
 }
 
 .form-container input {
-  border: none;
-  outline: none;
-  border-radius: 6px;
-  padding: 14px 16px;
-  background-color: #ffe4e4;
-  color: black;
-  border: 1px solid #ffffff;
-  transition: all 0.3s linear;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    padding: 14px 16px;
+    background-color: #ffe4e4;
+    color: black;
+    border: 1px solid #ffffff;
+    transition: all 0.3s linear;
 }
 
 .form-container input:focus {
-  background-color: white;
-  color: black;
-  transition: 100ms ease-in-out;
-  border: 1px solid #850000;
+    background-color: white;
+    color: black;
+    transition: 100ms ease-in-out;
+    border: 1px solid #850000;
 }
+
 
 .errors {
-  color: red;
-  font-size: 0.7rem;
+    color: red;
+    font-size: 0.7rem;
 }
 
+
 .input-button {
-  width: 100%;
-  background-color: #850000;
-  padding: 14px;
-  margin-top: 20px;
-  border-radius: 80px;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  font-size: 1.1rem;
-  font-weight: 500;
-  transition: all 0.3s ease-in;
+    width: 100%;
+    background-color: #850000;
+    padding: 14px;
+    margin-top: 20px;
+    border-radius: 80px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.3s ease-in;
 }
 
 .input-button:hover {
-  background-color: #6e0101;
+    background-color: #6e0101;
 }
 
 .form-bottom {
-  text-align: center;
-  margin-top: 30px;
+    text-align: center;
+    margin-top: 30px;
 }
 
 .form-bottom a {
-  color: #6e0101;
-  text-decoration: underline;
+    color: #6e0101;
+    text-decoration: underline;
 }
 
 .form-bottom a:hover {
-  color: #540000;
-  text-decoration: underline;
+    color: #540000;
+    text-decoration: underline;
 }
 
 .container_right.login::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
