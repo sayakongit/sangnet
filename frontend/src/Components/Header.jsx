@@ -15,6 +15,12 @@ const Header = () => {
 
 const { user, dispatch } = useAuthContext();
 
+const url = `http://localhost:8000`;
+  const navigate = useNavigate();
+  const gotoEdit = () => {
+    navigate("/edit-profile");
+};
+
 useEffect(() => {
     if (user === null) return;
     if (user.coordinates === null) {
@@ -22,11 +28,15 @@ useEffect(() => {
     }
   }, [user]);
 
-const url = `http://localhost:8000`;
-  const navigate = useNavigate();
-  const gotoEdit = () => {
-    navigate("/edit-profile");
-};
+  useEffect(() => {
+    var addScript = document.createElement("script");
+    addScript.setAttribute(
+      "src",
+      "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    );
+    document.body.appendChild(addScript);
+    window.googleTranslateElementInit = googleTranslateElementInit;
+  }, []);
 
 const jsdate = () => {
     const isodate = new Date(user.created_at);
@@ -41,6 +51,64 @@ const update = () => {
     const isotime = new Date(user.coordinates.last_updated);
     return dayjs(isotime).fromNow();
 };
+
+  // geoLocation
+  const geolocationAPI = navigator.geolocation;
+  const getUserCoordinates = () => {
+    if (!geolocationAPI) {
+      toast.error("Geolocation API is not available in your browser!");
+      return;
+    } else {
+      geolocationAPI.getCurrentPosition(
+        (position) => {
+          const { coords } = position;
+          try {
+            let { data } = axios.post(
+              `${url}/accounts/location/`,
+              {
+                email: user.email ? user.email : "",
+                longitude: coords.longitude,
+                latitude: coords.latitude,
+              },
+              {
+                headers: {
+                  "Content-type": "application/json",
+                },
+              }
+            );
+            dispatch({
+              type: "LOCATION",
+              payload: {
+                last_updated: new Date().toISOString(),
+                longitude: coords.longitude,
+                latitude: coords.latitude,
+              },
+            });
+            toast.success("Location updated successfully");
+          } catch (error) {
+            if (error.response.status === 400) {
+              toast.error(error.response.data.message);
+            } else {
+              toast.error("Something went wrong!");
+            }
+          }
+        },
+        (error) => {
+          toast.error(error.message);
+        }
+      );
+    }
+  };
+
+const googleTranslateElementInit = () => {
+    new window.google.translate.TranslateElement(
+      {
+        pageLanguage: "en",
+        layout: window.google.translate.TranslateElement.FloatPosition.TOP_LEFT,
+      },
+      "google_translate_element"
+    );
+  };
 
   return (
     <div className="headerContainer">
