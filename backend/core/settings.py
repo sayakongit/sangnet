@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'accounts',
+    'donor',
+    'donation_request',
 ]
 
 MIDDLEWARE = [
