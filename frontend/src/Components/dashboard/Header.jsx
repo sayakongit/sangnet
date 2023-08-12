@@ -12,45 +12,43 @@ import { useAuthContext } from "../../Hooks/useAuthContext";
 
 dayjs.extend(relativeTime);
 const Header = () => {
+  // get request to udpateprofile api
+  // const [response, setResponse] = useState(null);
+  const { user, dispatch } = useAuthContext();
 
-const { user, dispatch } = useAuthContext();
-
-const url = `http://localhost:8000`;
+  const url = `http://localhost:8000`;
   const navigate = useNavigate();
   const gotoEdit = () => {
     navigate("/edit-profile");
-};
+  };
+  // const fetchdata = async (user_id) => {
+  //   try {
+  //     let data = await axios.get(`${url}/accounts/profile/${user_id}`);
+  //     setResponse(data);
+  //     localStorage.setItem("is_donor", data.data.is_donor);
+  //     localStorage.setItem("donor_id", data.data.donor_id);
+  //   } catch (error) {
+  //     if (error.response.status === 400) {
+  //       toast.error(error.response.data.message);
+  //     } else {
+  //       toast.error("Something went wrong!");
+  //     }
+  //   }
+  // };
 
-useEffect(() => {
-    if (user === null) return;
-    if (user.coordinates === null) {
-      getUserCoordinates();
-    }
-  }, [user]);
-
-  useEffect(() => {
-    var addScript = document.createElement("script");
-    addScript.setAttribute(
-      "src",
-      "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
-    );
-    document.body.appendChild(addScript);
-    window.googleTranslateElementInit = googleTranslateElementInit;
-  }, []);
-
-const jsdate = () => {
+  const jsdate = () => {
     const isodate = new Date(user.created_at);
     const normalDate = dayjs(isodate).format("YYYY-MM-DD ");
     return dayjs(normalDate).fromNow();
-};
-const update = () => {
+  };
+  const update = () => {
     if (user.coordinates == null) {
       getUserCoordinates();
       return;
     }
     const isotime = new Date(user.coordinates.last_updated);
     return dayjs(isotime).fromNow();
-};
+  };
 
   // geoLocation
   const geolocationAPI = navigator.geolocation;
@@ -100,7 +98,19 @@ const update = () => {
     }
   };
 
-const googleTranslateElementInit = () => {
+  // useEffect(() => {
+  //   const user_id = localStorage.getItem("user_id");
+  //   if (user_id === null) return;
+  //   fetchdata(user_id);
+  // }, []);
+
+  useEffect(() => {
+    if (user === null) return;
+    if (user.coordinates === null) {
+      getUserCoordinates();
+    }
+  }, [user]);
+  const googleTranslateElementInit = () => {
     new window.google.translate.TranslateElement(
       {
         pageLanguage: "en",
@@ -110,6 +120,15 @@ const googleTranslateElementInit = () => {
     );
   };
 
+  useEffect(() => {
+    var addScript = document.createElement("script");
+    addScript.setAttribute(
+      "src",
+      "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+    );
+    document.body.appendChild(addScript);
+    window.googleTranslateElementInit = googleTranslateElementInit;
+  }, []);
   return (
     <div className="headerContainer">
       <div className="profile">

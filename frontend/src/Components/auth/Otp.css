@@ -1,120 +1,120 @@
 .wapper_otp {
-  margin: 0px;
-  border: none;
-  display: flex;
-  flex-direction: row;
+    margin: 0px;
+    border: none;
+    display: flex;
+    flex-direction: row;
 }
 
 .container_left_otp {
-  background: #850000;
-  color: White;
-  border: 2px solid #850000;
-  width: 35vw;
-  height: 100vh;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    background: #850000;
+    color: White;
+    border: 2px solid #850000;
+    width: 35vw;
+    height: 100vh;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-  h1 {
-    background-color: #850000;
-  }
+    h1 {
+        background-color: #850000;
+    }
 }
 
 .container_right_otp {
-  padding: 30px;
-  position: fixed;
-  top: 100px;
-  bottom: 100px;
-  left: 700px;
-  margin-left: 50px;
-  margin-right: auto;
-  color: black;
-  border-radius: 10px;
-
-  input {
+    padding: 30px;
+    position: fixed;
+    top: 100px;
+    bottom: 100px;
+    left: 700px;
+    margin-left: 50px;
+    margin-right: auto;
     color: black;
-  }
+    border-radius: 10px;
 
-  overflow: auto;
+    input {
+        color: black;
+    }
+
+    overflow: auto;
 }
 
 .form_container {
-  display: flex;
-  flex-direction: column;
-  margin-top: 50px;
-  width: 400px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 50px;
+    width: 400px;
 }
 
 .auth-heading.otp {
-  text-align: center;
+    text-align: center;
 }
 
 .auth-heading.otp h2 {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 8px;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 8px;
 }
 
 .auth-heading.otp p {
-  font-size: 1rem;
-  font-weight: 400;
-  color: rgb(164, 164, 164);
+    font-size: 1rem;
+    font-weight: 400;
+    color: rgb(164, 164, 164);
 }
 
 .form_container input {
-  border: none;
-  outline: none;
-  background-color: #ffe4e4;
-  border: 1px solid #ffffff;
-  color: black;
-  border-radius: 6px;
-  transition: all 0.3s linear;
-  width: 60px !important;
-  height: 60px !important;
-  font-size: 1.1rem;
-  margin-right: 0 !important;
+    border: none;
+    outline: none;
+    background-color: #ffe4e4;
+    border: 1px solid #ffffff;
+    color: black;
+    border-radius: 6px;
+    transition: all 0.3s linear;
+    width: 60px !important;
+    height: 60px !important;
+    font-size: 1.1rem;
+    margin-right: 0 !important;
 }
 
 .form_container input:focus {
-  background-color: white;
-  color: black;
-  transition: 100ms ease-in-out;
-  border: 1px solid #850000;
+    background-color: white;
+    color: black;
+    transition: 100ms ease-in-out;
+    border: 1px solid #850000;
 }
 
 .errors {
-  color: red;
-  font-size: 0.7rem;
+    color: red;
+    font-size: 0.7rem;
 }
 
 .container_right.login::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
 
-.auth_submit > button {
-  width: 100%;
-  background-color: #850000;
-  padding: 14px;
-  margin-top: 50px;
-  border-radius: 80px;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  font-size: 1.1rem;
-  font-weight: 500;
-  transition: all 0.3s ease-in;
+.auth_submit>button {
+    width: 100%;
+    background-color: #850000;
+    padding: 14px;
+    margin-top: 50px;
+    border-radius: 80px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.3s ease-in;
 }
 
 .auth_body {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
 }
 
-.auth_body > div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 36px;
+.auth_body>div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 36px;
 }

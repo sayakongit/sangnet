@@ -90,17 +90,17 @@ const Signin = () => {
 
       setLoading(true);
       let { data } = await axios.post(
-        `http://localhost:8000/accounts/register/`,
+        `${URL}/accounts/register/`,
         {
           first_name: values.fname,
           last_name: values.lname,
           email: values.email,
           date_of_birth: values.date,
           phone: values.number,
-          address: values.address,
           adhaar_number: values.adhaar_number,
           password: values.password,
           confirm_password: values.confirm_password,
+          address: values.address,
         },
         {
           headers: {
