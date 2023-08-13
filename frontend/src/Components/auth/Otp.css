@@ -6,9 +6,9 @@
 }
 
 .container_left_otp {
-    background: #850000;
+    background: #40339f;
     color: White;
-    border: 2px solid #850000;
+    border: 2px solid #40339f;
     width: 35vw;
     height: 100vh;
     text-align: center;
@@ -17,7 +17,7 @@
     align-items: center;
 
     h1 {
-        background-color: #850000;
+        background-color: #40339f;
     }
 }
 
@@ -65,7 +65,7 @@
 .form_container input {
     border: none;
     outline: none;
-    background-color: #ffe4e4;
+    background-color: #e4e4e4;
     border: 1px solid #ffffff;
     color: black;
     border-radius: 6px;
@@ -80,7 +80,7 @@
     background-color: white;
     color: black;
     transition: 100ms ease-in-out;
-    border: 1px solid #850000;
+    border: 1px solid #40339f;
 }
 
 .errors {
