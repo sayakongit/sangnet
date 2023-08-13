@@ -121,11 +121,20 @@
 .map-area img {
   width: 40px;
 }
+.form-group select {
+  background-color: #f6f6f6;
+  border: none;
+  outline: none;
+}
+.form-group input {
+  background-color: #f6f6f6;
+  border: none;
+}
 .requestDonorButton {
   padding: 18px 40px;
-  border: 2px solid red;
+  border: 2px solid #40339f;
   border-radius: 80px;
-  background-color: red;
+  background-color: #40339f;
   text-align: center;
   font-weight: 400;
   font-size: larger;
@@ -136,7 +145,7 @@
   margin-top: 50px;
 }
 .requestDonorButton:hover {
-  color: red;
+  color: #4436af;
   background-color: white;
   cursor: pointer;
 }
