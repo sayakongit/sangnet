@@ -32,6 +32,7 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import RotateLeftRoundedIcon from "@mui/icons-material/RotateLeftRounded";
 import { useAuthContext } from "../../../Hooks/useAuthContext";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 const HistoryReciever = () => {
   const [data, setData] = useState([]);
@@ -57,6 +58,7 @@ const HistoryReciever = () => {
     },
   };
   const { user } = useAuthContext();
+  const navigate = useNavigate();
 
   const url = "http://localhost:8000";
   const fetchRecieverHistory = async (user_id) => {
@@ -205,7 +207,7 @@ const HistoryReciever = () => {
 
         <div className="historyTable">
           {/* tooltip for filter */}
-          <Button variant="contained">Add New Request</Button>
+          <Button onClick={()=>{navigate("/request")}} variant="contained">Add New Request</Button>
           <Toolbar>
             <Typography
               sx={{ flex: "100%" }}
