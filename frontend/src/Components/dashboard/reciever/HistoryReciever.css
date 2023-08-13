@@ -8,11 +8,6 @@
     margin: 20px;
     padding: 10px;
     border: none;
-
-}
-
-.coloredBg:nth-child(even) {
-    background-color: #ffdcdccb;
 }
 
 .historyErrorMessage {

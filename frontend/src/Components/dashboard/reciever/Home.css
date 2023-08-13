@@ -1,3 +1,7 @@
+/* 40339f -green
+40339F-yellow
+*/
+
 .homeContainer {
   display: flex;
   flex-direction: row;
@@ -17,34 +21,36 @@
 }
 
 .donorList {
-  width: 45%;
+  width: 100%;
+  height: 100%;
+  /* padding-bottom: 1000px; */
 }
 
 .submitRequest {
   width: 94%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 14px;
 }
 
 .submitRequest button {
   /* margin-bottom: 20px; */
-  padding: 18px 40px;
-  border: 2px solid red;
-  border-radius: 80px;
-  background-color: red;
+  padding: 18px 50px;
+  border: 2px solid #40339f;
+  border-radius: 25px;
+  background-color: #40339f;
   text-align: center;
   font-weight: 400;
   font-size: larger;
   color: #fff;
   align-self: flex-start;
   transition: all 0.3s ease;
-  width: 100%;
+  width: 90%;
 }
 
 .submitRequest button:hover {
-  color: red;
-  background-color: white;
+  color: #40339f;
+  background-color: #fff;
   cursor: pointer;
 }
 
@@ -63,12 +69,10 @@
   margin-top: 20px;
   border-radius: 20px;
   padding: 24px;
-  min-height: 200px;
-  /* border: 2px solid rgba(0, 0, 0, 0.251);
-   */
   background: rgb(238, 238, 238);
-  overflow: scroll;
-  margin-bottom: 20px;
+  /* overflow: scroll; */
+  max-height: 400px;
+  margin-top: 50px;
 }
 
 .tabBox::-webkit-scrollbar {
@@ -86,11 +90,11 @@
   display: flex;
   flex-direction: row;
   margin-left: auto;
-  color: rgba(255, 0, 0, 0.77);
+  color: #40339f;
 }
 
 .donorName h2 {
-  color: rgba(255, 0, 0, 0.77);
+  color: #40339f;
   border: none;
   font-weight: 600 !important;
   font-size: 1.1rem;
@@ -117,11 +121,20 @@
 .map-area img {
   width: 40px;
 }
+.form-group select {
+  background-color: #f6f6f6;
+  border: none;
+  outline: none;
+}
+.form-group input {
+  background-color: #f6f6f6;
+  border: none;
+}
 .requestDonorButton {
   padding: 18px 40px;
-  border: 2px solid red;
+  border: 2px solid #40339f;
   border-radius: 80px;
-  background-color: red;
+  background-color: #40339f;
   text-align: center;
   font-weight: 400;
   font-size: larger;
@@ -132,7 +145,7 @@
   margin-top: 50px;
 }
 .requestDonorButton:hover {
-  color: red;
+  color: #4436af;
   background-color: white;
   cursor: pointer;
 }
@@ -155,4 +168,58 @@
 .tab-panel {
   max-height: 240px;
   overflow-y: scroll;
+  margin-top: 14px;
+}
+
+.home-footer {
+  /* border: 1px solid red; */
+  height: 200px;
+  width: 100%;
+
+  display: flex;
+  justify-content: flex-end;
+  color: #fff;
+}
+
+.footer-card {
+  background: #40339f;
+  padding: 20px 40px;
+  border-radius: 16px;
+  width: 600px;
+  margin-right: 20px;
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-between;
+  height: 100%;
+  /* border: 1px solid red; */
+  gap: 20px;
+  align-items: center;
+  overflow: hidden;
+}
+
+.footer-card > div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.footer-card h3 {
+  font-weight: 500;
+  font-size: 1.8rem;
+}
+
+.home-footer button {
+  border: none;
+  outline: none;
+  background: #fff;
+  color: #40339f;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.footer-card img {
+  width: 200px;
 }

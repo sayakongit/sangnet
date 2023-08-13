@@ -4,9 +4,9 @@
 
 .editContainerLeft {
 
-    background: #850000;
+    background: #40339f;
     color: White;
-    border: 2px solid #850000;
+    border: 2px solid #40339f;
     width: 35vw;
     height: 100vh;
     text-align: center;
@@ -17,7 +17,7 @@
 
 
 .editContainerLeft h1 {
-    background-color: #850000;
+    background-color: #40339f;
 }
 
 .editContainerRight {

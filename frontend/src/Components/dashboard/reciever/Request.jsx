@@ -109,7 +109,7 @@ const Request = () => {
         }
       );
       toast.success("Request created successfully");
-      navigate("/");
+      navigate("/history-reciever");
     } catch (error) {
       console.log(error);
     }
@@ -123,7 +123,7 @@ const Request = () => {
 
   return (
     <div className="request-container">
-      <h1 className="request-heading">Request for Donor</h1>
+      <h1 className="request-heading">Submit a Donation Request</h1>
       <form className="request-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="donationType">Type of Donation</label>

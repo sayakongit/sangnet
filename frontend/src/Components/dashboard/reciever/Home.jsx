@@ -20,6 +20,7 @@ import bloodBank from "../../Assets/blood-bank.png";
 import bloodBankData from "../../../Data/blood_banks.json";
 import { useAuthContext } from "../../../Hooks/useAuthContext";
 import { getDistance } from "geolib";
+import donorImage from "../../Assets/donor.png";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -31,12 +32,12 @@ const Home = () => {
     donor: false,
     recieverPage: true,
     active: {
-      padding: "20px",
+      padding: "18px",
       border: "none",
       textAlign: "center",
-      color: "white",
-      borderRadius: "20px",
-      backgroundColor: "rgba(255, 255, 255, 0.383)",
+      color: "#40339F",
+      borderRadius: "8px",
+      backgroundColor: "#fff",
       cursor: "pointer",
     },
   };
@@ -301,123 +302,7 @@ const Home = () => {
           <Header />
         </div>
         <div className="donor">
-          <div className="map-area">
-            <h3 className="map-area-heading">Nearby Donors & Bloodbanks</h3>
-
-            {user?.coordinates?.longitude && user?.coordinates?.latitude ? (
-              <Map
-                mapboxAccessToken="pk.eyJ1Ijoic2F5YWsxMCIsImEiOiJjbGp2amwwZWIwMXdsM2Vsb2FvMjViYzUwIn0.OlDv7VNB3W_UlYCuh6PpQA"
-                initialViewState={mapState}
-                style={{ width: 600, height: 400 }}
-                mapStyle="mapbox://styles/mapbox/streets-v9"
-              >
-                {donorLocations.map((location, index) => (
-                  <Marker
-                    key={index}
-                    longitude={location[1]}
-                    latitude={location[0]}
-                    anchor="bottom"
-                  >
-                    <img src={person} alt="pin" />
-                  </Marker>
-                ))}
-
-                {bloodBanksLocation.map((location, index) => (
-                  <Marker
-                    key={index}
-                    longitude={location.longitude}
-                    latitude={location.latitude}
-                    anchor="bottom"
-                  >
-                    <img
-                      src={bloodBank}
-                      alt="pin"
-                      style={{ width: "30px", height: "30px" }}
-                    />
-                  </Marker>
-                ))}
-              </Map>
-            ) : (
-              "Loading"
-            )}
-          </div>
-
           <div className="donorList">
-            <div className="submitRequest">
-              <LoadingButton
-                text={"Submit Request"}
-                loading={loading}
-                onClick={goto__request}
-              />
-              {/* <button id="donorStatusButton" onClick={donorOptions}>
-                {donorData.donor_application_status === "NA"
-                  ? "Be a donor"
-                  : donorData.donor_application_status === "AP"
-                  ? "Applied for Donor"
-                  : donorData.donor_application_status === "VR"
-                  ? "Go to Donor Dashboard"
-                  : ""}
-              </button> */}
-              <button id="donorStatusButton" onClick={donorOptions}>
-                {/* {user?.donor_application_status === "AP" ? "Applied" : "NA"} */}
-                {buttonText}
-              </button>
-              <Modal
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-              >
-                <Box sx={style}>
-                  <form
-                    onSubmit={(e) => {
-                      handleSubmit(e);
-                    }}
-                  >
-                    <div className="form-group">
-                      <label htmlFor="bloodGroup">Blood Group *</label>
-                      <select
-                        id="bloodGroup"
-                        value={donorBloodGroupData}
-                        onChange={handleBloodGroupChange}
-                      >
-                        <option value="">Select a blood group</option>
-                        <option value="A+">A+</option>
-                        <option value="B+">B+</option>
-                        <option value="O+">O+</option>
-                        <option value="AB+">AB+</option>
-                        <option value="A-">A-</option>
-                        <option value="B-">B-</option>
-                        <option value="O-">O-</option>
-                        <option value="AB-">AB-</option>
-                      </select>
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="requiredOn">Last donated on</label>
-                      <input
-                        id="requiredOn"
-                        type="date"
-                        value={lastDonated}
-                        onChange={handleRequiredOnChange}
-                        className="activecls"
-                      />
-                      {inputErrorDate && (
-                        <p className="errorProfileMsg">
-                          Future dates cannot be entered
-                        </p>
-                      )}
-                    </div>
-                    <button
-                      onClick={handleDonorRequest}
-                      className="requestDonorButton"
-                    >
-                      Submit
-                    </button>
-                  </form>
-                </Box>
-              </Modal>
-            </div>
-            {/* MUI Multi Tab code */}
             <Box
               sx={{
                 width: "95%",
@@ -498,7 +383,181 @@ const Home = () => {
               </TabContext>
             </Box>
           </div>
+          <div className="map-area">
+            <h3 className="map-area-heading">Nearby Donors & Bloodbanks</h3>
+
+            {user?.coordinates?.longitude && user?.coordinates?.latitude ? (
+              <Map
+                mapboxAccessToken="pk.eyJ1Ijoic2F5YWsxMCIsImEiOiJjbGp2amwwZWIwMXdsM2Vsb2FvMjViYzUwIn0.OlDv7VNB3W_UlYCuh6PpQA"
+                initialViewState={mapState}
+                style={{ width: 600, height: 340 }}
+                mapStyle="mapbox://styles/mapbox/streets-v9"
+              >
+                {donorLocations.map((location, index) => (
+                  <Marker
+                    key={index}
+                    longitude={location[1]}
+                    latitude={location[0]}
+                    anchor="bottom"
+                  >
+                    <img src={person} alt="pin" />
+                  </Marker>
+                ))}
+
+                {bloodBanksLocation.map((location, index) => (
+                  <Marker
+                    key={index}
+                    longitude={location.longitude}
+                    latitude={location.latitude}
+                    anchor="bottom"
+                  >
+                    <img
+                      src={bloodBank}
+                      alt="pin"
+                      style={{ width: "30px", height: "30px" }}
+                    />
+                  </Marker>
+                ))}
+              </Map>
+            ) : (
+              "Loading"
+            )}
+          </div>
         </div>
+        <div className="home-footer">
+          <div className="footer-card">
+            <div>
+              <div className="footer-card-content">
+                <h3>Want to be a Donor?</h3>
+              </div>
+              <div className="footer-card-button">
+                <button onClick={donorOptions}>{buttonText}</button>
+              </div>
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                  <form
+                    onSubmit={(e) => {
+                      handleSubmit(e);
+                    }}
+                  >
+                    <div className="form-group">
+                      <label htmlFor="bloodGroup">Blood Group *</label>
+                      <select
+                        id="bloodGroup"
+                        value={donorBloodGroupData}
+                        onChange={handleBloodGroupChange}
+                      >
+                        <option value="">Select a blood group</option>
+                        <option value="A+">A+</option>
+                        <option value="B+">B+</option>
+                        <option value="O+">O+</option>
+                        <option value="AB+">AB+</option>
+                        <option value="A-">A-</option>
+                        <option value="B-">B-</option>
+                        <option value="O-">O-</option>
+                        <option value="AB-">AB-</option>
+                      </select>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="requiredOn">Last donated on</label>
+                      <input
+                        id="requiredOn"
+                        type="date"
+                        value={lastDonated}
+                        onChange={handleRequiredOnChange}
+                        className="activecls"
+                      />
+                      {inputErrorDate && (
+                        <p className="errorProfileMsg">
+                          Future dates cannot be entered
+                        </p>
+                      )}
+                    </div>
+                    <button
+                      onClick={handleDonorRequest}
+                      className="requestDonorButton"
+                    >
+                      Submit
+                    </button>
+                  </form>
+                </Box>
+              </Modal>
+            </div>
+            <div>
+              <img src={donorImage} alt="donor" />
+            </div>
+          </div>
+        </div>
+        {/* <div className="submitRequest">
+              <LoadingButton
+                text={"Submit Request"}
+                loading={loading}
+                onClick={goto__request}
+              />
+              
+              <button id="donorStatusButton" onClick={donorOptions}>
+                {buttonText}
+              </button>
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                  <form
+                    onSubmit={(e) => {
+                      handleSubmit(e);
+                    }}
+                  >
+                    <div className="form-group">
+                      <label htmlFor="bloodGroup">Blood Group *</label>
+                      <select
+                        id="bloodGroup"
+                        value={donorBloodGroupData}
+                        onChange={handleBloodGroupChange}
+                      >
+                        <option value="">Select a blood group</option>
+                        <option value="A+">A+</option>
+                        <option value="B+">B+</option>
+                        <option value="O+">O+</option>
+                        <option value="AB+">AB+</option>
+                        <option value="A-">A-</option>
+                        <option value="B-">B-</option>
+                        <option value="O-">O-</option>
+                        <option value="AB-">AB-</option>
+                      </select>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="requiredOn">Last donated on</label>
+                      <input
+                        id="requiredOn"
+                        type="date"
+                        value={lastDonated}
+                        onChange={handleRequiredOnChange}
+                        className="activecls"
+                      />
+                      {inputErrorDate && (
+                        <p className="errorProfileMsg">
+                          Future dates cannot be entered
+                        </p>
+                      )}
+                    </div>
+                    <button
+                      onClick={handleDonorRequest}
+                      className="requestDonorButton"
+                    >
+                      Submit
+                    </button>
+                  </form>
+                </Box>
+              </Modal>
+        </div> */}
       </div>
     </div>
   );

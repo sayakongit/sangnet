@@ -15,7 +15,6 @@ const Sidebar = ({
   home,
   historyDonor,
   historyReciever,
-  rewards,
   donor,
   recieverPage,
   active,
@@ -58,7 +57,7 @@ const Sidebar = ({
     <div>
       <div className="sidebar">
         <div className="logo">
-          <h1>BloodLink</h1>
+          <h1>Sangnet</h1>
           {/* <button className="beDonor">Be a Donor!</button> */}
         </div>
         {donor ? (
@@ -108,7 +107,7 @@ const Sidebar = ({
                 }}
               >
                 <HistoryIcon className="icon" />
-                History
+                Requests
               </button>
             ) : (
               <button
@@ -118,40 +117,10 @@ const Sidebar = ({
                 }}
               >
                 <HistoryIcon className="icon" />
-                History
+                Requests
               </button>
             )}
 
-            {rewards ? (
-              <button
-                className="listItem"
-                onClick={() => {
-                  navigate("/rewards");
-                }}
-                style={{
-                  padding: active.padding,
-                  border: active.border,
-                  textAlign: active.textAlign,
-                  color: active.color,
-                  borderRadius: active.borderRadius,
-                  backgroundColor: active.backgroundColor,
-                  cursor: active.cursor,
-                }}
-              >
-                <WorkspacePremiumIcon className="icon" />
-                Rewards
-              </button>
-            ) : (
-              <button
-                className="listItem"
-                onClick={() => {
-                  navigate("/rewards");
-                }}
-              >
-                <WorkspacePremiumIcon className="icon" />
-                Rewards
-              </button>
-            )}
             {recieverPage ? (
               <button
                 className="listItem"
@@ -182,7 +151,7 @@ const Sidebar = ({
 
             <button className="signout donorExists" onClick={signOut}>
               <ExitToAppIcon className="icon signoutIcon" />
-              Sign out
+              Sign Out
             </button>
           </ul>
         ) : (
@@ -235,7 +204,7 @@ const Sidebar = ({
                 }}
               >
                 <HistoryIcon className="icon" />
-                History
+                Requests
               </button>
             ) : (
               <button
@@ -245,13 +214,13 @@ const Sidebar = ({
                 }}
               >
                 <HistoryIcon className="icon" />
-                History
+                Requests
               </button>
             )}
             {/* <div id="google_translate_element"></div> */}
             <button className="signout" onClick={signOut}>
               <ExitToAppIcon className="icon signoutIcon" />
-              Sign out
+              Sign Out
             </button>
           </ul>
         )}

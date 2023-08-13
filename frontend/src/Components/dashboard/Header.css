@@ -111,15 +111,16 @@
 }
 
 .skiptranslate.goog-te-gadget select {
-    padding: 12px 20px;
+    padding: 12px 10px;
     visibility: visible;
-    margin-right: -64px;
+    margin-right: -40px;
     border: none;
     outline: none;
-    border: 2px solid grey;
+    /* border: 2px solid grey; */
     border-radius: 6px;
     margin-bottom: 12px;
     /* display: inline !important; */
+    background: #fff !important;
 }
 
 .skiptranslate.goog-te-gadget span{

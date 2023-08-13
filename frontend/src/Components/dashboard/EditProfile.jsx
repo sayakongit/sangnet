@@ -108,7 +108,7 @@ const EditProfile = () => {
   return (
     <div className="editContainer">
       <div className="editContainerLeft">
-        <h1>Donate</h1>
+        <h1 className="logo-h1">Sangnet</h1>
       </div>
       <div className="editContainerRight">
         <div className="form-container sign-up">

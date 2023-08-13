@@ -32,6 +32,7 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import RotateLeftRoundedIcon from "@mui/icons-material/RotateLeftRounded";
 import { useAuthContext } from "../../../Hooks/useAuthContext";
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 const HistoryReciever = () => {
   const [data, setData] = useState([]);
@@ -47,16 +48,17 @@ const HistoryReciever = () => {
     rewards: false,
     donor: false,
     active: {
-      padding: "20px",
+      padding: "18px",
       border: "none",
       textAlign: "center",
-      color: "white",
-      borderRadius: "20px",
-      backgroundColor: "rgba(255, 255, 255, 0.383)",
+      color: "#40339F",
+      borderRadius: "8px",
+      backgroundColor: "#fff",
       cursor: "pointer",
     },
   };
   const { user } = useAuthContext();
+  const navigate = useNavigate();
 
   const url = "http://localhost:8000";
   const fetchRecieverHistory = async (user_id) => {
@@ -202,20 +204,17 @@ const HistoryReciever = () => {
         <div className="headerBox">
           <Header />
         </div>
+
         <div className="historyTable">
           {/* tooltip for filter */}
-          <Toolbar
-            sx={{
-              pl: { sm: 2 },
-              pr: { xs: 1, sm: 1 },
-            }}
-          >
+          <Button onClick={()=>{navigate("/request")}} variant="contained">Add New Request</Button>
+          <Toolbar>
             <Typography
-              sx={{ flex: "1 1 100%" }}
+              sx={{ flex: "100%" }}
               variant="h6"
               id="tableTitle"
               component="div"
-              fontWeight="bold"
+              marginLeft="-24px"
             >
               Donation Requests
             </Typography>
@@ -279,7 +278,7 @@ const HistoryReciever = () => {
             </Dialog>
           </Toolbar>
 
-          <TableContainer component={Paper} sx={{ borderRadius: "20px" }}>
+          <TableContainer component={Paper}>
             <Table
               sx={{ minWidth: 650 }}
               size="Large"
@@ -289,27 +288,27 @@ const HistoryReciever = () => {
                 <TableRow>
                   <TableCell
                     align="left"
-                    sx={{ fontSize: 16, fontWeight: 700 }}
+                    sx={{ fontSize: 16, fontWeight: 500 }}
                   >
                     Donor
                   </TableCell>
                   <TableCell
                     align="left"
-                    sx={{ fontSize: 16, fontWeight: 700 }}
+                    sx={{ fontSize: 16, fontWeight: 500 }}
                   >
                     Blood Group
                   </TableCell>
                   <TableCell
                     align="left"
                     className="tableHead"
-                    sx={{ fontSize: 16, fontWeight: 700 }}
+                    sx={{ fontSize: 16, fontWeight: 500 }}
                   >
                     Status
                   </TableCell>
                   <TableCell
                     align="left"
                     className="tableHead"
-                    sx={{ fontSize: 16, fontWeight: 700 }}
+                    sx={{ fontSize: 16, fontWeight: 500 }}
                   >
                     <TableSortLabel
                       active={orderBy === "units"}
@@ -322,7 +321,7 @@ const HistoryReciever = () => {
                   <TableCell
                     align="left"
                     className="tableHead"
-                    sx={{ fontSize: 16, fontWeight: 700 }}
+                    sx={{ fontSize: 16, fontWeight: 500 }}
                   >
                     <TableSortLabel
                       active={orderBy === "dondate"}
@@ -336,20 +335,20 @@ const HistoryReciever = () => {
                   <TableCell
                     align="left"
                     className="tableHead"
-                    sx={{ fontSize: 16, fontWeight: 700 }}
+                    sx={{ fontSize: 16, fontWeight: 500 }}
                   >
                     <TableSortLabel
                       active={orderBy === "reqdate"}
                       direction={order}
                       onClick={() => handleSortChange("reqdate")}
                     >
-                      Date of request
+                      Date of Request
                     </TableSortLabel>
                   </TableCell>
                   <TableCell
                     align="left"
                     className="tableHead"
-                    sx={{ fontSize: 16, fontWeight: 700 }}
+                    sx={{ fontSize: 16, fontWeight: 500 }}
                   >
                     Action
                   </TableCell>
@@ -365,7 +364,6 @@ const HistoryReciever = () => {
                             border: 0,
                           },
                         }}
-                        className="coloredBg"
                       >
                         <TableCell component="th" scope="row">
                           {data.current_status === "fullfilled" ||

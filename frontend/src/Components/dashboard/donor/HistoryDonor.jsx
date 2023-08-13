@@ -46,12 +46,12 @@ const HistoryDonor = () => {
     rewards: false,
     donor: true,
     active: {
-      padding: "20px",
+      padding: "18px",
       border: "none",
       textAlign: "center",
-      color: "white",
-      borderRadius: "20px",
-      backgroundColor: "rgba(255, 255, 255, 0.383)",
+      color: "#40339F",
+      borderRadius: "8px",
+      backgroundColor: "#fff",
       cursor: "pointer",
     },
   };
@@ -153,6 +153,12 @@ const HistoryDonor = () => {
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
     sortedData(order, orderBy);
+  };
+
+  const toTitleCase = (str) => {
+    return str.replace(/\w\S*/g, function (txt) {
+      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
   };
 
   const sortedData = (order, orderBy) => {
@@ -325,7 +331,7 @@ const HistoryDonor = () => {
                       direction={order}
                       onClick={() => handleSortChange("reqdate")}
                     >
-                      Date of request
+                      Required On
                     </TableSortLabel>
                   </TableCell>
                 </TableRow>
@@ -351,7 +357,7 @@ const HistoryDonor = () => {
                           : "--"}
                       </TableCell>
                       <TableCell align="left">{data.blood_group}</TableCell>
-                      <TableCell align="left">{data.current_status}</TableCell>
+                      <TableCell align="left">{toTitleCase(data.current_status)}</TableCell>
                       <TableCell align="left">{data.units_required}</TableCell>
                       <TableCell align="left">--</TableCell>
                       <TableCell align="left">
