@@ -20,38 +20,38 @@ const Sidebar = ({
   active,
 }) => {
   const navigate = useNavigate();
-  const access = localStorage.getItem("access");
-  const refresh = localStorage.getItem("refresh");
-  const url = "http://localhost:8000";
-  const { dispatch } = useAuthContext();
-  const signOut = async () => {
-    try {
-      let { data } = await axios.post(
-        `${url}/accounts/logout/`,
-        {
-          refresh_token: refresh,
-        },
-        {
-          headers: {
-            "Content-type": "application/json",
-            Authorization: `Bearer ${access}`,
-          },
-        }
-      );
-      localStorage.clear();
-      toast.success("Signed out successfully");
+  // const access = localStorage.getItem("access");
+  // const refresh = localStorage.getItem("refresh");
+  // const url = "http://localhost:8000";
+  // const { dispatch } = useAuthContext();
+  // const signOut = async () => {
+  //   try {
+  //     let { data } = await axios.post(
+  //       `${url}/accounts/logout/`,
+  //       {
+  //         refresh_token: refresh,
+  //       },
+  //       {
+  //         headers: {
+  //           "Content-type": "application/json",
+  //           Authorization: `Bearer ${access}`,
+  //         },
+  //       }
+  //     );
+  //     localStorage.clear();
+  //     toast.success("Signed out successfully");
 
-      dispatch({ type: "LOGOUT" });
-      navigate("/login", { replace: true });
-    } catch (error) {
-      console.log(error);
-      if (error.response.status === 400) {
-        toast.error(error.response.data.message);
-      } else {
-        toast.error("Something went wrong");
-      }
-    }
-  };
+  //     dispatch({ type: "LOGOUT" });
+  //     navigate("/login", { replace: true });
+  //   } catch (error) {
+  //     console.log(error);
+  //     if (error.response.status === 400) {
+  //       toast.error(error.response.data.message);
+  //     } else {
+  //       toast.error("Something went wrong");
+  //     }
+  //   }
+  // };
 
   return (
     <div>
@@ -218,10 +218,10 @@ const Sidebar = ({
               </button>
             )}
             {/* <div id="google_translate_element"></div> */}
-            <button className="signout" onClick={signOut}>
+            {/* <button className="signout" onClick={signOut}>
               <ExitToAppIcon className="icon signoutIcon" />
               Sign Out
-            </button>
+            </button> */}
           </ul>
         )}
       </div>
