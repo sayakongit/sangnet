@@ -15,7 +15,6 @@ const Sidebar = ({
   home,
   historyDonor,
   historyReciever,
-  rewards,
   donor,
   recieverPage,
   active,
@@ -122,36 +121,6 @@ const Sidebar = ({
               </button>
             )}
 
-            {rewards ? (
-              <button
-                className="listItem"
-                onClick={() => {
-                  navigate("/rewards");
-                }}
-                style={{
-                  padding: active.padding,
-                  border: active.border,
-                  textAlign: active.textAlign,
-                  color: active.color,
-                  borderRadius: active.borderRadius,
-                  backgroundColor: active.backgroundColor,
-                  cursor: active.cursor,
-                }}
-              >
-                <WorkspacePremiumIcon className="icon" />
-                Rewards
-              </button>
-            ) : (
-              <button
-                className="listItem"
-                onClick={() => {
-                  navigate("/rewards");
-                }}
-              >
-                <WorkspacePremiumIcon className="icon" />
-                Rewards
-              </button>
-            )}
             {recieverPage ? (
               <button
                 className="listItem"

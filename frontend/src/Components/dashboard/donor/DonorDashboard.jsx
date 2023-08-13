@@ -217,10 +217,6 @@ const DonorDashboard = () => {
               <div className="level-card-box">
                 <h5>Level</h5>
                 <h1>{donorData.level.toFixed(1)}</h1>
-                <p>
-                  {donorData.donation_required_to_reach_next_level} more
-                  donations to next level
-                </p>
                 <LinearProgress variant="determinate" value={50} />
               </div>
             </div>

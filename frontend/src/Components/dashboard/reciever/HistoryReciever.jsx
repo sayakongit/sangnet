@@ -342,7 +342,7 @@ const HistoryReciever = () => {
                       direction={order}
                       onClick={() => handleSortChange("reqdate")}
                     >
-                      Date of request
+                      Date of Request
                     </TableSortLabel>
                   </TableCell>
                   <TableCell
