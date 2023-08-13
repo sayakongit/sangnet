@@ -431,8 +431,62 @@ const Home = () => {
                 <h3>Want to be a Donor?</h3>
               </div>
               <div className="footer-card-button">
-                <button>Be a donor!</button>
+                <button onClick={donorOptions}>{buttonText}</button>
               </div>
+              <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                  <form
+                    onSubmit={(e) => {
+                      handleSubmit(e);
+                    }}
+                  >
+                    <div className="form-group">
+                      <label htmlFor="bloodGroup">Blood Group *</label>
+                      <select
+                        id="bloodGroup"
+                        value={donorBloodGroupData}
+                        onChange={handleBloodGroupChange}
+                      >
+                        <option value="">Select a blood group</option>
+                        <option value="A+">A+</option>
+                        <option value="B+">B+</option>
+                        <option value="O+">O+</option>
+                        <option value="AB+">AB+</option>
+                        <option value="A-">A-</option>
+                        <option value="B-">B-</option>
+                        <option value="O-">O-</option>
+                        <option value="AB-">AB-</option>
+                      </select>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="requiredOn">Last donated on</label>
+                      <input
+                        id="requiredOn"
+                        type="date"
+                        value={lastDonated}
+                        onChange={handleRequiredOnChange}
+                        className="activecls"
+                      />
+                      {inputErrorDate && (
+                        <p className="errorProfileMsg">
+                          Future dates cannot be entered
+                        </p>
+                      )}
+                    </div>
+                    <button
+                      onClick={handleDonorRequest}
+                      className="requestDonorButton"
+                    >
+                      Submit
+                    </button>
+                  </form>
+                </Box>
+              </Modal>
             </div>
             <div>
               <img src={donorImage} alt="donor" />
