@@ -20,6 +20,7 @@ import bloodBank from "../../Assets/blood-bank.png";
 import bloodBankData from "../../../Data/blood_banks.json";
 import { useAuthContext } from "../../../Hooks/useAuthContext";
 import { getDistance } from "geolib";
+import donorImage from "../../Assets/donor.png";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -31,12 +32,12 @@ const Home = () => {
     donor: false,
     recieverPage: true,
     active: {
-      padding: "20px",
+      padding: "18px",
       border: "none",
       textAlign: "center",
-      color: "white",
-      borderRadius: "20px",
-      backgroundColor: "rgba(255, 255, 255, 0.383)",
+      color: "#40339F",
+      borderRadius: "8px",
+      backgroundColor: "#fff",
       cursor: "pointer",
     },
   };
@@ -301,8 +302,7 @@ const Home = () => {
           <Header />
         </div>
         <div className="donor">
-        <div className="donorList">
-            
+          <div className="donorList">
             <Box
               sx={{
                 width: "95%",
@@ -390,7 +390,7 @@ const Home = () => {
               <Map
                 mapboxAccessToken="pk.eyJ1Ijoic2F5YWsxMCIsImEiOiJjbGp2amwwZWIwMXdsM2Vsb2FvMjViYzUwIn0.OlDv7VNB3W_UlYCuh6PpQA"
                 initialViewState={mapState}
-                style={{ width: 600, height: 400 }}
+                style={{ width: 600, height: 340 }}
                 mapStyle="mapbox://styles/mapbox/streets-v9"
               >
                 {donorLocations.map((location, index) => (
@@ -423,8 +423,21 @@ const Home = () => {
               "Loading"
             )}
           </div>
-
-          
+        </div>
+        <div className="home-footer">
+          <div className="footer-card">
+            <div>
+              <div className="footer-card-content">
+                <h3>Want to be a Donor?</h3>
+              </div>
+              <div className="footer-card-button">
+                <button>Be a donor!</button>
+              </div>
+            </div>
+            <div>
+              <img src={donorImage} alt="donor" />
+            </div>
+          </div>
         </div>
         {/* <div className="submitRequest">
               <LoadingButton

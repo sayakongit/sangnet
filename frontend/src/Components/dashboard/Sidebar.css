@@ -1,137 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Caprasimo&display=swap');
+
 * {
-    margin: 0px;
-    padding: 0px;
+  margin: 0px;
+  padding: 0px;
 }
 
 .sidebar {
-    width: 16%;
-    background-color: #246b38;
-    padding: 15px;
-    box-sizing: border-box;
-    /* border-radius: 0px 50px 50px 0px; */
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    height: 100vh;
-    z-index: 1000;
+  width: 16%;
+  background-color: #40339f;
+  padding: 15px;
+  box-sizing: border-box;
+  /* border-radius: 0px 50px 50px 0px; */
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  height: 100vh;
+  z-index: 1000;
 }
 
 .sidebar .list {
-    list-style-type: none;
-    padding-top: 50px;
+  list-style-type: none;
+  padding-top: 50px;
 }
 
 .logo {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .logo h1 {
-    margin-top: 30px;
-    margin-left: 14px;
-    color: #ffe8b0;
-    text-align: left;
-    font-size: xx-large;
-    font-weight: bolder;
-    border: none;
+  margin-top: 30px;
+  margin-left: 14px;
+  color: #fff;
+  text-align: left;
+  font-size: 2.6rem;
+  border: none;
+  font-family: 'Caprasimo', cursive;
 }
 
 .logo .beDonor {
-    margin-top: 20px;
-    color: #850000;
-    text-align: center;
-    font-size: larger;
-    font-weight: bolder;
-    padding: 20px;
-    border-radius: 80px;
-    background-color: white;
-    border: none;
-    transition: all 0.3s ease;
+  margin-top: 20px;
+  color: #850000;
+  text-align: center;
+  font-size: larger;
+  font-weight: bolder;
+  padding: 20px;
+  border-radius: 80px;
+  background-color: white;
+  border: none;
+  transition: all 0.3s ease;
 }
 
 .logo .beDonor:hover {
-    color: antiquewhite;
-    background-color: rgba(255, 255, 255, 0.383);
-    cursor: pointer;
+  color: antiquewhite;
+  background-color: rgba(255, 255, 255, 0.383);
+  cursor: pointer;
 }
 
 .sidebar .listItem {
-    width: 100%;
-    padding: 16px;
-    border-radius: 15px;
-    background-color: #ffe8b0;
-    border: none;
-    text-align: left;
-    font-weight: 400;
-    font-size: 1rem;
-    color: #246b38;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    transition: 90ms ease-in;
-    margin-top: 5px;
+  width: 100%;
+  padding: 18px;
+  border-radius: 8px;
+  background-color: #dadada42;
+  border: none;
+  text-align: left;
+  font-weight: 400;
+  font-size: 1rem;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  transition: 90ms ease-in;
+  font-weight: 500;
+  margin-bottom: 10px;
 }
 
 .icon {
-    margin-right: 20px;
-    margin-top: -3px;
+  margin-right: 20px;
+  margin-top: -3px;
 }
 
 .signoutIcon {
-    margin-right: 15px;
-    /* margin-top: -3px; */
+  margin-right: 15px;
+  /* margin-top: -3px; */
 }
 
 .sidebar .listItem:hover {
-    padding: 16px;
-    border: none;
-    text-align: center;
-    color: antiquewhite;
-    border-radius: 15px;
-    background-color: rgba(255, 255, 255, 0.383);
-    cursor: pointer;
+  padding: 18px;
+  border: none;
+  text-align: center;
+  color: #fff;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.383);
+  cursor: pointer;
 }
 
 .signout {
-    margin-top: 200px;
-    width: 100%;
-    padding: 16px;
-    border-radius: 15px;
-    background-color: #ffe8b0;
-    border: none;
-    text-align: left;
-    font-weight: 500;
-    font-size: 1rem;
-    color: #246b38;
-    display: flex;
-    align-items: center;
-    transition: 90ms ease-in;
+  margin-top: 200px;
+  width: 100%;
+  padding: 18px;
+  border-radius: 8px;
+  background-color: #fff;
+  border: none;
+  text-align: left;
+  font-weight: 500;
+  font-size: 1rem;
+  /* color: #40339f; */
+  background: transparent;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  transition: 90ms ease-in;
 }
 
 .signout:hover {
-    padding: 16px;
-    border: none;
-    text-align: center;
-    color: antiquewhite;
-    border-radius: 15px;
-    background-color: rgba(255, 255, 255, 0.383);
-    cursor: pointer;
+  padding: 18px;
+  border: none;
+  text-align: center;
+  color: #fff;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.383);
+  cursor: pointer;
 }
 
-.active {
+/* .active {
     padding: 16px;
     border: none;
-    border-radius: 15px;
+    border-radius: 8px;
     text-align: center;
     color: antiquewhite;
     border-image-repeat: 20px;
     background-color: rgba(255, 255, 255, 0.383);
     cursor: pointer;
     font-size: 1rem;
-}
+} */
 
 .donorExists {
-    margin-top: 150px;
+  margin-top: 150px;
 }

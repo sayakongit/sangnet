@@ -1,5 +1,5 @@
-/* 246b38 -green
-ffe8b0-yellow
+/* 40339f -green
+40339F-yellow
 */
 
 .homeContainer {
@@ -36,21 +36,21 @@ ffe8b0-yellow
 .submitRequest button {
   /* margin-bottom: 20px; */
   padding: 18px 50px;
-  border: 2px solid #246b38;
-  border-radius:25px;
-  background-color: #246b38;
+  border: 2px solid #40339f;
+  border-radius: 25px;
+  background-color: #40339f;
   text-align: center;
   font-weight: 400;
   font-size: larger;
-  color: #ffe8b0;
+  color: #fff;
   align-self: flex-start;
   transition: all 0.3s ease;
   width: 90%;
 }
 
 .submitRequest button:hover {
-  color: #246b38;
-  background-color: #ffe8b0;
+  color: #40339f;
+  background-color: #fff;
   cursor: pointer;
 }
 
@@ -67,14 +67,12 @@ ffe8b0-yellow
 
 .tabBox {
   margin-top: 20px;
-  /* border-radius: 20px; */
-  /* padding: 24px; */
-  height: 100vh;
-  /* border: 2px solid rgba(0, 0, 0, 0.251);
-   */
+  border-radius: 20px;
+  padding: 24px;
   background: rgb(238, 238, 238);
-  overflow: scroll;
-  /* margin-bottom: 20px; */
+  /* overflow: scroll; */
+  max-height: 400px;
+  margin-top: 50px;
 }
 
 .tabBox::-webkit-scrollbar {
@@ -92,11 +90,11 @@ ffe8b0-yellow
   display: flex;
   flex-direction: row;
   margin-left: auto;
-  color: #829612;
+  color: #40339f;
 }
 
 .donorName h2 {
-  color: #206232;
+  color: #40339f;
   border: none;
   font-weight: 600 !important;
   font-size: 1.1rem;
@@ -161,4 +159,57 @@ ffe8b0-yellow
 .tab-panel {
   max-height: 240px;
   overflow-y: scroll;
+}
+
+.home-footer {
+  /* border: 1px solid red; */
+  height: 200px;
+  width: 100%;
+
+  display: flex;
+  justify-content: flex-end;
+  color: #fff;
+}
+
+.footer-card {
+  background: #40339f;
+  padding: 20px 40px;
+  border-radius: 16px;
+  width: 600px;
+  margin-right: 20px;
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-between;
+  height: 100%;
+  /* border: 1px solid red; */
+  gap: 20px;
+  align-items: center;
+  overflow: hidden;
+}
+
+.footer-card > div {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.footer-card h3 {
+  font-weight: 500;
+  font-size: 1.8rem;
+}
+
+.home-footer button {
+  border: none;
+  outline: none;
+  background: #fff;
+  color: #40339f;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.footer-card img {
+  width: 200px;
 }

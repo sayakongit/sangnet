@@ -161,8 +161,8 @@ const Header = () => {
       <div className="profile">
         {/* <img src={profileimage} alt="profile image" className="profileImage" /> */}
         <div className="profileContent">
-          <Typography variant="h4" fontWeight="bold">
-            <span style={{color:"#246b38"}}>Hi, </span>{user && user.first_name && user.last_name
+          <Typography variant="h4">
+            <span style={{color:"#40339f"}}>Hi, </span>{user && user.first_name && user.last_name
                 ? user.first_name + " " + user.last_name
                 : "" + " " + ""}
           </Typography>
@@ -208,7 +208,7 @@ const Header = () => {
           }),
         }}
       >
-        <Avatar>{user?.first_name.charAt(0)+user?.last_name.charAt(0)}</Avatar>
+        <Avatar sx={{ bgcolor: '#40339f' }}>{user?.first_name.charAt(0)+user?.last_name.charAt(0)}</Avatar>
       </IconButton>
 
       <Popover
@@ -256,7 +256,7 @@ const Header = () => {
 
 
     </div>
-      <Divider sx={{ color: "#246b38", borderBottom: "3px solid #246b38", fontWeight: "bold", marginBottom: "10px" }} />
+      <Divider sx={{ color: "#246b38", borderBottom: "3px solid #40339f", fontWeight: "bold", marginBottom: "10px" }} />
       </>
   );
 };

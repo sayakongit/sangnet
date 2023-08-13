@@ -108,7 +108,7 @@ const Sidebar = ({
                 }}
               >
                 <HistoryIcon className="icon" />
-                History
+                Requests
               </button>
             ) : (
               <button
@@ -118,7 +118,7 @@ const Sidebar = ({
                 }}
               >
                 <HistoryIcon className="icon" />
-                History
+                Requests
               </button>
             )}
 
@@ -182,7 +182,7 @@ const Sidebar = ({
 
             <button className="signout donorExists" onClick={signOut}>
               <ExitToAppIcon className="icon signoutIcon" />
-              Sign out
+              Sign Out
             </button>
           </ul>
         ) : (
@@ -235,7 +235,7 @@ const Sidebar = ({
                 }}
               >
                 <HistoryIcon className="icon" />
-                History
+                Requests
               </button>
             ) : (
               <button
@@ -245,13 +245,13 @@ const Sidebar = ({
                 }}
               >
                 <HistoryIcon className="icon" />
-                History
+                Requests
               </button>
             )}
             {/* <div id="google_translate_element"></div> */}
             <button className="signout" onClick={signOut}>
               <ExitToAppIcon className="icon signoutIcon" />
-              Sign out
+              Sign Out
             </button>
           </ul>
         )}

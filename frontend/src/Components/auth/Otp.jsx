@@ -61,7 +61,7 @@ const Otp = () => {
     <>
       <div className="wrapper_otp">
         <div className="container_left_otp">
-          <h1> BloodLink </h1>
+          <h1> Sangnet </h1>
         </div>
         <div className="container_right_otp">
           <div className="form_container">

@@ -137,14 +137,14 @@ const Signin = () => {
     <div>
       <Wapper>
         <Container_left>
-          <h1> BloodLink </h1>
+          <h1 className="logo-h1"> Sangnet </h1>
           <p>"Connecting Lives, Saving Futures."</p>
         </Container_left>
         <Container_right className="container_right sign-up">
           <div className="form-container sign-up">
             <div className="signup_text">
               <div className="auth-heading">
-                <p>Sign up to BloodLink</p>
+                <p>Sign up to Sangnet</p>
               </div>
             </div>
             <form onSubmit={handleSubmit} autoComplete="off">
@@ -381,9 +381,9 @@ const Wapper = styled.div`
 `;
 
 const Container_left = styled.div`
-  background: #850000;
+  background: #40339f;
   color: White;
-  border: 2px solid #850000;
+  border: 2px solid #40339f;
   width: 35vw;
   height: 100vh;
   text-align: center;
@@ -391,9 +391,6 @@ const Container_left = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  h1 {
-    background-color: #850000;
-  }
   p {
     color: #ffffffca;
   }

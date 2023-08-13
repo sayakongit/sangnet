@@ -17,12 +17,12 @@ const DonorDashboard = () => {
     donor: true,
     recieverPage: false,
     active: {
-      padding: "20px",
+      padding: "18px",
       border: "none",
       textAlign: "center",
-      color: "white",
-      borderRadius: "20px",
-      backgroundColor: "rgba(255, 255, 255, 0.383)",
+      color: "#40339F",
+      borderRadius: "8px",
+      backgroundColor: "#fff",
       cursor: "pointer",
     },
   };
