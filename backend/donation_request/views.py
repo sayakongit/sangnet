@@ -232,24 +232,6 @@ class FulfillDonation(APIView):
                 donor.active_donation_request = None
                 
                 try:
-                    print(donation_request.donor_id.id,
-                        donation_request.requested_by,
-                        donation_request.blood_group,
-                        donation_request.required_on,
-                        donation_request.place_of_donation,
-                        donation_request.is_urgent,
-                        donation_request.units_required)
-                    CONTRACT.functions.recordDonation(
-                        donation_request.donor_id.id,
-                        donation_request.requested_by.first_name+" "+donation_request.requested_by.last_name,
-                        donation_request.blood_group,
-                        str(donation_request.required_on)[:10],
-                        donation_request.place_of_donation,
-                        donation_request.is_urgent,
-                        donation_request.units_required
-                    ).transact({'from': "0xac4a4714606C7815d57FdB9b173497eDCD80757d"})
-
-                    result = CONTRACT.functions.getDonations().call()
                     donation_request.save()
                     donor.save()
                 except Exception as e:
