@@ -1,3 +1,4 @@
+import logging
 from django.shortcuts import render
 from .models import User, Coordinate
 from rest_framework.views import APIView
@@ -9,6 +10,8 @@ from rest_framework import status
 from .serializers import *
 from django.contrib.auth import authenticate
 from .emails import send_verification_email
+
+logger = logging.getLogger('accounts.views')
 
 
 def get_tokens_for_user(user):
@@ -46,7 +49,6 @@ class RegisterView(APIView):
             user.set_password(password)
             user.save()
         except IntegrityError as e:
-            print('Error -->', str(e))
             return Response({'message': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
         refresh = RefreshToken.for_user(user)
@@ -83,6 +85,7 @@ class UserLoginView(APIView):
                     {'message': 'logged in successfully', 'data': data, 'token': token}, status=status.HTTP_200_OK)
 
         else:
+            logger.info(f"Login with invalid credentials by email '{email}'")
             return Response({'message': 'invalid credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -117,7 +120,6 @@ class VerifyOTP(APIView):
                 return Response({'message': 'otp verification failed'}, status=status.HTTP_400_BAD_REQUEST)
 
         except Exception as e:
-            print('Error -->', str(e))
             return Response({'message': 'something went wrong'}, status=status.HTTP_400_BAD_REQUEST)
 
 
