@@ -2,6 +2,7 @@ from django.db import models
 from accounts.models import User
 from donation_request.models import DonationRequest
 
+
 # Create your models here.
 class Donor(models.Model):
     user = models.OneToOneField('accounts.User', on_delete=models.CASCADE)
@@ -14,7 +15,8 @@ class Donor(models.Model):
     level = models.FloatField(default=1.0)
     donation_count = models.IntegerField(default=0)
     donation_required_to_reach_next_level = models.IntegerField(default=0)
-    active_donation_request = models.ForeignKey('donation_request.DonationRequest', on_delete=models.SET_NULL, null=True, blank=True)
-    
+    active_donation_request = models.ForeignKey('donation_request.DonationRequest', on_delete=models.SET_NULL,
+                                                null=True, blank=True)
+
     def __str__(self):
-        return str(self.id) + " " +  self.user.first_name + " " + self.user.last_name
+        return f"{self.id} - {self.user.first_name} {self.user.last_name}"
