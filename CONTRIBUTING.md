@@ -32,8 +32,35 @@ We appreciate contributions from the community. To submit a pull request:
 1. Fork the repository and create a new branch from `master`.
 2. Make your changes and ensure the code adheres to our coding standards.
 3. Write clear and concise commit messages.
-4. Open a pull request, referencing any relevant issues.
+4. Open a pull request, referencing any relevant issues with the specified [PR template](PULL_REQUEST_TEMPLATE.md).
 5. Be prepared to address feedback and make necessary changes.
+
+## Commit Message Conventions :label:
+
+We follow a set of commit message conventions to maintain a clear and organized version history. When making contributions, please adhere to the following guidelines for commit messages:
+
+- Use the appropriate prefix in your commit message to indicate the type of change you're making. Refer to our [commit message convention table](#commit-message-convention-table) for a list of prefixes and their meanings.
+- Keep commit messages concise, clear, and descriptive.
+- If your commit relates to a specific issue or task, reference it by including "Closes #issue-number" or "Fixes #issue-number" in the commit message (e.g., "Closes #123").
+- Feel free to include additional details or context in the body of the commit message if necessary.
+
+### Commit Message Convention Table
+
+| Prefix    | Emoji              | Description              |
+| --------- | ------------------ | ------------------------ |
+| feat:     | :sparkles:         | New feature added        |
+| bug:      | :bug:              | Bug fix                  |
+| chore:    | :wrench:           | Routine maintenance      |
+| docs:     | :memo:             | Documentation changes    |
+| style:    | :lipstick:         | Code style/formatting    |
+| refactor: | :recycle:          | Code refactoring         |
+| test:     | :white_check_mark: | Adding tests             |
+| ci:       | :construction:     | Continuous integration   |
+| perf:     | :rocket:           | Performance improvement  |
+| security: | :lock:             | Security-related changes |
+| deps:     | :package:          | Dependency updates       |
+
+By following these commit message conventions, you help maintain a clear and informative version history, making it easier for reviewers and future contributors to understand the purpose of each change.
 
 ## Style Guidelines :lipstick:
 
