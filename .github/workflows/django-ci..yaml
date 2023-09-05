@@ -1,0 +1,21 @@
+name: Django CI
+on: push
+jobs:
+  execute_tests:
+    name: Install requirements and execute tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update
+        run: sudo apt update
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Install pip
+        run: sudo apt install python3-pip
+      - name: Install requirements
+        run: |
+          cd backend
+          pip install -r requirements.txt
+      - name: Execute tests
+        run: |
+          cd backend
+          python manage.py test
