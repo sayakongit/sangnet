@@ -10,6 +10,7 @@ from donor.models import Donor
 from accounts.models import User, Coordinate
 from .serializers import DonationRequestSerializer
 from .emails import send_email_create, send_fullfilled_email, send_accepted_email
+import logging
 
 BLOOD_GROUPS_MAPPER = {
     'A+': ['A+', 'AB+'],
@@ -21,6 +22,8 @@ BLOOD_GROUPS_MAPPER = {
     'O+': ['O+', 'A+', 'B+', 'AB+'],
     'O-': ['O-', 'O+', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-']
 }
+
+logger = logging.getLogger('donation_request.views')
 
 
 class DonationRequestView(APIView):
@@ -51,8 +54,6 @@ class DonationRequestView(APIView):
             except Coordinate.DoesNotExist:
                 return Response({'message': 'Please update your location'}, status=status.HTTP_404_NOT_FOUND)
 
-            print(coordinate.longitude, coordinate.latitude)
-
             donation = DonationRequest(requested_by=user, phone_number=phone_number,
                                        blood_group=blood_group, required_on=required_on,
                                        place_of_donation=place_of_donation,
@@ -72,7 +73,7 @@ class DonationRequestView(APIView):
             #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         except Exception as e:
-            print(e)
+            logger.error("Unable to create donation request", exc_info=True)
             return Response({'message': 'Something went wrong'}, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -80,7 +81,6 @@ class DonationStatusUpdate(APIView):
     def put(self, request, pk):
         try:
             donation = DonationRequest.objects.get(request_id=pk)
-            print(donation)
         except DonationRequest.DoesNotExist:
             return Response({'message': 'Donation Request does not exist'}, status=status.HTTP_404_NOT_FOUND)
         data = request.data
@@ -155,7 +155,7 @@ class PendingDonationsListView(APIView):
             serializer = DonationRequestSerializer(donation_requests, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Exception as e:
-            print(e)
+            logger.error("Unable to show pending or current donation request", exc_info=True)
             return Response({'message': 'Something went wrong'}, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -171,7 +171,7 @@ class DonorHistory(APIView):
             serializer = DonationRequestSerializer(donation_request, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Exception as e:
-            print(e)
+            logger.error("Unable to show donor's donation history", exc_info=True)
             return Response({"message": "Something went wrong"}, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -187,7 +187,7 @@ class ReceiverDonationRequestHistoryView(APIView):
             serializer = DonationRequestSerializer(donation_request, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Exception as e:
-            print(e)
+            logger.error("Unable to show receiver's donation donation", exc_info=True)
             return Response({"message": "Something went wrong"}, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -241,12 +241,8 @@ class FulfillDonation(APIView):
                 donor.level = donor.level + 0.2
                 donor.active_donation_request = None
 
-                try:
-                    donation_request.save()
-                    donor.save()
-                except Exception as e:
-                    print("exception", e)
-                    return Response({'message': f'{e}'}, status=status.HTTP_400_BAD_REQUEST)
+                donation_request.save()
+                donor.save()
 
                 return Response({'message': 'Donation Request fulfilled by Receiver'}, status=status.HTTP_200_OK)
 
@@ -254,5 +250,5 @@ class FulfillDonation(APIView):
                 return Response({'message': 'Invalid role'}, status=status.HTTP_400_BAD_REQUEST)
 
         except Exception as e:
-            print(e)
+            logger.error("Unable to update requests as fulfilled", exc_info=True)
             return Response({"message": "Something went wrong"}, status=status.HTTP_400_BAD_REQUEST)

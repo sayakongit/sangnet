@@ -6,6 +6,9 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from .serializers import ApplyAsDonorSerializer, DonorProfileViewSerializer
 import geopy.distance
+import logging
+
+logger = logging.getLogger('donor.views')
 
 
 class ApplyAsDonorView(APIView):
@@ -51,7 +54,7 @@ class ApplyAsDonorView(APIView):
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         except Exception as e:
-            print(e)
+            logging.error("Unable to send donor application", exc_info=True)
             return Response({'message': 'Something went wrong'}, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -106,7 +109,7 @@ class VerifyDonorView(APIView):
         except User.DoesNotExist:
             return Response({'message': 'User does not exist'}, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
-            print(e)
+            logging.error("Unable to verify donor", exc_info=True)
             return Response({'message': 'Something went wrong'}, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -143,5 +146,5 @@ class NearbyDonorsView(APIView):
         except User.DoesNotExist:
             return Response({'message': 'User does not exist'}, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
-            print(e)
+            logging.error("Unable to fetch nearby donors", exc_info=True)
             return Response({'message': 'Something went wrong'}, status=status.HTTP_400_BAD_REQUEST)

@@ -159,7 +159,7 @@ class UpdateCoordinates(APIView):
             else:
                 return Response({'message': 'enter all the fields'}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
-            print('Error -->', str(e))
+            logger.error(f"Unable to update the coordinates for user", exc_info=True)
             return Response({'message': 'something went wrong'}, status=status.HTTP_400_BAD_REQUEST)
 
 
