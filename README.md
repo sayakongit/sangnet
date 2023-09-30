@@ -1,5 +1,5 @@
 ﻿<p align="center">
-    <img width="500" src="https://github.com/sayakongit/status-code-sangnet/blob/master/docs/banner.png " alt="sangnet">
+    <img src="https://github.com/sayakongit/status-code-sangnet/blob/master/docs/banner.png " alt="sangnet">
 </p>
 
 # 🚀 Sangnet | Connecting blood, saving life
