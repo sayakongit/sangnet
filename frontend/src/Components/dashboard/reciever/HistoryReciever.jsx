@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Sidebar from "../Sidebar";
 import Header from "../Header";
 import "./HistoryReciever.css";
@@ -14,6 +15,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
+import abi from "../../contracts/BloodDonation.json"
 import {
   Button,
   Dialog,
@@ -32,7 +34,7 @@ import FilterListIcon from "@mui/icons-material/FilterList";
 import RotateLeftRoundedIcon from "@mui/icons-material/RotateLeftRounded";
 import { useAuthContext } from "../../../Hooks/useAuthContext";
 import dayjs from "dayjs";
-import { useNavigate } from "react-router-dom";
+import { ethers } from "ethers";
 
 const HistoryReciever = () => {
   const [data, setData] = useState([]);
@@ -42,24 +44,73 @@ const HistoryReciever = () => {
   const [filterStatus, setFilterStatus] = useState("");
   const [orderBy, setOrderBy] = useState("");
   const [order, setOrder] = useState("asc");
+  const [currentAccount, setCurrentAccount] = useState('');
+  const [candidate, setCandidate] = useState({});
+  const [state, setState] = useState({
+    provide: null,
+    signer: null,
+    contract: null,
+  });
+  const [account, setAccount] = useState("None");
   const sidebarProp = {
     home: false,
     historyReciever: true,
     rewards: false,
     donor: false,
     active: {
-      padding: "18px",
+      padding: "20px",
       border: "none",
       textAlign: "center",
-      color: "#40339F",
-      borderRadius: "8px",
-      backgroundColor: "#fff",
+      color: "white",
+      borderRadius: "20px",
+      backgroundColor: "rgba(255, 255, 255, 0.383)",
       cursor: "pointer",
     },
   };
   const { user } = useAuthContext();
   const navigate = useNavigate();
 
+  
+  const connectWallet = async () => {
+    try {
+      const contractAddress = "0x7d7dE5C38Da75645C0a8786A88Cadd6Af4eEEdcf";
+      const contractABI = abi.abi;
+      const provide = new ethers.providers.Web3Provider(ethereum);
+      const signer = provide.getSigner();
+      const contract = new ethers.Contract(
+        contractAddress,
+        contractABI,
+        signer
+      );
+      const account = await ethereum.request({
+        method: "eth_requestAccounts"
+      })
+      setAccount(account);
+      setState({ provide, signer, contract });
+
+      // const candidateData = {};
+      await Promise.all(
+        data.map(async (doc) => {
+          //add data to contract
+          if(doc.current_status === "fulfilled" ){
+            await contract.recordDonation(doc.donor_id.id, 
+              doc.requested_by.first_name+" "+doc.requested_by.last_name,
+              doc.blood_group,
+              doc.required_on,
+              doc.place_of_donation,
+              doc.is_urgent,
+              doc.units_required
+            );
+          }
+        })
+      );
+      toast.success("Data added to blockchain");
+      console.log("blobk", await contract.getDonations())
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
   const url = "http://localhost:8000";
   const fetchRecieverHistory = async (user_id) => {
     try {
@@ -74,7 +125,7 @@ const HistoryReciever = () => {
       );
       setData(data);
       setNewData(data);
-      // console.log("Data", data);
+       console.log("Data", data);
       if (!data || data.length === 0) {
         toast.warn("No history found at the moment!");
       }
@@ -391,6 +442,7 @@ const HistoryReciever = () => {
                             <Button
                               onClick={() => {
                                 fulfillRequest(data.request_id);
+                                connectWallet()
                               }}
                               variant="contained"
                               color="success"
