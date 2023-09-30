@@ -1,8 +1,8 @@
 ﻿<p align="center">
-    <img width="500" src="https://github.com/sayakongit/status-code-sangnet/blob/master/docs/logo.png " alt="Status Code 0">
+    <img width="500" src="https://github.com/sayakongit/status-code-sangnet/blob/master/docs/banner.png " alt="sangnet">
 </p>
 
-# 🚀 Sangnet | Status Code 0
+# 🚀 Sangnet | Connecting blood, saving life
 
 This repository contains a project that combines Django, Django REST Framework, React, and Vite to create a web application with a robust backend and a dynamic frontend.
 
@@ -12,8 +12,6 @@ The project is organized into two main folders:
 
 - `backend`: Contains the Django application responsible for handling API requests and database interactions.
 - `frontend`: Contains the React application built using Vite, providing a modern and efficient development experience for the frontend.
-- `contracts`: Contains Ethereum smart contract files in Solidity (.sol) format.
-
 
 ## Backend (Django) 📦
 
@@ -34,40 +32,39 @@ The backend is built using Django and Django REST Framework, providing a RESTful
 
 2. **Create a Python Virtual Environment (Optional, but recommended):**
 
-    Create and activate a virtual environment to isolate project dependencies.
+   Create and activate a virtual environment to isolate project dependencies.
 
-    On macOS and Linux:
+   On macOS and Linux:
 
-    ```
-    python3 -m venv venv
-    source venv/bin/activate
-    ```
+   ```
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
 
-    
-    On Windows:
-    ```
-    pip install virtualenv
-    virtualenv venv
-    ./venv/Scripts/Activate.ps1
-    ```
+   On Windows:
 
+   ```
+   pip install virtualenv
+   virtualenv venv
+   ./venv/Scripts/Activate.ps1
+   ```
 
-2. Install the required Python packages:
+3. Install the required Python packages:
 
    ```bash
    pip install -r requirements.txt
    ```
 
-3. Run database migrations:
+4. Run database migrations:
    ```bash
     python manage.py makemigrations
     python manage.py migrate
    ```
-4. Start the Django development server:
+5. Start the Django development server:
    ```bash
     python manage.py runserver
    ```
-5. Navigate to `http://localhost:8000` to view the API.
+6. Use `http://localhost:8000` as the API base URL.
 
 ## Frontend (React with Vite) ⚛️
 
@@ -89,55 +86,20 @@ The frontend is built using React and Vite, providing fast development and hot m
    ```
 4. Navigate to `http://localhost:5173` to view the frontend.
 
-## Smart Contracts (Solidity) 📝
-
-The `blockhain` folder contains Ethereum smart contract files in Solidity (.sol) format. These contracts define the business logic of your blockchain interactions.
-
-1. Navigate to the `blockchain` folder:
-   ```bash
-   cd blockchain
-   ```
-2. Install the required Node packages:
-   ```bash
-    npm install
-   ```
-
-### Compiling Smart Contracts ⚙️
-
-Before you can deploy your smart contracts, you need to compile them. 
-
- 1. Run the following command to compile your smart contracts:
-
-    ```bash
-    npx hardhat compile
-    ```
-
-### Deploying Smart Contracts 🚀
-
-To deploy your compiled smart contract to a specific Ethereum network, follow these steps:
-
-1. Deploy your smart contract: 
-
-    ```bash
-    npx hardhat run scripts/deploy.js --network NETWORK_NAME
-    ```
-
-2. Replace NETWORK_NAME with the name of the network you want to deploy to (e.g., rinkeby, mainnet, etc.).
-
-
-## Postman API Public Workspace  📚
+## Postman API Public Workspace 📚
 
 For detailed information about the available API endpoints and their usage, refer to the [Post API Documentation](https://example.com/api-docs/posts).
 
+## Contributors
 
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
 
-## Contributors 👥
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
 
-- [Sayak Saha](https://github.com/contributor1)
-- [Suchetan Chanda](https://github.com/SuchetanChanda)
-- [Soumojit Chakraborty](https://github.com/SOUMOJIT-CHAKRABORTY)
-- [Somesh Debnath](https://github.com/Somesh-Debnath)
-- [Debangsu Das](https://github.com/debangsudas90)
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## Credits 👏
 
@@ -145,3 +107,6 @@ For detailed information about the available API endpoints and their usage, refe
 - Django REST Framework: [https://www.django-rest-framework.org/](https://www.django-rest-framework.org/)
 - React: [https://reactjs.org/](https://reactjs.org/)
 - Vite: [https://vitejs.dev/](https://vitejs.dev/)
+- Material UI: [https://mui.com/](https://mui.com/)
+- Material UI: [https://mui.com/](https://mui.com/)
+- Formik: [https://formik.org/](https://formik.org/)
