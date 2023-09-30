@@ -1,4 +1,7 @@
 ﻿<p align="center">
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
     <img width="500" src="https://github.com/sayakongit/status-code-sangnet/blob/master/docs/banner.png " alt="sangnet">
 </p>
 
@@ -93,6 +96,20 @@ For detailed information about the available API endpoints and their usage, refe
 ## Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://sayakongit.github.io/"><img src="https://avatars.githubusercontent.com/u/83216382?v=4?s=100" width="100px;" alt="Sayak Saha"/><br /><sub><b>Sayak Saha</b></sub></a><br /><a href="https://github.com/sayakongit/sangnet/commits?author=sayakongit" title="Code">💻</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 
