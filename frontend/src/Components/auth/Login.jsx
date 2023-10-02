@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, Link } from "react-router-dom";
 import LoadingButton from "../UI/LoadingButton";
 import { useLogin } from "../../Hooks/useLogin";
+import { ContainerLeft } from "./ContainerLeft";
 
 const Login = () => {
   const initialvalues = {
@@ -111,11 +112,8 @@ const Login = () => {
 
   return (
     <div>
-      <Wapper>
-        <Container_left>
-          <h1 className="logo-h1"> Sangnet </h1>
-          <p>"Connecting Lives, Saving Futures."</p>
-        </Container_left>
+      <Wrapper>
+        <ContainerLeft/>
         <Container_right className="container_right login">
           <div className="form-container">
             <div className="auth-heading">
@@ -179,33 +177,15 @@ const Login = () => {
             </form>
           </div>
         </Container_right>
-      </Wapper>
+      </Wrapper>
     </div>
   );
 };
-const Wapper = styled.div`
+const Wrapper = styled.div`
   margin: 0px;
   border: none;
   display: flex;
   flex-direction: row;
-`;
-
-const Container_left = styled.div`
-  background: #40339f;
-  color: White;
-  border: 2px solid #40339f;
-  width: 35vw;
-  height: 100vh;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  p {
-    color: #ffffffca;
-  }
 `;
 
 const Container_right = styled.div`

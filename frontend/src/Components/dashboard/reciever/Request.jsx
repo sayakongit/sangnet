@@ -17,8 +17,8 @@ const Request = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [reason, setReason] = useState("");
   const [emergencyRequirement, setEmergencyRequirement] = useState(false);
-  const [inputErrorDate, setinputErrorDate] = useState(false);
-  const [inputErrorPhone, setinputErrorPhone] = useState(false);
+  const [inputErrorDate, setInputErrorDate] = useState(false);
+  const [inputErrorPhone, setInputErrorPhone] = useState(false);
   const [inputErrorUnits, setinputErrorUnits] = useState(false);
   const handlerequestedByChange = (event) => {
     setrequestedBy(event.target.value);
@@ -38,14 +38,14 @@ const Request = () => {
     const date = new Date(event.target.value);
     if (current.getFullYear() === date.getFullYear()) {
       if (date.getMonth() < current.getMonth()) {
-        setinputErrorDate(true);
+        setInputErrorDate(true);
       } else if (
         date.getMonth() === current.getMonth() &&
         date.getDate() < current.getDate()
       ) {
-        setinputErrorDate(true);
+        setInputErrorDate(true);
       } else {
-        setinputErrorDate(false);
+        setInputErrorDate(false);
       }
     }
   };
@@ -68,9 +68,9 @@ const Request = () => {
       event.target.value.length > 10 ||
       event.target.value.length === 0
     ) {
-      setinputErrorPhone(true);
+      setInputErrorPhone(true);
     } else {
-      setinputErrorPhone(false);
+      setInputErrorPhone(false);
     }
   };
 
