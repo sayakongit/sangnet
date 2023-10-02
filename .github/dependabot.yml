@@ -9,3 +9,12 @@ updates:
     directory: "/frontend" # Location of package manifests
     schedule:
       interval: "daily"
+    commit-message:
+      prefix: "dependency-update :arrow_up:"
+  - package-ecosystem: "pip"
+    directory: "/backend"
+    schedule: 
+      interval: "daily"
+    commit-message:
+      prefix: "dependency-update :arrow_up:"  
+
