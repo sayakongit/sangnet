@@ -1,0 +1,26 @@
+name: Thank You for Raising Issue
+
+on:
+  issues:
+    types:
+      - opened
+
+jobs:
+  respond_to_issue:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Comment on Issue
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const issueComment = `
+              Thank you for raising this issue!
+              Someone from the team will take a look and assign it to the appropriate person.
+            `;
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: issueComment,
+            });

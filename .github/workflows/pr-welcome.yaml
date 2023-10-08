@@ -1,0 +1,26 @@
+name: Welcome PR Contributor
+
+on:
+  pull_request:
+    types:
+      - opened
+
+jobs:
+  welcome_pr_contributor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Comment on Pull Request
+        uses: actions/github-script@v5
+        with:
+          script: |
+            const prComment = `
+              Hello ${github.context.payload.pull_request.user.login}, thanks for raising a Pull Request! 🚀
+              Your contribution is valuable to us. The maintainers will review this Pull Request and provide feedback as soon as possible. Keep up the great work!
+            `;
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: prComment,
+            });
