@@ -4,7 +4,7 @@
 
 <p align="center">
   <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 </p>
 
@@ -106,6 +106,7 @@ For detailed information about the available API endpoints and their usage, refe
     <tr>
       <td align="center" valign="top" width="14.28%"><a href="https://sayakongit.github.io/"><img src="https://avatars.githubusercontent.com/u/83216382?v=4?s=100" width="100px;" alt="Sayak Saha"/><br /><sub><b>Sayak Saha</b></sub></a><br /><a href="https://github.com/sayakongit/sangnet/commits?author=sayakongit" title="Code">💻</a></td>
       <td align="center" valign="top" width="14.28%"><a href="https://riddhick.github.io/Profile/"><img src="https://avatars.githubusercontent.com/u/39643319?v=4?s=100" width="100px;" alt="Riddhick Dalal"/><br /><sub><b>Riddhick Dalal</b></sub></a><br /><a href="https://github.com/sayakongit/sangnet/commits?author=Riddhick" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://www.linkedin.com/in/shiwangi-kumari-5b0b3b1b7/"><img src="https://avatars.githubusercontent.com/u/77545230?v=4?s=100" width="100px;" alt="Shiwangi Kumari"/><br /><sub><b>Shiwangi Kumari</b></sub></a><br /><a href="#infra-sshiwangi" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
     </tr>
   </tbody>
 </table>
