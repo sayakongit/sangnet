@@ -24,6 +24,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "sshiwangi",
+      "name": "Shiwangi Kumari",
+      "avatar_url": "https://avatars.githubusercontent.com/u/77545230?v=4",
+      "profile": "https://www.linkedin.com/in/shiwangi-kumari-5b0b3b1b7/",
+      "contributions": [
+        "infra"
+      ]
     }
   ],
   "contributorsPerLine": 7,
