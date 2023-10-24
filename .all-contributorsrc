@@ -33,6 +33,15 @@
       "contributions": [
         "infra"
       ]
+    },
+    {
+      "login": "anevski-stefan",
+      "name": "Stefan Anevski",
+      "avatar_url": "https://avatars.githubusercontent.com/u/105498279?v=4",
+      "profile": "https://stefananevski.xyz/",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
