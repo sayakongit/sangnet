@@ -1,0 +1,49 @@
+name: Version Check
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - closed
+
+jobs:
+  version_check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install bump2version  # Installing the version bumping tool
+
+      - name: Fetch Main Branch Version
+        run: |
+          main_branch_version=$(curl -s https://raw.githubusercontent.com/sayakongit/sangnet/main/backend/requirements.txt | grep 'Django==' | cut -d'=' -f3)
+          echo "Main branch version: $main_branch_version"
+
+      - name: Fetch Current Branch Version
+        run: |
+          current_branch_version=$(grep 'Django==' backend/requirements.txt | cut -d'=' -f3)
+          echo "Current branch version: $current_branch_version"
+
+      - name: Compare Versions and Bump if Necessary
+        run: |
+          if [[ "$current_branch_version" < "$main_branch_version" ]]; then
+            echo "Bumping version..."
+            bump2version patch
+            git add backend/requirements.txt
+            git commit -m "Bump version" -a
+            git push origin HEAD
+          else
+            echo "Versions are up-to-date. No bump needed."
+          fi
