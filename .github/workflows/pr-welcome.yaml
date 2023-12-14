@@ -15,11 +15,11 @@ jobs:
         with:
           script: |
             const prComment = `
-              Hello ${github.context.payload.pull_request.user.login}, thanks for raising a Pull Request! 🚀
+              Hello ${context.payload.pull_request.user.login}, thanks for raising a Pull Request! 🚀
               Your contribution is valuable to us. The maintainers will review this Pull Request and provide feedback as soon as possible. Keep up the great work!
             `;
             github.issues.createComment({
-              issue_number: context.issue.number,
+              issue_number: context.payload.pull_request.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: prComment,
