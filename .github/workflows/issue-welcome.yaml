@@ -1,26 +1,18 @@
-name: Thank You for Raising Issue
+name: 'Welcome New Contributors'
 
 on:
   issues:
-    types:
-      - opened
+    types: [opened]
+  pull_request_target:
+    types: [opened]
 
 jobs:
-  respond_to_issue:
+  welcome-new-contributor:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Comment on Issue
-        uses: actions/github-script@v5
+      - name: 'Greet the contributor'
+        uses: garg3133/welcome-new-contributors@v1.2
         with:
-          script: |
-            const issueComment = `
-              Thank you for raising this issue!
-              Someone from the team will take a look and assign it to the appropriate person.
-            `;
-            github.issues.createComment({
-              issue_number: context.payload.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: issueComment,
-            });
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-message: 'Hello there, thanks for opening this issue. Someone from the team will have a look and assign it to the appropriate person!'
+          pr-message: 'Hello there, thanks for opening the Pull Request. We will review it soon.'
