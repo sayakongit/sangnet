@@ -4,7 +4,7 @@ django-cors-headers==4.3.1
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.3.0
 geographiclib==2.0
-geopy==2.4.0
+geopy==2.4.1
 PyJWT==2.8.0
 python-dotenv==1.0.0
 pytz==2023.3.post1
