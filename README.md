@@ -6,6 +6,7 @@
   <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 </div>
 
@@ -37,7 +38,16 @@ The backend is built using Django and Django REST Framework, providing a RESTful
    cd backend
    ```
 
-2. **Create a Python Virtual Environment (Optional, but recommended):**
+2. Setup the environment variables:
+
+   Rename the `.env.example` to `.env` and update all the env variables.
+
+   - `EMAIL_HOST_USER` is your gmail.
+   - `EMAIL_HOST_PASSWORD` will be the App Password in your gmail. Refer this [doc](https://support.google.com/mail/answer/185833?hl=en) to create your app password.
+   - `DATABASE_URL` is typically a external Postgres db URL hosted on cloud. You can create a free one on [Render](https://docs.render.com/databases).
+   - **PS:** If you don't want to setup a cloud db, you can still use a local db for development purpose. For that uncomment line 88-93 in `core/settings.py` and comment out line 95-97
+
+3. **Create a Python Virtual Environment (Optional, but recommended):**
 
    Create and activate a virtual environment to isolate project dependencies.
 
@@ -56,22 +66,22 @@ The backend is built using Django and Django REST Framework, providing a RESTful
    ./venv/Scripts/Activate.ps1
    ```
 
-3. Install the required Python packages:
+4. Install the required Python packages:
 
    ```bash
    pip install -r requirements.txt
    ```
 
-4. Run database migrations:
+5. Run database migrations:
    ```bash
     python manage.py makemigrations
     python manage.py migrate
    ```
-5. Start the Django development server:
+6. Start the Django development server:
    ```bash
     python manage.py runserver
    ```
-6. Use `http://localhost:8000` as the API base URL.
+7. Use `http://localhost:8000` as the API base URL.
 
 ## Frontend (React with Vite) ⚛️
 
