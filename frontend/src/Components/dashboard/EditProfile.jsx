@@ -10,11 +10,11 @@ import { useAuthContext } from "../../Hooks/useAuthContext";
 const EditProfile = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const [prevData, setprevData] = useState(null);
-  const [inputErrorFname, setinputErrorFname] = useState(false);
-  const [inputErrorLname, setinputErrorLname] = useState(false);
-  const [inputErrorPhone, setinputErrorPhone] = useState(false);
-  const [inputErrorAddress, setinputErrorAddress] = useState(false);
+  const [prevData, setPrevData] = useState(null);
+  const [inputErrorFname, setInputErrorFname] = useState(false);
+  const [inputErrorLname, setInputErrorLname] = useState(false);
+  const [inputErrorPhone, setInputErrorPhone] = useState(false);
+  const [inputErrorAddress, setInputErrorAddress] = useState(false);
   const { user, dispatch } = useAuthContext();
 
   // const fetchProfileData = async (user_id) => {
@@ -22,7 +22,7 @@ const EditProfile = () => {
   //     let { data } = await axios.get(
   //       `http://localhost:8000/accounts/profile/${user_id}`
   //     );
-  //     setprevData(data);
+  //     setPrevData(data);
   //     console.log("Data", data);
   //   } catch (error) {
   //     if (error) {
@@ -70,21 +70,21 @@ const EditProfile = () => {
   const handleChange = (e) => {
     if (e.target.name === "fname") {
       if (e.target.value.length > 30 || e.target.value.length === 0) {
-        setinputErrorFname(true);
+        setInputErrorFname(true);
       } else {
-        setinputErrorFname(false);
+        setInputErrorFname(false);
       }
     } else if (e.target.name === "lname") {
       if (e.target.value.length > 30 || e.target.value.length === 0) {
-        setinputErrorLname(true);
+        setInputErrorLname(true);
       } else {
-        setinputErrorLname(false);
+        setInputErrorLname(false);
       }
     } else if (e.target.name === "address") {
       if (e.target.value.length > 100 || e.target.value.length === 0) {
-        setinputErrorAddress(true);
+        setInputErrorAddress(true);
       } else {
-        setinputErrorAddress(false);
+        setInputErrorAddress(false);
       }
     } else if (e.target.name === "number") {
       if (
@@ -92,9 +92,9 @@ const EditProfile = () => {
         e.target.value.length < 10 ||
         !Number(e.target.value)
       ) {
-        setinputErrorPhone(true);
+        setInputErrorPhone(true);
       } else {
-        setinputErrorPhone(false);
+        setInputErrorPhone(false);
       }
     }
   };
@@ -102,7 +102,7 @@ const EditProfile = () => {
   useEffect(() => {
     // const user_id = localStorage.getItem("user_id");
     // fetchProfileData(user_id);
-    setprevData(user);
+    setPrevData(user);
     console.log("hye");
   }, [user]);
   return (
@@ -135,7 +135,7 @@ const EditProfile = () => {
                   autoComplete="off"
                   value={prevData?.first_name}
                   onChange={(e) => {
-                    setprevData({ ...prevData, first_name: e.target.value });
+                    setPrevData({ ...prevData, first_name: e.target.value });
                     handleChange(e);
                   }}
                   className="class_fname"
@@ -157,7 +157,7 @@ const EditProfile = () => {
                   autoComplete="off"
                   value={prevData?.last_name}
                   onChange={(e) => {
-                    setprevData({ ...prevData, last_name: e.target.value });
+                    setPrevData({ ...prevData, last_name: e.target.value });
                     handleChange(e);
                   }}
                 />
@@ -193,7 +193,7 @@ const EditProfile = () => {
                 autoComplete="off"
                 value={prevData?.address}
                 onChange={(e) => {
-                  setprevData({ ...prevData, address: e.target.value });
+                  setPrevData({ ...prevData, address: e.target.value });
                   handleChange(e);
                 }}
               />
@@ -230,7 +230,7 @@ const EditProfile = () => {
                 autoComplete="off"
                 value={prevData?.phone}
                 onChange={(e) => {
-                  setprevData({ ...prevData, phone: e.target.value });
+                  setPrevData({ ...prevData, phone: e.target.value });
                   handleChange(e);
                 }}
               />

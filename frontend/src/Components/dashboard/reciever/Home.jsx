@@ -85,7 +85,7 @@ const Home = () => {
   const user_id = localStorage.getItem("user_id");
 
   const [donorLocations, setDonorLocations] = useState([]);
-  const [inputErrorDate, setinputErrorDate] = useState(false);
+  const [inputErrorDate, setInputErrorDate] = useState(false);
 
   const [mapState, setMapState] = useState({
     longitude: 88.3832,
@@ -242,14 +242,14 @@ const Home = () => {
     const date = new Date(event.target.value);
     if (current.getFullYear() === date.getFullYear()) {
       if (date.getMonth() > current.getMonth()) {
-        setinputErrorDate(true);
+        setInputErrorDate(true);
       } else if (
         date.getMonth() === current.getMonth() &&
         date.getDate() > current.getDate()
       ) {
-        setinputErrorDate(true);
+        setInputErrorDate(true);
       } else {
-        setinputErrorDate(false);
+        setInputErrorDate(false);
       }
     }
 
