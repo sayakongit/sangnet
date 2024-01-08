@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./Home.css";
+import pin from "../../Assets/pin.png";
 import Header from "../Header";
 import Sidebar from "../Sidebar";
 import Box from "@mui/material/Box";
@@ -183,6 +184,7 @@ const Home = () => {
         longitude: parseFloat(data.coordinates.longitude),
         latitude: parseFloat(data.coordinates.latitude),
         zoom: 15,
+        
       });
     } catch (error) {
       console.log(error);
@@ -392,7 +394,16 @@ const Home = () => {
                 initialViewState={mapState}
                 style={{ width: 600, height: 340 }}
                 mapStyle="mapbox://styles/mapbox/streets-v9"
+
               >
+                  <Marker 
+                    longitude={longitude}
+                    latitude={latitude}
+                    anchor="bottom"
+                  >
+                  <img style={{ width: "26px", height: "40px" }} src={pin} alt="pin" />
+                  </Marker>
+                  
                 {donorLocations.map((location, index) => (
                   <Marker
                     key={index}
