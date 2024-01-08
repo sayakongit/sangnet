@@ -396,11 +396,14 @@ const Home = () => {
                 mapStyle="mapbox://styles/mapbox/streets-v9"
 
               >
-                   <Marker 
-                  longitude={longitude}
-                  latitude={latitude}
-                  anchor="bottom"
-                  ><img src={pin} alt="pin" /></Marker>
+                  <Marker 
+                    longitude={longitude}
+                    latitude={latitude}
+                    anchor="bottom"
+                  >
+                  <img src={pin} alt="pin" />
+                  </Marker>
+                  
                 {donorLocations.map((location, index) => (
                   <Marker
                     key={index}
