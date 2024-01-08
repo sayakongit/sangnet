@@ -401,7 +401,7 @@ const Home = () => {
                     latitude={latitude}
                     anchor="bottom"
                   >
-                  <img src={pin} alt="pin" />
+                  <img style={{ width: "26px", height: "40px" }} src={pin} alt="pin" />
                   </Marker>
                   
                 {donorLocations.map((location, index) => (
