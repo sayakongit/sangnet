@@ -42,6 +42,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "harith-hacky03",
+      "name": "Harith",
+      "avatar_url": "https://avatars.githubusercontent.com/u/108193091?v=4",
+      "profile": "https://portfolio-harith.vercel.app/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
