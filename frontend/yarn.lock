@@ -2150,6 +2150,18 @@ react-otp-input@^3.1.1:
   resolved "https://registry.yarnpkg.com/react-otp-input/-/react-otp-input-3.1.1.tgz#910169629812c40a614e6c175cc2c5f36102bb61"
   integrity sha512-bjPavgJ0/Zmf/AYi4onj8FbH93IjeD+e8pWwxIJreDEWsU1ILR5fs8jEJmMGWSBe/yyvPP6X/W6Mk9UkOCkTPw==
 
+react-storage-complete@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/react-storage-complete/-/react-storage-complete-1.1.5.tgz#5a8e5a8b30267d0df8861323530d7d8a30d263d2"
+  integrity sha512-/cr/ZLGVGXng1THYW9tuIuukOhRQg0YjJZ37nOLmAHjDDzX5cWWqzHQn8yw0vYCLyubB8XqfCQQaIkel5CwQoQ==
+  dependencies:
+    react-sub-unsub "^2.1.11"
+
+react-sub-unsub@^2.1.11:
+  version "2.1.11"
+  resolved "https://registry.yarnpkg.com/react-sub-unsub/-/react-sub-unsub-2.1.11.tgz#173d0803e1d7b29611cb29d95f47ed7798e93642"
+  integrity sha512-FNKy0uD5wSieRE+l5RXaS0bUu6cR8XAXLDwOJnvSDGBMHcWVb1dod8ZkXYjPKtKR74tjYCEpMWcEAWCOoWNXxQ==
+
 react@^18:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-18.2.0.tgz#555bd98592883255fa00de14f1151a917b5d77d5"

@@ -1,14 +1,20 @@
 "use client";
 
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import Link from "next/link";
-import React, { useState } from "react";
 import Sidebar from "@/components/Sidebar";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import { backend } from "@/components/constants/Const";
+import { useLocalStorage } from 'react-storage-complete';
+import userDetails, { User } from "@/components/state/GlobalState";
+
 
 const Signup = () => {
+
+  const { setUser } = userDetails() as User;
   const [loading, setLoading] = useState(false);
-  const [user, setUser] = useState({
+  const [userInfo, setUserInfo] = useState({
     first_name: "",
     last_name: "",
     email: "",
@@ -19,6 +25,32 @@ const Signup = () => {
     confirm_password: "",
     address: "",
   });
+
+  const router = useRouter();
+  const [ access, setAccess ] = useLocalStorage("access", null);
+
+  const checkAccess = async () => {
+    if (access !== null) {
+      // console.log(`Access Token ${token}`);
+      try {
+        await axios.post(
+          `${backend}/accounts/token/verify/`,
+          {
+            token: access,
+          },
+          {
+            headers: {
+              "Content-type": "application/json",
+            },
+          }
+        );
+        router.push("/");
+      } catch (error) {
+        const e = error as AxiosError;
+        console.error(e.response?.data);
+      }
+    }
+  };
 
   const isFutureDate = (date: string | number | Date) => {
     const now = new Date();
@@ -41,36 +73,32 @@ const Signup = () => {
 
   const handleChange = (e: { target: { name: string; value: string } }) => {
     const { name, value } = e.target;
-    setUser((prevState) => ({
+    setUserInfo((prevState) => ({
       ...prevState,
       [name]: value,
     }));
-    // console.log(user);
-  };
-
-  const sleep = (ms: number | undefined) => {
-    return new Promise((resolve) => setTimeout(resolve, ms));
+    // console.log(userInfo);
   };
 
   const handleSubmit = async () => {
-    const isEmpty = Object.values(user).some((x) => x === ""); // Check if any field is empty
+    const isEmpty = Object.values(userInfo).some((x) => x === ""); // Check if any field is empty
     if (isEmpty) {
       // TODO: Toast Empty Field not allowed !
       console.log(isEmpty);
       return;
     }
-    // else if (isFutureDate(user.date_of_birth)) {
+    // else if (isFutureDate(userInfo.date_of_birth)) {
     //   // TODO: Toast Future Date not allowed !
     //   return;
-    // } else if (isAtLeast18YearsOld(user.date_of_birth)) {
+    // } else if (isAtLeast18YearsOld(userInfo.date_of_birth)) {
     //   // TODO: Toast You Must be Atleast 18 Years old !
     //   return;
     // }
-    else if (user.password.length < 8) {
-      // TODO: Password must be at least 8 chars long !
+    else if (userInfo.password.length < 6) {
+      // TODO: Password must be at least 6 chars long !
       console.log("Password Short");
       return;
-    } else if (user.password !== user.confirm_password) {
+    } else if (userInfo.password !== userInfo.confirm_password) {
       // TODO: Password is not matching !
       console.log("Password Diff");
       return;
@@ -79,26 +107,40 @@ const Signup = () => {
     setLoading(!loading); // Set the Button as Loading
 
     try {
-      // const { data } = await axios.post(`${backend}/accounts/register/`, user, {
-      //   headers: {
-      //     "Content-type": "application/json",
-      //   },
-      // });
+      const { data } = await axios.post(
+        `${backend}/accounts/register/`,
+        userInfo,
+        {
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
 
-      await sleep(3000);
+      console.log(data);
 
-      // TODO: Toast Registration was successful !
+      // Assuming Registration was Successful ✅
+
+      const userData = {
+        id: data.user_id,
+        email: userInfo.email,
+        password: userInfo.password,
+        first_name: userInfo.first_name,
+        last_name: userInfo.last_name,
+        phone: userInfo.phone,
+        address: userInfo.address,
+        date_of_birth: userInfo.date_of_birth,
+        adhaar_number: userInfo.adhaar_number,
+      };
+
+      setUser(userData); // Update the global State
+
       setLoading(!loading);
-
+      
+      // TODO: Toast Registration was successful !
       console.log("Pushing Router");
 
-      // navigate("/verify", {
-      //   state: {
-      //     email: user.email,
-      //     password: user.password,
-      //   },
-      //   replace: true,
-      // });
+      router.push("/verify"); // Redirect for OTP Verification
 
     } catch (error) {
       // TODO: Toast Something went Wrong, Try again !
@@ -106,6 +148,10 @@ const Signup = () => {
       return;
     }
   };
+
+  useEffect(() => {
+    checkAccess();
+  }, []);
 
   return (
     <main className="flex flex-row">

@@ -2,34 +2,46 @@
 
 import Link from "next/link";
 import OTPInput from "react-otp-input";
-import React, { useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
 import Sidebar from "@/components/Sidebar";
-import { backend } from "@/components/constants/Const";
 import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { backend } from "@/components/constants/Const";
+import { useLocalStorage } from "react-storage-complete";
+import userDetails, { User } from "@/components/state/GlobalState";
 
 const Verify = () => {
   const router = useRouter();
-
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [otp, setOtp] = useState("");
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("Kindly enter a valid Otp");
+  const { loggedIn, user, setLog } = userDetails() as User;
+
+  const [userId, setUserId] = useLocalStorage("user_id", null);
+  const [access, setAccess] = useLocalStorage("access", null);
+  const [refresh, setRefresh] = useLocalStorage("refresh", null);
+
+  console.log("Logged in ? = " + loggedIn);
+  console.log("User = " + user);
 
   const verifyOTP = async () => {
     if (otp.length < 4) {
       // TODO: toast.warn("Kindly enter a valid Otp");
-      alert("Kindly enter a valid Otp");
+      setError("Please Enter a Valid OTP");
+      console.log(otp);
+      // alert("Kindly enter a valid Otp");
       return;
     }
 
-    setLoading(!loading);
+    setLoading(true);
 
     try {
+      // Verifying OTP
       const url = `${backend}/accounts/verify/`;
-      console.log(`Url is ${url}`);
-      const { data } = await axios.post(
+
+      const veriFication = await axios.post(
         url,
         {
           email: email,
@@ -42,30 +54,60 @@ const Verify = () => {
         }
       );
 
-      console.log(data);
+      // console.log(veriFication.data);
 
-      // TODO: toast.success("User verified successfully");
-      // TODO: Call LogIn() to set token in LocalStorage
+      // Getting AccessToken
+
+      const { data } = await axios.post(
+        `${backend}/accounts/login/`,
+        {
+          email: email,
+          password: password,
+        },
+        {
+          headers: {
+            "Content-type": "application/json",
+          },
+        }
+      );
+
+      // Setting Access Tokens
+
+      setRefresh(data.token.refresh);
+      setAccess(data.token.access);
+      setUserId(data.data.user_id);
+
+      setLog(true);
+
+      // TODO: Toast Verification Successful
 
       router.push("/"); // Redirect to Dashboard on success
+
     } catch (error) {
       const e = error as AxiosError;
+      console.log(JSON.stringify(e.response));
       if (e.response) {
         // TODO: toast.error(`${e.response.data.message}`);
-        alert(
-          "Error Code: " +
-            e.response.status +
-            " Error Message: " +
-            JSON.stringify(e.response.data)
-        );
+        if (e.response.status === 400) {
+          setError("The OTP is Incorrect");
+        } else {
+          setError(JSON.stringify(e.response.data));
+        }
       }
+      setLoading(false);
     }
-    setLoading(!loading);
   };
 
-  // useEffect(() => {
-    
-  // }, []);
+  useEffect(() => {
+    if (!user) {
+      router.push("/login");
+    } else if (loggedIn) {
+      router.push("/");
+    } else {
+      setEmail(user.email);
+      setPassword(user.password);
+    }
+  }, []);
 
   return (
     <main className="flex flex-row">
@@ -87,13 +129,24 @@ const Verify = () => {
 
           <OTPInput
             value={otp}
-            onChange={setOtp}
+            onChange={(value) => {
+              setOtp(value);
+              setError("");
+            }}
             numInputs={4}
             inputType="tel"
             renderInput={(props) => <input {...props} />}
             containerStyle="p-4 rounded-lg"
-            inputStyle="min-h-20 min-w-20 rounded-lg mx-4 bg-yellow-100/70 font-bold text-2xl"
+            inputStyle={`min-h-20 focus:border-0 min-w-20 rounded-lg mx-4 bg-yellow-100/70 font-bold text-2xl ${
+              error ? "border-2 border-red-600" : ""
+            }`}
           />
+
+          {error ? (
+            <p className="text-sm text-center text-red-600 font-bold">
+              {error}
+            </p>
+          ) : null}
 
           <div className="px-16 mt-8">
             <button
