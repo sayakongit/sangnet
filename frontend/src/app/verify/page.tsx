@@ -6,12 +6,15 @@ import axios, { AxiosError } from "axios";
 import Sidebar from "@/components/Sidebar";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { ToastAction } from "@/components/ui/toast"
+import { useToast } from "@/components/ui/use-toast"
 import { backend } from "@/components/constants/Const";
 import { useLocalStorage } from "react-storage-complete";
 import userDetails, { User } from "@/components/state/GlobalState";
 
 const Verify = () => {
   const router = useRouter();
+  const { toast } = useToast();
   const [otp, setOtp] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
@@ -31,7 +34,6 @@ const Verify = () => {
       // TODO: toast.warn("Kindly enter a valid Otp");
       setError("Please Enter a Valid OTP");
       console.log(otp);
-      // alert("Kindly enter a valid Otp");
       return;
     }
 
@@ -79,7 +81,10 @@ const Verify = () => {
 
       setLog(true);
 
-      // TODO: Toast Verification Successful
+      toast({
+        title: "Log in Successful",
+        description: "Email Successfully Verified !",
+      })
 
       router.push("/"); // Redirect to Dashboard on success
 
@@ -90,6 +95,12 @@ const Verify = () => {
         // TODO: toast.error(`${e.response.data.message}`);
         if (e.response.status === 400) {
           setError("The OTP is Incorrect");
+          toast({
+            variant: "destructive",
+            title: "Wrong OTP",
+            description: "Please check your entered OTP",
+            action: <ToastAction altText="Try again">Try again</ToastAction>,
+          })
         } else {
           setError(JSON.stringify(e.response.data));
         }

@@ -3,12 +3,14 @@
 import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useLocalStorage } from "react-storage-complete";
+import { useToast } from "@/components/ui/use-toast";
 import userDetails, { User } from "@/components/state/GlobalState";
 import { backend } from "@/components/constants/Const";
 import axios, { AxiosError } from "axios";
 
 const Dashboard = () => {
   const router = useRouter();
+  const { toast } = useToast();
   const { user, loggedIn } = userDetails() as User;
   const [access, setAccess] = useLocalStorage("access", null);
 
@@ -30,17 +32,25 @@ const Dashboard = () => {
         const e = error as AxiosError;
         console.error(e.response?.data);
         if (e.response?.status === 401) {
-          // TODO: toast.error("Please login again!");
+          toast({
+            variant: "destructive",
+            title: "Something Went Wrong",
+            description: "Please login again!",
+          });
           router.push("/login");
           return;
         } else {
-          // TODO: toast.error("Please login first!");
+          toast({
+            variant: "destructive",
+            title: "Not Logged in",
+            description: "Please login First!",
+          });
+
           router.push("/login");
           return;
         }
       }
-    }
-    else {
+    } else {
       router.push("/login");
     }
   };
@@ -51,7 +61,9 @@ const Dashboard = () => {
 
   return (
     <main className="min-h-[100vh] grid place-content-center">
-      <h2 className="text-red-600 text-2xl">Hey ! {user?.first_name} {user?.last_name}</h2>
+      <h2 className="text-red-600 text-2xl">
+        Hey ! {user?.first_name} {user?.last_name}
+      </h2>
       <h1 className="text-blue-500 text-6xl my-12 mx-12">{"UI"}</h1>
     </main>
   );

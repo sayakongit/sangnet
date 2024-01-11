@@ -5,6 +5,7 @@ import axios, { AxiosError } from "axios";
 import Sidebar from "@/components/Sidebar";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
+import { useToast } from "@/components/ui/use-toast"
 import { backend } from "@/components/constants/Const";
 import { useLocalStorage } from 'react-storage-complete';
 import { getUserData } from "@/components/auth/AuthManager";
@@ -12,6 +13,7 @@ import userDetails, { User } from "@/components/state/GlobalState";
 
 const Login = () => {
   const router = useRouter();
+  const { toast } = useToast();
   const [email, setEmail] = useState("");
   const [error, setError] = useState(false);
   const [password, setPassword] = useState("");
@@ -37,7 +39,6 @@ const Login = () => {
 
   const checkAccess = async () => {
     if (access !== null) {
-      // console.log(`Access Token ${token}`);
       try {
         await axios.post(
           `${backend}/accounts/token/verify/`,
@@ -59,8 +60,12 @@ const Login = () => {
   };
 
   const handleSubmit = async () => {
+
     if (!email || !password) {
-      // TODO: Toast fields must not be empty
+      toast({
+        title: "All Fields Required",
+        description: "Kindly fill all fields !",
+      })
       setError(true);
       return;
     }
@@ -107,7 +112,10 @@ const Login = () => {
       setLoading(false);
 
       if (!data.data.is_verified) {
-        // TODO: toast.warn("Please verify your email!");
+        toast({
+          title: "Account Not Verified",
+          description: "Please verify your email !",
+        })
         router.push("/verify");
         return;
       }
@@ -117,7 +125,12 @@ const Login = () => {
       setUserId(data.data.user_id);
 
       setLog(true);
-      // TODO: Toast: You are successfully Logged in
+ 
+      toast({
+        title: "Log in Successful",
+        description: "You are successfully Logged in",
+      })
+
       router.push("/"); // redirect to Dashboard
 
     } catch (error) {
