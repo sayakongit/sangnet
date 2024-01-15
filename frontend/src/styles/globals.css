@@ -61,10 +61,19 @@
   }
 }
 
+#logo {
+  font-family: var(--font-caprasimo);
+  @apply md:text-5xl 2xl:text-[3.25rem] mt-16 2xl:mt-24
+}
+
 .active-btn {
   @apply w-full inline-flex items-center justify-center rounded-lg bg-primary px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary/90
 }
 
 .loading-btn {
   @apply w-full inline-flex items-center justify-center rounded-lg bg-gray-400 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm
+}
+
+.sidebar-btn {
+  @apply w-full rounded-full flex flex-row justify-start gap-4 py-4 2xl:py-5 px-6
 }

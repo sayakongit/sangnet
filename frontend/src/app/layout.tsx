@@ -1,9 +1,14 @@
 import "../styles/globals.css";
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
 import { Toaster } from "@/components/ui/toaster";
+import { Poppins, Caprasimo } from "next/font/google";
 
-const poppins = Poppins({ subsets: ["latin"], weight: ["200"] });
+const poppins = Poppins({ subsets: ["latin"], weight: ["300"] });
+const caprasimo = Caprasimo({
+  subsets: ["latin"],
+  weight: ["400"],
+  variable: "--font-caprasimo",
+});
 
 export const metadata: Metadata = {
   title: "Sangnet",
@@ -18,7 +23,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={poppins.className}>
+      <body className={`${poppins.className} ${caprasimo.variable}`}>
         {children}
         <Toaster />
       </body>

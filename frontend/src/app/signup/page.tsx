@@ -1,17 +1,22 @@
 "use client";
 
-import axios, { AxiosError } from "axios";
 import Link from "next/link";
-import Sidebar from "@/components/Sidebar";
+import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { backend } from "@/components/constants/Const";
-import { useLocalStorage } from 'react-storage-complete';
+import { OuterSidebar } from "@/components/Sidebar";
+import { ToastAction } from "@/components/ui/toast";
+import { useToast } from "@/components/ui/use-toast";
+import { useLocalStorage } from "react-storage-complete";
 import userDetails, { User } from "@/components/state/GlobalState";
-
+import {
+  verify_token,
+  req_signup,
+  json_header,
+} from "@/components/constants/Const";
 
 const Signup = () => {
-
+  const { toast } = useToast();
   const { setUser } = userDetails() as User;
   const [loading, setLoading] = useState(false);
   const [userInfo, setUserInfo] = useState({
@@ -27,21 +32,18 @@ const Signup = () => {
   });
 
   const router = useRouter();
-  const [ access, setAccess ] = useLocalStorage("access", null);
+  const [access, setAccess] = useLocalStorage("access", null);
 
   const checkAccess = async () => {
     if (access !== null) {
-      // console.log(`Access Token ${token}`);
       try {
         await axios.post(
-          `${backend}/accounts/token/verify/`,
+          verify_token,
           {
             token: access,
           },
           {
-            headers: {
-              "Content-type": "application/json",
-            },
+            headers: json_header,
           }
         );
         router.push("/");
@@ -107,15 +109,9 @@ const Signup = () => {
     setLoading(!loading); // Set the Button as Loading
 
     try {
-      const { data } = await axios.post(
-        `${backend}/accounts/register/`,
-        userInfo,
-        {
-          headers: {
-            "Content-type": "application/json",
-          },
-        }
-      );
+      const { data } = await axios.post(req_signup, userInfo, {
+        headers: json_header,
+      });
 
       console.log(data);
 
@@ -136,14 +132,18 @@ const Signup = () => {
       setUser(userData); // Update the global State
 
       setLoading(!loading);
-      
+
       // TODO: Toast Registration was successful !
       console.log("Pushing Router");
 
       router.push("/verify"); // Redirect for OTP Verification
-
     } catch (error) {
-      // TODO: Toast Something went Wrong, Try again !
+      toast({
+        variant: "destructive",
+        title: "Could not register",
+        description: "Something went Wrong!",
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+      });
       setLoading(!loading); // Set the Button as Loading
       return;
     }
@@ -155,10 +155,7 @@ const Signup = () => {
 
   return (
     <main className="flex flex-row">
-      <Sidebar
-        name={"Sangnet"}
-        text={'"Connecting Lives, Saving Futures."'}
-      ></Sidebar>
+      <OuterSidebar></OuterSidebar>
 
       <section className="ml-[35vw] w-[65vw] min-h-[100vh] grid place-content-center">
         <div className="mx-auto p-6 items-center justify-center">

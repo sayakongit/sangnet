@@ -3,14 +3,18 @@
 import Link from "next/link";
 import OTPInput from "react-otp-input";
 import axios, { AxiosError } from "axios";
-import Sidebar from "@/components/Sidebar";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { ToastAction } from "@/components/ui/toast"
-import { useToast } from "@/components/ui/use-toast"
-import { backend } from "@/components/constants/Const";
+import { ToastAction } from "@/components/ui/toast";
+import { OuterSidebar } from "@/components/Sidebar";
+import { useToast } from "@/components/ui/use-toast";
 import { useLocalStorage } from "react-storage-complete";
 import userDetails, { User } from "@/components/state/GlobalState";
+import {
+  json_header,
+  req_login,
+  verify_otp,
+} from "@/components/constants/Const";
 
 const Verify = () => {
   const router = useRouter();
@@ -41,7 +45,7 @@ const Verify = () => {
 
     try {
       // Verifying OTP
-      const url = `${backend}/accounts/verify/`;
+      const url = verify_otp;
 
       const veriFication = await axios.post(
         url,
@@ -50,26 +54,23 @@ const Verify = () => {
           otp: otp,
         },
         {
-          headers: {
-            "Content-type": "application/json",
-          },
+          headers: json_header,
         }
       );
 
+      // TODO: Fix backend to give access token on otp verification
       // console.log(veriFication.data);
 
       // Getting AccessToken
 
       const { data } = await axios.post(
-        `${backend}/accounts/login/`,
+        req_login,
         {
           email: email,
           password: password,
         },
         {
-          headers: {
-            "Content-type": "application/json",
-          },
+          headers: json_header,
         }
       );
 
@@ -84,10 +85,9 @@ const Verify = () => {
       toast({
         title: "Log in Successful",
         description: "Email Successfully Verified !",
-      })
+      });
 
       router.push("/"); // Redirect to Dashboard on success
-
     } catch (error) {
       const e = error as AxiosError;
       console.log(JSON.stringify(e.response));
@@ -100,7 +100,7 @@ const Verify = () => {
             title: "Wrong OTP",
             description: "Please check your entered OTP",
             action: <ToastAction altText="Try again">Try again</ToastAction>,
-          })
+          });
         } else {
           setError(JSON.stringify(e.response.data));
         }
@@ -122,10 +122,7 @@ const Verify = () => {
 
   return (
     <main className="flex flex-row">
-      <Sidebar
-        name={"Sangnet"}
-        text={'"Connecting Lives, Saving Futures."'}
-      ></Sidebar>
+      <OuterSidebar></OuterSidebar>
 
       <section className="ml-[35vw] w-[65vw] min-h-[100vh] grid place-content-center">
         <div className="mx-auto p-6 items-center justify-center">

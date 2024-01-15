@@ -2,14 +2,19 @@
 
 import Link from "next/link";
 import axios, { AxiosError } from "axios";
-import Sidebar from "@/components/Sidebar";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
-import { useToast } from "@/components/ui/use-toast"
-import { backend } from "@/components/constants/Const";
-import { useLocalStorage } from 'react-storage-complete';
-import { getUserData } from "@/components/auth/AuthManager";
+import { ToastAction } from "@/components/ui/toast";
+import { OuterSidebar } from "@/components/Sidebar";
+import { useToast } from "@/components/ui/use-toast";
+import { useLocalStorage } from "react-storage-complete";
+import { getUserData } from "@/components/server/UserManager";
 import userDetails, { User } from "@/components/state/GlobalState";
+import {
+  req_login,
+  verify_token,
+  json_header,
+} from "@/components/constants/Const";
 
 const Login = () => {
   const router = useRouter();
@@ -19,11 +24,10 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const { setUser, setLog } = userDetails() as User;
-  
-  const [ userId, setUserId ] = useLocalStorage("user_id", null);
-  const [ access, setAccess ] = useLocalStorage("access", null);
-  const [ refresh, setRefresh ] = useLocalStorage("refresh", null);
 
+  const [userId, setUserId] = useLocalStorage("user_id", null);
+  const [access, setAccess] = useLocalStorage("access", null);
+  const [refresh, setRefresh] = useLocalStorage("refresh", null);
 
   const handleChange = (e: any) => {
     const { target } = e;
@@ -41,14 +45,12 @@ const Login = () => {
     if (access !== null) {
       try {
         await axios.post(
-          `${backend}/accounts/token/verify/`,
+          verify_token,
           {
             token: access,
           },
           {
-            headers: {
-              "Content-type": "application/json",
-            },
+            headers: json_header,
           }
         );
         router.push("/");
@@ -60,12 +62,11 @@ const Login = () => {
   };
 
   const handleSubmit = async () => {
-
     if (!email || !password) {
       toast({
         title: "All Fields Required",
         description: "Kindly fill all fields !",
-      })
+      });
       setError(true);
       return;
     }
@@ -74,21 +75,18 @@ const Login = () => {
 
     try {
       const { data } = await axios.post(
-        `${backend}/accounts/login/`,
+        req_login,
         {
           email: email,
           password: password,
         },
         {
-          headers: {
-            "Content-type": "application/json",
-          },
+          headers: json_header,
         }
       );
 
-      
       const [_, User] = await getUserData(data.data.user_id);
-      
+
       const userData = {
         id: User.id,
         coordinates: User.coordinates,
@@ -106,16 +104,16 @@ const Login = () => {
         updated_at: User.updated_at,
         donor_application_status: User.donor_application_status,
       };
-      
+
       setUser(userData); // Update Global state after successful Authentication
-      
+
       setLoading(false);
 
       if (!data.data.is_verified) {
         toast({
           title: "Account Not Verified",
           description: "Please verify your email !",
-        })
+        });
         router.push("/verify");
         return;
       }
@@ -125,14 +123,13 @@ const Login = () => {
       setUserId(data.data.user_id);
 
       setLog(true);
- 
+
       toast({
         title: "Log in Successful",
         description: "You are successfully Logged in",
-      })
+      });
 
       router.push("/"); // redirect to Dashboard
-
     } catch (error) {
       const e = error as AxiosError;
 
@@ -140,8 +137,20 @@ const Login = () => {
       setLoading(false);
 
       if (e.response?.status === 404) {
-        // TODO: toast.error("User does not exist");
-        return JSON.stringify(e.response?.data);
+        setError(true);
+        toast({
+          variant: "destructive",
+          title: "Wrong Credentials",
+          description: "The entered user does not exist !",
+        });
+      } else if (e.response?.status === 400) {
+        setError(true);
+        toast({
+          variant: "destructive",
+          title: "Wrong Credentials",
+          description: "Please double Check your credentials !",
+          action: <ToastAction altText="Try again">Try again</ToastAction>,
+        });
       } else {
         // TODO: toast.error("Something is wrong !");
         return;
@@ -155,10 +164,7 @@ const Login = () => {
 
   return (
     <main className="flex flex-row">
-      <Sidebar
-        name={"Sangnet"}
-        text={'"Connecting Lives, Saving Futures."'}
-      ></Sidebar>
+      <OuterSidebar></OuterSidebar>
 
       <section className="ml-[35vw] w-[65vw] min-h-[100vh] grid place-content-center">
         <div className="mx-auto p-6 items-center justify-center">
