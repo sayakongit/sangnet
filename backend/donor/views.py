@@ -7,12 +7,12 @@ from rest_framework.permissions import IsAuthenticated
 from .serializers import ApplyAsDonorSerializer, DonorProfileViewSerializer
 import geopy.distance
 import logging
+from datetime import datetime,timedelta,date
 
 logger = logging.getLogger('donor.views')
 
 
 class ApplyAsDonorView(APIView):
-    # permission_classes = (IsAuthenticated,)
     def post(self, request):
         try:
             data = request.data
@@ -21,40 +21,35 @@ class ApplyAsDonorView(APIView):
             if serializer.is_valid():
                 user_id = serializer.data['user_id']
                 blood_group = serializer.data['blood_group']
-                try:
-                    last_donated_on = serializer.data['last_donated_on']
-                    # TODO: if last donation is less than 6 months ago, mark as not available for donation
-                except:
-                    last_donated_on = None
+                last_donated_on = serializer.data.get('last_donated_on', None)
 
                 user = User.objects.get(id=user_id)
+
+                # Check if last donation date is within the last 3 months
+                if last_donated_on:
+                    today = date.today()
+                    three_months_ago = today - timedelta(days=90)
+                    if last_donated_on > three_months_ago:
+                        return Response({'message': 'You cannot donate within the last 3 months'},
+                                        status=status.HTTP_400_BAD_REQUEST)
+
                 if Donor.objects.filter(user=user).exists():
+                     donor = Donor(user=user, blood_group=blood_group, last_donated_on=last_donated_on)
+                     user.donor_application_status = 'AP'
 
-                    application_status = user.donor_application_status
+                     donor.save()
+                     user.donor_id = donor.pk
+                     user.save()
 
-                    for status_tuple in APPLICATION_STATUS_CHOICES:
-                        if status_tuple[0] == application_status:
-                            application_status = status_tuple[1]
-                            break
-                    return Response({'message': 'You have already applied as a donor', 'status': application_status},
-                                    status=status.HTTP_400_BAD_REQUEST)
-
-                donor = Donor(user=user, blood_group=blood_group, last_donated_on=last_donated_on)
-                user.donor_application_status = 'AP'
-
-                donor.save()
-                user.donor_id = donor.pk
-                user.save()
-
-                response = {
-                    'message': 'Donor application submitted successfully'
-                }
-                return Response(response, status=status.HTTP_201_CREATED)
+                     response = {
+                          'message': 'Donor application submitted successfully'
+                       }
+                     return Response(response, status=status.HTTP_201_CREATED)
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         except Exception as e:
-            logging.error("Unable to send donor application", exc_info=True)
+            # Handle exceptions appropriately
             return Response({'message': 'Something went wrong'}, status=status.HTTP_400_BAD_REQUEST)
 
 
