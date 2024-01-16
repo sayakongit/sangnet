@@ -15,6 +15,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../../Hooks/useAuthContext";
 import {
+  Box,
   Button,
   Dialog,
   DialogActions,
@@ -40,6 +41,8 @@ const HistoryDonor = () => {
   const [open, setOpen] = useState(false);
   const [orderBy, setOrderBy] = useState("");
   const [order, setOrder] = useState("asc");
+
+  const themeColor = localStorage.getItem("theme");
   const sidebarProp = {
     home: false,
     historyDonor: true,
@@ -183,15 +186,15 @@ const HistoryDonor = () => {
   }, [user]);
 
   return (
-    <div className="historyContainer">
-      <div className="historyLeft">
+    <Box sx={{bgcolor : "background.default" , height : "100vh"}} >
+      <Box className="historyLeft">
         <Sidebar {...sidebarProp} />
-      </div>
-      <div className="historyRight">
-        <div className="headerBox">
+      </Box>
+      <Box  className="historyRight">
+        <Box className="headerBox">
           <Header />
-        </div>
-        <div className="historyTable">
+        </Box>
+        <Box className="historyTable">
           {/* tooltip for filter */}
           <Toolbar
             sx={{
@@ -199,15 +202,16 @@ const HistoryDonor = () => {
               pr: { xs: 1, sm: 1 },
             }}
           >
-            <Typography
-              sx={{ flex: "1 1 100%" }}
-              variant="h6"
-              id="tableTitle"
-              component="div"
-              fontWeight="bold"
+            <h6
+              // sx={{ flex: "100%"}}
+              // variant="h6"
+              // id="tableTitle"
+              // component="Box"
+              // fontWeight="bold"
+              style={{flex : "100%" ,fontSize : "1.25rem" ,color : (themeColor === null || themeColor === "light")?"black":"white"}}
             >
               Donation Requests
-            </Typography>
+            </h6>
 
             <Tooltip title="Reset Filter">
               <IconButton onClick={handleResetClick}>
@@ -387,9 +391,9 @@ const HistoryDonor = () => {
               </TableBody>
             </Table>
           </TableContainer>
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 

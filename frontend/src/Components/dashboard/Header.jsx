@@ -1,6 +1,6 @@
 import "./Header.css";
 import profileimage from "../Assets/profile.png";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import UpdateIcon from "@mui/icons-material/Update";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -18,7 +18,11 @@ import {
   Popover,
   Stack,
   Typography,
+
 } from "@mui/material";
+
+import ThemeToggleButton from "../UI/ThemeToggleButton";
+
 
 dayjs.extend(relativeTime);
 const Header = () => {
@@ -30,6 +34,7 @@ const Header = () => {
   const navigate = useNavigate();
   const access = localStorage.getItem("access");
   const refresh = localStorage.getItem("refresh");
+  
   // const gotoEdit = () => {
   //   navigate("/edit-profile");
   // };
@@ -203,10 +208,10 @@ const Header = () => {
   };
   return (
     <>
-      <div className="headerContainer">
-        <div className="profile">
+      <Box sx={{bgcolor : "background.default"}} className="headerContainer">
+        <Box className="profile">
           {/* <img src={profileimage} alt="profile image" className="profileImage" /> */}
-          <div className="profileContent">
+          <Box className="profileContent">
             <Typography variant="h4">
               <span style={{ color: "#40339f" }}>Hi, </span>
               {user && user.first_name && user.last_name
@@ -224,20 +229,20 @@ const Header = () => {
           <button className="editbutton" onClick={gotoEdit}>
             Edit Profile
           </button> */}
-          </div>
-        </div>
-        <div className="lastUpdate">
-          <div className="updateBox">
-            <div id="google_translate_element"></div>
-            {/* <div className="updateText">
+          </Box>
+        </Box>
+        <Box className="lastUpdate">
+          <Box className="updateBox">
+            <Box id="google_translate_element"></Box>
+            {/* <Box className="updateText">
             <button className="refresh" onClick={getUserCoordinates}>
               <UpdateIcon className="updateIcon" />
             </button>
             <h4>Location Last Updated:</h4>
-            <div className="data">{user ? update() : "12:30am "}</div>
-          </div> */}
-          </div>
-          <div>
+            <Box className="data">{user ? update() : "12:30am "}</Box>
+          </Box> */}
+          </Box>
+          <Box>
             <IconButton
               onClick={handleOpen}
               sx={{
@@ -308,9 +313,11 @@ const Header = () => {
                 <MenuItem onClick={signOut}>Sign Out</MenuItem>
               </Stack>
             </Popover>
-          </div>
-        </div>
-      </div>
+          {/*  */}
+          <ThemeToggleButton/>  
+          </Box>
+        </Box>
+      </Box>
       <Divider
         sx={{
           color: "#246b38",

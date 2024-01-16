@@ -91,3 +91,7 @@
 .container_right.login::-webkit-scrollbar {
   display: none;
 }
+
+input {
+  color : black;
+}

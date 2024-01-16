@@ -10,6 +10,8 @@ import "react-toastify/dist/ReactToastify.css";
 import "./Login";
 import "./Otp";
 import LoadingButton from "../UI/LoadingButton";
+import { Box, Typography } from "@mui/material";
+import ThemeToggleButton from "../UI/ThemeToggleButton";
 
 const Signin = () => {
   // this is used to navigate to different pages
@@ -133,26 +135,42 @@ const Signin = () => {
     access();
   }, []);
 
+  
+  const themeColor = localStorage.getItem("theme");
+
   return (
-    <div>
-      <Wapper>
-        <Container_left>
+    <Box sx={{bgcolor : "background.default"}}>
+      <Box sx={{display : "flex" , margin : 0 , flexDirection : "row" , height : "100vh" , scrollBehavior : "smooth" , border : "none"}}>
+        <div style={{backgroundColor : "#40339f" , color : "white" , border : "2px solid #40339f;" , width : "35vw" , height : "100vh" , textAlign : "center" , display : "flex" , flexDirection : "column" , justifyContent : "center" , alignItems : "center"}}>
           <h1 className="logo-h1"> Sangnet </h1>
-          <p>"Connecting Lives, Saving Futures."</p>
-        </Container_left>
-        <Container_right className="container_right sign-up">
-          <div className="form-container sign-up">
-            <div className="signup_text">
-              <div className="auth-heading">
-                <p>Sign up to Sangnet</p>
-              </div>
-            </div>
-            <form onSubmit={handleSubmit} autoComplete="off">
+          <p style={{color : "#ffffffca"}}>"Connecting Lives, Saving Futures."</p>
+        </div>
+        <Box sx={{ display : "flex" , flex : 2 , flexDirection : "column"}}>
+        
+          <Box sx={{ padding : "1rem", width : "100%" , display : "flex" , justifyContent : "flex-end"}}>
+            <ThemeToggleButton />
+          </Box>
+        <div style={{ display : "flex" , justifyContent : "center" , alignItems : "center"}}>
+            
+          <Box className="form-container sign-up">
+            
+            <Box className="signup_text">
+              {/* <Box className="auth-heading">
+                <Typography variant="p">Sign up to Sangnet</Typography>
+              </Box> */}
+              <h6
+              className="auth-heading"
+              style={{ color : (themeColor === null || themeColor === "light")?"black":"white"}}
+            >
+              Edit your profile
+            </h6>
+            </Box>
+            <form style={{gap : 10 , display : "flex" , flexDirection : "column"}} onSubmit={handleSubmit} autoComplete="off">
               {/* name */}
-              <div className="name_container">
+              <Box className="name_container">
                 {/* FirstName */}
-                <div className="form-group">
-                  <label htmlFor="fname" className="input-label">
+                <Box className="form-group">
+                  <label style={{ color : (themeColor === null || themeColor === "light")?"black":"white"}} htmlFor="fname" className="input-label">
                     First Name{" "}
                   </label>
                   <input
@@ -167,15 +185,16 @@ const Signin = () => {
                     className="class_fname"
                   />
                   {errors.fname && touched.fname ? (
-                    <div className="errors">
+                    <Box className="errors">
                       <p>{errors.fname}</p>
-                    </div>
+                    </Box>
                   ) : null}
-                </div>
+                </Box>
 
                 {/* LastName */}
-                <div className="form-group">
-                  <label htmlFor="lname" className="input-label">
+                <Box className="form-group">
+                  <label style={{ color : (themeColor === null || themeColor === "light")?"black":"white"}}
+                 htmlFor="lname" className="input-label">
                     Last Name{" "}
                   </label>
                   <input
@@ -189,16 +208,16 @@ const Signin = () => {
                     onBlur={handleBlur}
                   />
                   {errors.lname && touched.lname ? (
-                    <div className="errors">
+                    <Box className="errors">
                       <p>{errors.lname}</p>
-                    </div>
+                    </Box>
                   ) : null}
-                </div>
-              </div>
+                </Box>
+              </Box>
 
               {/* Email */}
-              <div className="form-group">
-                <label htmlFor="email" className="input-label">
+              <Box className="form-group">
+                <label style={{ color : (themeColor === null || themeColor === "light")?"black":"white"}} htmlFor="email" className="input-label">
                   Email{" "}
                 </label>
                 <input
@@ -212,14 +231,14 @@ const Signin = () => {
                   onBlur={handleBlur}
                 />
                 {errors.email && touched.email ? (
-                  <div className="errors">
+                  <Box className="errors">
                     <p>{errors.email}</p>
-                  </div>
+                  </Box>
                 ) : null}
-              </div>
+              </Box>
 
-              <div className="form-group">
-                <label htmlFor="address" className="input-label">
+              <Box className="form-group">
+                <label style={{ color : (themeColor === null || themeColor === "light")?"black":"white"}} htmlFor="address" className="input-label">
                   Address{" "}
                 </label>
                 <input
@@ -233,15 +252,15 @@ const Signin = () => {
                   onBlur={handleBlur}
                 />
                 {errors.address && touched.address ? (
-                  <div className="errors">
+                  <Box className="errors">
                     <p>{errors.address}</p>
-                  </div>
+                  </Box>
                 ) : null}
-              </div>
+              </Box>
 
               {/* Date of Birth */}
-              <div className="form-group">
-                <label htmlFor="date" className="input-label">
+              <Box className="form-group">
+                <label style={{ color : (themeColor === null || themeColor === "light")?"black":"white"}} htmlFor="date" className="input-label">
                   Date of Birth{" "}
                 </label>
                 <input
@@ -256,15 +275,15 @@ const Signin = () => {
                   onBlur={handleBlur}
                 />
                 {errors.date && touched.date ? (
-                  <div className="errors">
+                  <Box className="errors">
                     <p>{errors.date}</p>
-                  </div>
+                  </Box>
                 ) : null}
-              </div>
+              </Box>
 
               {/* Phone Number */}
-              <div className="form-group">
-                <label htmlFor="number" className="input-label">
+              <Box className="form-group">
+                <label style={{ color : (themeColor === null || themeColor === "light")?"black":"white"}} htmlFor="number" className="input-label">
                   Phone Number{" "}
                 </label>
                 <input
@@ -278,15 +297,15 @@ const Signin = () => {
                   onBlur={handleBlur}
                 />
                 {errors.number && touched.number ? (
-                  <div className="errors">
+                  <Box className="errors">
                     <p>{errors.number}</p>
-                  </div>
+                  </Box>
                 ) : null}
-              </div>
+              </Box>
 
               {/* Adhaar card number */}
-              <div className="form-group">
-                <label htmlFor="adhaar_number" className="input-label">
+              <Box className="form-group">
+                <label style={{ color : (themeColor === null || themeColor === "light")?"black":"white"}} htmlFor="adhaar_number" className="input-label">
                   Adhaar Card Number{" "}
                 </label>
                 <input
@@ -300,15 +319,15 @@ const Signin = () => {
                   onBlur={handleBlur}
                 />
                 {errors.adhaar_number && touched.adhaar_number ? (
-                  <div className="errors">
+                  <Box className="errors">
                     <p>{errors.adhaar_number}</p>
-                  </div>
+                  </Box>
                 ) : null}
-              </div>
+              </Box>
 
               {/* Password */}
-              <div className="form-group">
-                <label htmlFor="password" className="input-label">
+              <Box className="form-group">
+                <label style={{ color : (themeColor === null || themeColor === "light")?"black":"white"}} htmlFor="password" className="input-label">
                   Password{" "}
                 </label>
                 <input
@@ -322,15 +341,15 @@ const Signin = () => {
                   onBlur={handleBlur}
                 />
                 {errors.password && touched.password ? (
-                  <div className="errors">
+                  <Box className="errors">
                     <p>{errors.password}</p>
-                  </div>
+                  </Box>
                 ) : null}
-              </div>
+              </Box>
 
               {/* Confirm Password */}
-              <div className="form-group">
-                <label htmlFor="confirm_password" className="input-label">
+              <Box className="form-group">
+                <label style={{ color : (themeColor === null || themeColor === "light")?"black":"white"}} htmlFor="confirm_password" className="input-label">
                   Confirm Password{" "}
                 </label>
                 <input
@@ -344,13 +363,13 @@ const Signin = () => {
                   onBlur={handleBlur}
                 />
                 {errors.confirm_password && touched.confirm_password ? (
-                  <div className="errors">
+                  <Box className="errors">
                     <p>{errors.confirm_password}</p>
-                  </div>
+                  </Box>
                 ) : null}
-              </div>
+              </Box>
 
-              <div className="buttons">
+              <Box className="buttons">
                 <LoadingButton
                   text={"Create Account"}
                   loading={loading}
@@ -358,44 +377,46 @@ const Signin = () => {
                     registerUser(values);
                   }}
                 />
-              </div>
+              </Box>
 
-              <div className="form-bottom">
-                Already have an account? <Link to={"/login"}>Login</Link>
-              </div>
+              <Box className="form-bottom">
+                <span style={{ color : (themeColor === null || themeColor === "light")?"black":"white"}}>Already have an account? </span><Link to={"/login"}>Login</Link>
+              </Box>
             </form>
+          </Box>
+          
           </div>
-        </Container_right>
-      </Wapper>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 
-const Wapper = styled.div`
-  margin: 0px;
-  border: none;
-  display: flex;
-  flex-direction: row;
-  height: 100vh;
-  scroll-behavior: smooth;
-`;
+// const Wapper = styled.Box`
+//   margin: 0px;
+//   border: none;
+//   display: flex;
+//   flex-direction: row;
+//   height: 100vh;
+//   scroll-behavior: smooth;
+// `;
 
-const Container_left = styled.div`
-  background: #40339f;
-  color: White;
-  border: 2px solid #40339f;
-  width: 35vw;
-  height: 100vh;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  p {
-    color: #ffffffca;
-  }
-`;
+// const Box = styled.Box`
+//   background: #40339f;
+//   color: White;
+//   border: 2px solid #40339f;
+//   width: 35vw;
+//   height: 100vh;
+//   text-align: center;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   p {
+//     color: #ffffffca;
+//   }
+// `;
 
-const Container_right = styled.div``;
+// const Box = styled.Box``;
 
 export default Signin;

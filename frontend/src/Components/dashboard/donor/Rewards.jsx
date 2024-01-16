@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../Header";
 import Sidebar from "../Sidebar";
 import "./Rewards.css";
+import { Box } from "@mui/material";
 
 const Rewards = () => {
   const sidebarProp = {
@@ -20,14 +21,14 @@ const Rewards = () => {
     },
   };
   return (
-    <div>
-      <div className="sidebarReward">
+    <Box sx={{bgcolor : "background.default" , height : "100vh"}}>
+      <Box className="sidebarReward">
         <Sidebar {...sidebarProp} />
-      </div>
-      <div className="headerReward">
+      </Box>
+      <Box className="headerReward">
         <Header />
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

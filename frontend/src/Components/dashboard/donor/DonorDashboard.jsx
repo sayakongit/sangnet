@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./DonorDashboard.css";
 import Sidebar from "../Sidebar";
 import Header from "../Header";
-import { LinearProgress, Alert, CircularProgress } from "@mui/material";
+import { LinearProgress, Alert, CircularProgress, Typography } from "@mui/material";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../../Hooks/useAuthContext";
 import dayjs from "dayjs";
+import {Box} from "@mui/material";
 
 const DonorDashboard = () => {
   const sidebarProp = {
@@ -134,28 +135,28 @@ const DonorDashboard = () => {
   }, [user]);
 
   return (
-    <div className="donorPageConatiner">
-      <div className="donorPageConatinerLeft">
+    <Box bgcolor={"background.default"} height={"100vh"} className="donorPageConatiner">
+      <Box className="donorPageConatinerLeft">
         <Sidebar {...sidebarProp} />
-      </div>
-      <div className="donorPageConatinerRight">
-        <div className="donorHeader">
+      </Box>
+      <Box className="donorPageConatinerRight">
+        <Box className="donorHeader">
           <Header />
-        </div>
-        <div className="donorBody">
-          <div className="donor-body-top">
-            <div className="pending-requests">
-              <h3>Donation Requests </h3>
+        </Box>
+        <Box className="donorBody">
+          <Box className="donor-body-top">
+            <Box className="pending-requests">
+              <Typography variant="h3">Donation Requests </Typography >
               {loader ? (
-                <div className="loader-area">
+                <Box className="loader-area">
                   <CircularProgress />
-                </div>
+                </Box>
               ) : (
-                <div className="requests-box">
+                <Box className="requests-box">
                   {response && response.length !== 0 ? (
                     response.map((item) => (
-                      <div className="donation-card" key={item.request_id}>
-                        <div className="d-card-content">
+                      <Box className="donation-card" key={item.request_id}>
+                        <Box className="d-card-content">
                           <h5>
                             {item.requested_by.first_name +
                               " " +
@@ -174,8 +175,8 @@ const DonorDashboard = () => {
                           ) : (
                             ""
                           )}
-                        </div>
-                        <div className="d-card-button">
+                        </Box>
+                        <Box className="d-card-button">
                           {item.current_status == "active" &&
                           item.donor_approved == true ? (
                             <button className="btn-outline-pending">
@@ -201,29 +202,29 @@ const DonorDashboard = () => {
                           ) : (
                             ""
                           )}
-                        </div>
-                      </div>
+                        </Box>
+                      </Box>
                     ))
                   ) : (
                     <Alert severity="error">
                       No pending donations at the moment!
                     </Alert>
                   )}
-                </div>
+                </Box>
               )}
-            </div>
-            <div className="level-card">
-              <h3>Profile Level</h3>
-              <div className="level-card-box">
+            </Box>
+            <Box className="level-card">
+              <Typography variant="h3">Profile Level</Typography>
+              <Box className="level-card-box">
                 <h5>Level</h5>
                 <h1>{donorData.level.toFixed(1)}</h1>
                 <LinearProgress variant="determinate" value={50} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 

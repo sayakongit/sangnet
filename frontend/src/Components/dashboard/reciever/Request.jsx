@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingButton from "../../UI/LoadingButton";
 import { useNavigate } from "react-router-dom";
+import { Box } from "@mui/material";
 
 const Request = () => {
   const [loading, setLoading] = useState(false);
@@ -121,12 +122,21 @@ const Request = () => {
     // Handle form submission here
   };
 
+  const themeColor = localStorage.getItem("theme");
+
+
   return (
-    <div className="request-container">
-      <h1 className="request-heading">Submit a Donation Request</h1>
+    <Box height={"100vh"} width={"100vw"} bgcolor={"background.default"}>
+    <Box height={"100vh"} className="request-container">
+      {/* <h1 ></h1> */}
+      <h1 className="request-heading"
+              style={{flex : "100%" ,fontSize : "1.25rem" ,color : (themeColor === null || themeColor === "light")?"black":"white"}}
+            >
+              Submit a Donation Request
+            </h1>
       <form className="request-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="donationType">Type of Donation</label>
+        <Box className="form-group">
+          <label htmlFor="donationType" style={{color : (themeColor === null || themeColor === "light")?"black":"white"}}>Type of Donation</label>
           <select
             id="donationType"
             value={donationType}
@@ -139,10 +149,10 @@ const Request = () => {
             <option value="plasma">Plasma</option>
             <option value="blood">Blood</option>
           </select>
-        </div>
+        </Box>
 
-        <div className="form-group">
-          <label htmlFor="bloodGroup">Blood Group</label>
+        <Box className="form-group">
+          <label htmlFor="bloodGroup" style={{color : (themeColor === null || themeColor === "light")?"black":"white"}}>Blood Group</label>
           <select
             id="bloodGroup"
             value={bloodGroup}
@@ -159,10 +169,10 @@ const Request = () => {
             <option value="O-">O-</option>
             <option value="AB-">AB-</option>
           </select>
-        </div>
+        </Box>
 
-        <div className="form-group">
-          <label htmlFor="requiredOn">Required On</label>
+        <Box className="form-group">
+          <label htmlFor="requiredOn" style={{color : (themeColor === null || themeColor === "light")?"black":"white"}}>Required On</label>
           <input
             id="requiredOn"
             type="date"
@@ -173,10 +183,10 @@ const Request = () => {
           {inputErrorDate && (
             <p className="errorProfileMsg">Past dates cannot be entered</p>
           )}
-        </div>
+        </Box>
 
-        <div className="form-group">
-          <label htmlFor="PlaceOfDonation">Place of Donation</label>
+        <Box className="form-group">
+          <label htmlFor="PlaceOfDonation" style={{color : (themeColor === null || themeColor === "light")?"black":"white"}}>Place of Donation</label>
           <input
             id="PlaceOfDonation"
             type="text"
@@ -184,10 +194,10 @@ const Request = () => {
             onChange={handlePlaceOfDonationChange}
             className="activecls placeOfDonation"
           />
-        </div>
+        </Box>
 
-        <div className="form-group">
-          <label htmlFor="numberOfUnits">Number of Units</label>
+        <Box className="form-group">
+          <label htmlFor="numberOfUnits" style={{color : (themeColor === null || themeColor === "light")?"black":"white"}}>Number of Units</label>
           <input
             id="numberOfUnits"
             type="number"
@@ -200,10 +210,10 @@ const Request = () => {
               Number of units cannot be negative or zero
             </p>
           )}
-        </div>
+        </Box>
 
-        <div className="form-group">
-          <label htmlFor="phoneNumber">Phone Number</label>
+        <Box className="form-group">
+          <label htmlFor="phoneNumber" style={{color : (themeColor === null || themeColor === "light")?"black":"white"}}>Phone Number</label>
           <input
             id="phoneNumber"
             type="number"
@@ -214,20 +224,20 @@ const Request = () => {
           {inputErrorPhone && (
             <p className="errorProfileMsg">Enter a valid phone number</p>
           )}
-        </div>
+        </Box>
 
-        <div className="form-group">
-          <label htmlFor="reason">Reason(Optional)</label>
+        <Box className="form-group">
+          <label htmlFor="reason" style={{color : (themeColor === null || themeColor === "light")?"black":"white"}}>Reason(Optional)</label>
           <textarea
             id="reason"
             value={reason}
             onChange={handleReasonChange}
             className="activecls"
           />
-        </div>
+        </Box>
 
-        <div className="form-group emergencyRequirementBox">
-          <label htmlFor="emergencyRequirement">
+        <Box className="form-group emergencyRequirementBox">
+          <label htmlFor="emergencyRequirement" style={{color : (themeColor === null || themeColor === "light")?"black":"white"}}>
             <input
               id="emergencyRequirement"
               type="checkbox"
@@ -236,14 +246,15 @@ const Request = () => {
             />
             Emergency Requirement
           </label>
-        </div>
+        </Box>
         <LoadingButton
           text={"Submit Request"}
           loading={loading}
           onClick={createRequest}
         />
       </form>
-    </div>
+    </Box>
+    </Box>
   );
 };
 

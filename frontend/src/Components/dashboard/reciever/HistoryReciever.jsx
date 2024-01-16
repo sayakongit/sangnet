@@ -1,7 +1,7 @@
 import React from "react";
 import Sidebar from "../Sidebar";
 import Header from "../Header";
-import "./HistoryReciever.css";
+// import "./HistoryReciever.css";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import {
+  Box,
   Button,
   Dialog,
   DialogActions,
@@ -196,24 +197,30 @@ const HistoryReciever = () => {
     console.log(data);
   }, []);
   return (
-    <div className="historyContainer">
-      <div className="historyLeft">
+    <Box className="historyContainer" sx={{
+      display : "flex",
+      height : "100vh",
+      bgcolor: 'background.default',
+      color: 'text.primary',
+      
+    }}>
+      <Box className="historyLeft">
         <Sidebar {...sidebarProp} />
-      </div>
-      <div className="historyRight">
-        <div className="headerBox">
+      </Box>
+      <Box className="historyRight">
+        <Box className="headerBox">
           <Header />
-        </div>
+        </Box>
 
-        <div className="historyTable">
+        <Box className="historyTable">
           {/* tooltip for filter */}
-          <Button onClick={()=>{navigate("/request")}} variant="contained">Add New Request</Button>
+          <Button onClick={()=>{navigate("/request")}} variant="contained" >Add New Request</Button>
           <Toolbar>
             <Typography
               sx={{ flex: "100%" }}
               variant="h6"
               id="tableTitle"
-              component="div"
+              component="Box"
               marginLeft="-24px"
             >
               Donation Requests
@@ -407,9 +414,9 @@ const HistoryReciever = () => {
               </TableBody>
             </Table>
           </TableContainer>
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 

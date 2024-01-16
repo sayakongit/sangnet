@@ -9,6 +9,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, Link } from "react-router-dom";
 import LoadingButton from "../UI/LoadingButton";
 import { useLogin } from "../../Hooks/useLogin";
+import { Box } from "@mui/material";
+import ThemeToggleButton from "../UI/ThemeToggleButton";
 
 const Login = () => {
   const initialvalues = {
@@ -109,120 +111,203 @@ const Login = () => {
     access();
   }, []);
 
+  const themeColor = localStorage.getItem("theme");
+
   return (
-    <div>
-      <Wapper>
-        <Container_left>
+    <Box sx={{ bgcolor: "background.default" }}>
+      <Box
+        sx={{
+          display: "flex",
+          margin: 0,
+          flexDirection: "row",
+          height: "100vh",
+          scrollBehavior: "smooth",
+          border: "none",
+        }}
+      >
+        <div
+          style={{
+            backgroundColor: "#40339f",
+            color: "white",
+            border: "2px solid #40339f;",
+            width: "35vw",
+            height: "100vh",
+            textAlign: "center",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
           <h1 className="logo-h1"> Sangnet </h1>
           <p>"Connecting Lives, Saving Futures."</p>
-        </Container_left>
-        <Container_right className="container_right login">
-          <div className="form-container">
-            <div className="auth-heading">
-              <p>Log in to Sangnet</p>
-            </div>
-            <form onSubmit={handleSubmit} autoComplete="off">
-              <div className="Email">
-                <label htmlFor="email" className="input-label">
-                  Email{" "}
-                </label>
-                <input
-                  type="text"
-                  name="email"
-                  id="email"
-                  autoComplete="off"
-                  placeholder="Enter your Email ID"
-                  value={values.email}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-              </div>
-              {errors.email && touched.email ? (
-                <div className="errors">
-                  <p>{errors.email}</p>
-                </div>
-              ) : null}
-              <div className="Password">
-                <label htmlFor="password" className="input-label">
-                  Password{" "}
-                </label>
-                <input
-                  type="password"
-                  name="password"
-                  id="password"
-                  autoComplete="off"
-                  placeholder="Enter your Password"
-                  value={values.password}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-              </div>
-              {errors.password && touched.password ? (
-                <div className="errors">
-                  <p>{errors.password}</p>
-                </div>
-              ) : null}
+        </div>
+        <div style={{ display: "flex", flex : 2, flexDirection: "column-reverse" }}>
+          <div
+            style={{
+              // paddingLeft: "30px",
+              display : "grid",
+              placeItems : "center",
 
-              <div className="buttons">
-                <LoadingButton
-                  text={"Login"}
-                  onClick={() => {
-                    loginUser(values);
+              // position: "fixed",
+              // top: "100px",
+              // bottom: "100px",
+              // left: "700px",
+              // marginLeft: "50px",
+              // marginRight: "auto",
+              color: "black",
+              borderRadius: "10px",
+              overflow: "auto",
+            }}
+          >
+            <Box className="form-container">
+              <Box className="auth-heading">
+                <h6
+                  className="auth-heading"
+                  style={{
+                    color:
+                      themeColor === null || themeColor === "light"
+                        ? "black"
+                        : "white",
                   }}
-                  loading={loading}
-                />
-              </div>
+                >
+                  Log in to Sangnet
+                </h6>
+              </Box>
+              <form onSubmit={handleSubmit} autoComplete="off">
+                <Box className="Email">
+                  <label
+                    style={{
+                      color:
+                        themeColor === null || themeColor === "light"
+                          ? "black"
+                          : "white",
+                    }}
+                    htmlFor="email"
+                    className="input-label"
+                  >
+                    Email{" "}
+                  </label>
+                  <input
+                    type="text"
+                    name="email"
+                    id="email"
+                    autoComplete="off"
+                    placeholder="Enter your Email ID"
+                    value={values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                </Box>
+                {errors.email && touched.email ? (
+                  <Box className="errors">
+                    <p>{errors.email}</p>
+                  </Box>
+                ) : null}
+                <Box className="Password">
+                  <label
+                    style={{
+                      color:
+                        themeColor === null || themeColor === "light"
+                          ? "black"
+                          : "white",
+                    }}
+                    htmlFor="password"
+                    className="input-label"
+                  >
+                    Password{" "}
+                  </label>
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    autoComplete="off"
+                    placeholder="Enter your Password"
+                    value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                </Box>
+                {errors.password && touched.password ? (
+                  <Box className="errors">
+                    <p>{errors.password}</p>
+                  </Box>
+                ) : null}
 
-              <div className="form-bottom">
-                Have not registered yet? <Link to="/signup">Sign up</Link>
-              </div>
-            </form>
+                <Box className="buttons">
+                  <LoadingButton
+                    text={"Login"}
+                    onClick={() => {
+                      loginUser(values);
+                    }}
+                    loading={loading}
+                  />
+                </Box>
+
+                <Box className="form-bottom">
+                  <span
+                    style={{
+                      color:
+                        themeColor === null || themeColor === "light"
+                          ? "black"
+                          : "white",
+                    }}
+                  >
+                    Have notregistered yet?{" "}
+                  </span>
+                  <Link to="/signup">Sign up</Link>
+                </Box>
+              </form>
+            </Box>
           </div>
-        </Container_right>
-      </Wapper>
-    </div>
+          <div style={{display : "flex" , flex : 1 , justifyContent : "flex-end" , alignItems : "flex-start" , padding : "1.5rem"}}>
+            <ThemeToggleButton />
+          </div>
+        </div>
+      </Box>
+    </Box>
   );
 };
-const Wapper = styled.div`
-  margin: 0px;
-  border: none;
-  display: flex;
-  flex-direction: row;
-`;
+// const Box = styled.Box`
+//   margin: 0px;
+//   border: none;
+//   display: flex;
+//   flex-direction: row;
+// `;
 
-const Container_left = styled.div`
-  background: #40339f;
-  color: White;
-  border: 2px solid #40339f;
-  width: 35vw;
-  height: 100vh;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  p {
-    color: #ffffffca;
-  }
-`;
+// const Container_left = styled.Box`
+//   background: #40339f;
+//   color: White;
+//   border: 2px solid #40339f;
+//   width: 35vw;
+//   height: 100vh;
+//   text-align: center;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   p {
+//     color: #ffffffca;
+//   }
+// `;
 
-const Container_right = styled.div`
-  padding: 30px;
-  position: fixed;
-  top: 100px;
-  bottom: 100px;
-  left: 700px;
-  margin-left: 50px;
-  margin-right: auto;
-  color: black;
-  /* border: 1px solid black; */
-  border-radius: 10px;
-  input {
-    color: black;
-  }
-  overflow: auto;
-`;
+// const Box = styled.Box`
+//   padding: 30px;
+//   position: fixed;
+//   top: 100px;
+//   bottom: 100px;
+//   left: 700px;
+//   margin-left: 50px;
+//   margin-right: auto;
+//   color: black;
+//   /* border: 1px solid black; */
+//   border-radius: 10px;
+//   input {
+//     color: black;
+//   }
+//   overflow: auto;
+// `;
 
 export default Login;

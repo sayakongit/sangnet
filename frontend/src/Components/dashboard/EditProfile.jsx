@@ -6,6 +6,9 @@ import "react-toastify/dist/ReactToastify.css";
 import LoadingButton from "../UI/LoadingButton";
 import "./EditProfile.css";
 import { useAuthContext } from "../../Hooks/useAuthContext";
+import { Box  , Typography} from "@mui/material";
+import ThemeToggleButton from "../UI/ThemeToggleButton";
+
 
 const EditProfile = () => {
   const navigate = useNavigate();
@@ -105,27 +108,41 @@ const EditProfile = () => {
     setprevData(user);
     console.log("hye");
   }, [user]);
+
+  
+  const themeColor = localStorage.getItem("theme");
+
   return (
-    <div className="editContainer">
-      <div className="editContainerLeft">
+    <Box bgcolor={"background.default"}  className="editContainer">
+      <Box className="editContainerLeft">
         <h1 className="logo-h1">Sangnet</h1>
-      </div>
-      <div className="editContainerRight">
-        <div className="form-container sign-up">
-          <div className="edit_text">
-            <h1>Edit your profile </h1>
-          </div>
+      </Box>
+      <Box className="editContainerRight" sx={{display : "flex" , flexDirection : "column"}}>
+        <div style={{display : "flex" , justifyContent : "flex-end" , width : "100%" , paddingRight : "1rem"}}>
+
+            <ThemeToggleButton/>  
+        </div>
+        <Box className="form-container sign-up">
+          <Box className="edit_text">
+          <h6
+              style={{flex : "100%" ,fontSize : "1.25rem" ,color : (themeColor === null || themeColor === "light")?"black":"white"}}
+            >
+              Edit your profile
+            </h6>
+          </Box>
+          
           <form
+          style={{gap : 5 , display : "flex" , flexDirection : "column"}}
             onSubmit={(e) => {
               handleSubmit(e);
             }}
             autoComplete="off"
           >
             {/* name */}
-            <div className="name_container">
+            <Box className="name_container">
               {/* FirstName */}
-              <div className="form-group">
-                <label htmlFor="fname" className="input-label">
+              <Box className="form-group">
+                <label style={{color : (themeColor === null || themeColor === "light")?"black":"white"}} htmlFor="fname" className="input-label">
                   First Name{" "}
                 </label>
                 <input
@@ -143,11 +160,11 @@ const EditProfile = () => {
                 {inputErrorFname && (
                   <p className="errorProfileMsg">enter a valid name</p>
                 )}
-              </div>
+              </Box>
 
               {/* LastName */}
-              <div className="form-group">
-                <label htmlFor="lname" className="input-label">
+              <Box className="form-group">
+                <label style={{color : (themeColor === null || themeColor === "light")?"black":"white"}}   htmlFor="lname" className="input-label">
                   Last Name{" "}
                 </label>
                 <input
@@ -164,11 +181,11 @@ const EditProfile = () => {
                 {inputErrorLname && (
                   <p className="errorProfileMsg">enter a valid name</p>
                 )}
-              </div>
-            </div>
+              </Box>
+            </Box>
             {/* Email */}
-            <div className="form-group">
-              <label htmlFor="email" className="input-label">
+            <Box className="form-group">
+              <label style={{color : (themeColor === null || themeColor === "light")?"black":"white"}}  htmlFor="email" className="input-label">
                 Email{" "}
               </label>
               <input
@@ -179,11 +196,11 @@ const EditProfile = () => {
                 value={prevData?.email}
                 readOnly
               />
-            </div>
+            </Box>
 
             {/* address */}
-            <div className="form-group">
-              <label htmlFor="address" className="input-label">
+            <Box className="form-group">
+              <label style={{color : (themeColor === null || themeColor === "light")?"black":"white"}}  htmlFor="address" className="input-label">
                 Address{" "}
               </label>
               <input
@@ -200,11 +217,11 @@ const EditProfile = () => {
               {inputErrorAddress && (
                 <p className="errorProfileMsg">enter a valid address</p>
               )}
-            </div>
+            </Box>
 
             {/* Date of Birth */}
-            <div className="form-group">
-              <label htmlFor="date" className="input-label">
+            <Box className="form-group">
+              <label style={{color : (themeColor === null || themeColor === "light")?"black":"white"}}  htmlFor="date" className="input-label">
                 Date of Birth{" "}
               </label>
               <input
@@ -216,11 +233,11 @@ const EditProfile = () => {
                 value={prevData?.date_of_birth}
                 readOnly
               />
-            </div>
+            </Box>
 
             {/* Phone Number */}
-            <div className="form-group">
-              <label htmlFor="number" className="input-label">
+            <Box className="form-group">
+              <label style={{color : (themeColor === null || themeColor === "light")?"black":"white"}} htmlFor="number" className="input-label">
                 Phone Number{" "}
               </label>
               <input
@@ -237,10 +254,10 @@ const EditProfile = () => {
               {inputErrorPhone && (
                 <p className="errorProfileMsg">enter a valid number</p>
               )}
-            </div>
+            </Box>
             {/* Adhaar card number */}
-            <div className="form-group">
-              <label htmlFor="adhaar_number" className="input-label">
+            <Box className="form-group">
+              <label style={{color : (themeColor === null || themeColor === "light")?"black":"white"}}  htmlFor="adhaar_number" className="input-label">
                 Adhaar Card Number{" "}
               </label>
               <input
@@ -251,10 +268,10 @@ const EditProfile = () => {
                 value={prevData?.adhaar_number}
                 readOnly
               />
-            </div>
+            </Box>
 
             {/* Submit button  */}
-            <div className="buttons">
+            <Box className="buttons">
               <LoadingButton
                 text={"Edit Profile"}
                 loading={loading}
@@ -263,11 +280,11 @@ const EditProfile = () => {
                   console.log(prevData);
                 }}
               />
-            </div>
+            </Box>
           </form>
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 
