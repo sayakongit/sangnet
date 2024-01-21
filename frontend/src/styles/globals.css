@@ -51,7 +51,6 @@
   }
 }
 
- 
 @layer base {
   * {
     @apply border-border;
@@ -61,10 +60,41 @@
   }
 }
 
+/* ====== Scrollbars ====== */
+
+/* width */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #40339e; 
+  border-radius: 50px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #40339e; 
+}
+
+
+/* ====== IDs ====== */
+
 #logo {
   font-family: var(--font-caprasimo);
   @apply md:text-5xl 2xl:text-[3.25rem] mt-16 2xl:mt-24
 }
+
+
+/* ====== Classes ====== */
+
 
 .active-btn {
   @apply w-full inline-flex items-center justify-center rounded-lg bg-primary px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary/90
