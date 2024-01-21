@@ -1,7 +1,9 @@
-export const getNearbyBanks = () => {
+import { getDistance } from "geolib";
+
+export const getAllBanks = () => {
 
   // TODO: Should be changed with server logic later
-
+  
   const banks = [
     {
       name: "OM Blood Bank Kolkata",
@@ -93,4 +95,28 @@ export const getNearbyBanks = () => {
   ];
 
   return banks;
+}
+
+export const getNearbyBanks = (radiusKm: number, location: any) => {
+
+  const banks = getAllBanks();
+
+  // Find Blood Banks within given distance range
+  const nearbyBloodBanks = banks
+      .map((bloodBank) => {
+        const distance = getDistance(
+          { latitude: location.latitude, longitude: location.longitude },
+          { latitude: bloodBank.latitude, longitude: bloodBank.longitude }
+        );
+        return {
+          ...bloodBank,
+          distance: distance / 1000, // Convert distance from meters to kilometers
+        };
+      })
+      .filter((bloodBank) => bloodBank.distance <= radiusKm);
+
+    // Sort the nearby blood banks by distance (from lower to higher)
+    nearbyBloodBanks.sort((a, b) => a.distance - b.distance);
+
+  return nearbyBloodBanks;
 };
