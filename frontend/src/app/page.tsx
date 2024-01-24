@@ -27,13 +27,13 @@ import "mapbox-gl/dist/mapbox-gl.css";
 const Dashboard = () => {
   const router = useRouter();
   const { toast } = useToast();
-  const { user, loggedIn } = userDetails() as User;
-  const [access, setAccess] = useLocalStorage("access", null);
-  const [userId, setUserId] = useLocalStorage("user_id", null);
+  const { user } = userDetails() as User;
+  const [access] = useLocalStorage("access", null);
+  const [userId] = useLocalStorage("user_id", null);
 
-  const [longitude, setLongitude] = useState<any>(null);
-  const [latitude, setLatitude] = useState<any>(null);
-  const [donorData, setDonorData] = useState([]);
+  // const [longitude, setLongitude] = useState<any>(null);
+  // const [latitude, setLatitude] = useState<any>(null);
+  // const [donorData, setDonorData] = useState([]);
   const [allBanks, setAllBanks] = useState<any[]>([]);
   const [nearbyDonors, setNearbyDonors] = useState<any[]>([]);
   const [nearbyBloodBanks, setNearbyBloodBanks] = useState<any[]>([]);
@@ -81,14 +81,14 @@ const Dashboard = () => {
     try {
       const [_, data] = await getUserData(user_id);
 
-      setDonorData(data);
-      setLongitude(parseFloat(data.coordinates.longitude));
-      setLatitude(parseFloat(data.coordinates.latitude));
-      // setMapState({
-      //   longitude: parseFloat(data.coordinates.longitude),
-      //   latitude: parseFloat(data.coordinates.latitude),
-      //   zoom: 15,
-      // });
+      // setDonorData(data);
+      // setLongitude(parseFloat(data.coordinates.longitude));
+      // setLatitude(parseFloat(data.coordinates.latitude));
+      setMapState({
+        longitude: parseFloat(data.coordinates.longitude),
+        latitude: parseFloat(data.coordinates.latitude),
+        zoom: 15,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -157,7 +157,6 @@ const Dashboard = () => {
   useEffect(() => {
     donorApplication(user);
   }, [user]);
-  
 
   return (
     <main className="min-h-[100vh] grid place-content-center">
@@ -176,7 +175,7 @@ const Dashboard = () => {
 
           <Tabs
             defaultValue="donors"
-            className="w-[400px] 2xl:w-[500px] mt-8 2xl:mt-16"
+            className="w-[350px] 2xl:w-[500px] mt-8 2xl:mt-16"
           >
             <TabsList className="grid w-full grid-cols-2 bg-primary/40">
               <TabsTrigger className="text-white" value="donors">
@@ -259,7 +258,7 @@ const Dashboard = () => {
 
           {/* ==== MAP Area ==== */}
 
-          <div className="px-6 2xl:px-10 md:pr-24 lg:pr-16 2xl:pr-10">
+          <div className="px-6 2xl:px-10 md:pr-36 lg:pr-28 2xl:pr-10">
             <h3 className="text-primary font-bold text-xl my-4 text-center">
               Nearby Donors & Bloodbanks
             </h3>
