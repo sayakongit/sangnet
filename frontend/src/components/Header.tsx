@@ -43,6 +43,8 @@ const Header = () => {
   const { user, setUser, setLog } = userDetails() as User;
 
   // geoLocation
+
+  /*
   const geolocationAPI = navigator.geolocation;
   const getUserCoordinates = () => {
     if (!geolocationAPI) {
@@ -90,6 +92,8 @@ const Header = () => {
     }
   };
 
+  */
+
   // const googleTranslateElementInit = () => {
   //   new window.google.translate.TranslateElement(
   //     {
@@ -136,64 +140,68 @@ const Header = () => {
 
   const ProfileMenu = () => {
     return (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild className="focus:outline-none">
-          <button>
-            <div className="h-12 w-12 rounded-full bg-primary text-white grid place-content-center">
-              <span className="text-xl m-auto">
-                {user?.first_name.charAt(0) + user?.last_name.charAt(0)}
-              </span>
-            </div>
-          </button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="md:w-48 2xl:w-52">
-          <DropdownMenuLabel className="font-bold text-lg">
-            {user?.first_name + " " + user?.last_name}
-            <p className="text-xs font-light">{user?.email}</p>
-          </DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuGroup>
-            <DropdownMenuItem>
-              <Link href={"/"}>Home</Link>
-              <DropdownMenuShortcut>⇧⌘H</DropdownMenuShortcut>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Link href={"/profile"}>Edit Profile</Link>
-              <DropdownMenuShortcut>⌘P</DropdownMenuShortcut>
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <button onClick={getUserCoordinates}>Update Location</button>
-              <DropdownMenuShortcut>⌘L</DropdownMenuShortcut>
-            </DropdownMenuItem>
-          </DropdownMenuGroup>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem className="bg-red-500 text-white hover:bg-red-600">
-
-
-            <AlertDialog>
+      <AlertDialog>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild className="focus:outline-none">
+            <button>
+              <div className="h-12 w-12 rounded-full bg-primary text-white grid place-content-center">
+                <span className="text-xl m-auto">
+                  {user &&
+                    user?.first_name.charAt(0) + user?.last_name.charAt(0)}
+                </span>
+              </div>
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="md:w-48 2xl:w-52">
+            <DropdownMenuLabel className="font-bold text-lg">
+              {user && user?.first_name + " " + user?.last_name}
+              <p className="text-xs font-light">{user?.email}</p>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              <DropdownMenuItem>
+                <Link href={"/"}>Home</Link>
+                <DropdownMenuShortcut>⇧⌘H</DropdownMenuShortcut>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href={"/profile"}>Edit Profile</Link>
+                <DropdownMenuShortcut>⌘P</DropdownMenuShortcut>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                {/* <button onClick={getUserCoordinates}>Update Location</button> */}
+                <button>Update Location</button>
+                <DropdownMenuShortcut>⌘L</DropdownMenuShortcut>
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="bg-red-500 text-white hover:bg-red-600">
               <AlertDialogTrigger asChild>
                 <button>Log out</button>
               </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    This action cannot be undone. This will permanently delete
-                    your account and remove your data from our servers.
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction>Continue</AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog>
 
+              <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
 
-            <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will log you out from your current session in Sangnet.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              className="bg-red-500 text-white hover:bg-red-600"
+              onClick={signOut}
+            >
+              Continue
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     );
   };
 
