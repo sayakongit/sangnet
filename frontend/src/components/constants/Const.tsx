@@ -33,5 +33,7 @@ export const donation_request = `${backend}/donation/request/`;
 
 export const fulfill_request = `${backend}/donation/fullfill-donation/receiver/`;
 
+export const donor_apply = `${backend}/donor/apply/`;
+
 
 // Database URL will be added later
