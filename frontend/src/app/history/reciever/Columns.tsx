@@ -1,5 +1,6 @@
 "use client";
 
+import { fulfill_request, json_header } from "@/components/constants/Const";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -9,11 +10,14 @@ import {
   DropdownMenuSeparator,
 } from "@radix-ui/react-dropdown-menu";
 import { ColumnDef } from "@tanstack/react-table";
+import axios, { AxiosError } from "axios";
+import { useRouter } from "next/router";
 import {
   ArrowUpDown,
   ChevronsUpDown,
   CircleEllipsis,
   MoreHorizontal,
+  User,
 } from "lucide-react";
 
 export type Request = {
@@ -52,6 +56,39 @@ export type Request = {
   donor_approved: boolean;
   current_status: "pending" | "active" | "fullfilled" | "cancelled";
   coordinates: number;
+};
+
+const fulfillRequest = async (request_id: any) => {
+  const user_id = localStorage.getItem("user_id");
+
+  // const router = useRouter();
+
+  try {
+    const { data } = await axios.post(
+      `${fulfill_request}${request_id}/`,
+      {
+        user_id: user_id,
+      },
+      {
+        headers: json_header,
+      }
+    );
+    // TODO: toast.success(data.message);
+    // fetchRecieverHistory(user?.id);
+    // router.reload(); // Reload page
+
+    // console.log(data);
+  } catch (error) {
+    console.log(error);
+    const e = error as AxiosError;
+    if (e.response?.status === 400) {
+      console.error(e.response?.data);
+      // TODO: toast.error(error.response.data.message);
+    } else {
+      // TODO: toast.error("Something went wrong!");
+      console.error(e.response?.data);
+    }
+  }
 };
 
 export const columns: ColumnDef<Request>[] = [
@@ -162,7 +199,6 @@ export const columns: ColumnDef<Request>[] = [
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
-
       const required_on: string = row.getValue("required_on");
       const isoDateString = required_on;
       const date = new Date(isoDateString);
@@ -172,21 +208,38 @@ export const columns: ColumnDef<Request>[] = [
 
       return (
         <DropdownMenu>
-          <DropdownMenuTrigger asChild>
+          <DropdownMenuTrigger asChild className="focus:outline-none">
             <button className="h-8 w-8 p-0">
               <span className="sr-only">Open menu</span>
               <CircleEllipsis className="h-4 w-4" />
             </button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="bg-white shadow-md shadow-black/40 rounded-md p-4">
-            <DropdownMenuItem className="p-2 hover:bg-gray-300 rounded-sm"
-              onClick={() => navigator.clipboard.writeText(`${row.getValue("blood_group")} on ${hmrDate}`)}
+          <DropdownMenuContent
+            align="end"
+            className="bg-white shadow-md shadow-black/40 rounded-md p-4"
+          >
+            <DropdownMenuItem
+              className="p-2 hover:bg-gray-300 rounded-sm"
+              onClick={() =>
+                navigator.clipboard.writeText(
+                  `Need ${row.getValue(
+                    "blood_group"
+                  )} on ${hmrDate} at ${row.getValue("place_of_donation")}`
+                )
+              }
             >
               Copy Details
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="p-2 hover:bg-gray-300 rounded-sm">Mark Complete</DropdownMenuItem>
-            <DropdownMenuItem className="p-2 hover:bg-gray-300 rounded-sm">Mark Cancelled</DropdownMenuItem>
+            <DropdownMenuItem
+              // onClick={() => fulfillRequest(row.getValue("request_id"))}
+              className="p-2 hover:bg-gray-300 rounded-sm"
+            >
+              Mark Complete
+            </DropdownMenuItem>
+            <DropdownMenuItem className="p-2 hover:bg-gray-300 rounded-sm">
+              Mark Cancelled
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );

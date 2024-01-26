@@ -31,5 +31,7 @@ export const receiver_history = `${backend}/donation/receiver-history/`;
 
 export const donation_request = `${backend}/donation/request/`;
 
+export const fulfill_request = `${backend}/donation/fullfill-donation/receiver/`;
+
 
 // Database URL will be added later
