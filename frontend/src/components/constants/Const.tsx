@@ -29,5 +29,7 @@ export const get_location = `${backend}/accounts/location/`;
 
 export const receiver_history = `${backend}/donation/receiver-history/`;
 
+export const donation_request = `${backend}/donation/request/`;
+
 
 // Database URL will be added later
