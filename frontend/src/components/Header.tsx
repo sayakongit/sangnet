@@ -197,7 +197,7 @@ const Header = () => {
               className="bg-red-500 text-white hover:bg-red-600"
               onClick={signOut}
             >
-              Continue
+              Log Out
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

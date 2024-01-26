@@ -6,12 +6,13 @@ import React, { useEffect, useState } from "react";
 
 import { columns, Request } from "./Columns";
 import { DataTable } from "./DataTable";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
-import { receiver_history } from "@/components/constants/Const";
+import { json_header, receiver_history } from "@/components/constants/Const";
 
 
 const Reciever = () => {
+  const router = useRouter();
   const [data, setData] = useState<Request[]>([]);
 
   const fetchRecieverHistory = async (user_id: string | null) => {
@@ -22,7 +23,7 @@ const Reciever = () => {
           requested_by: user_id,
         },
         {
-          headers: { "Content-Type": "application/json" },
+          headers: json_header,
         }
       );
       setData(data);
@@ -69,12 +70,12 @@ const Reciever = () => {
           </div>
           <div className="mt-12">
 
-          <Link
-            href={"/request"}
+          <button
+            onClick={() => router.push("/request")}
             className="bg-primary/90 text-white rounded-3xl p-3 px-4 hover:bg-primary shadow-md shadow-black/50"
           >
             Add New Request
-          </Link>
+          </button>
           </div>
         </section>
       </div>
