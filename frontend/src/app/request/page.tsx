@@ -43,7 +43,8 @@ const Request = () => {
   const [inputErrorPhone, setinputErrorPhone] = useState(false);
   const [inputErrorUnits, setinputErrorUnits] = useState(false);
 
-  const createRequest = async () => {
+  const createRequest = async (event: { preventDefault: () => void; }) => {
+    event.preventDefault();
     setLoading(true);
     try {
       const { data } = await axios.post(donation_request, request, {
@@ -51,6 +52,7 @@ const Request = () => {
       });
       // TODO: toast.success("Request created successfully");
       router.push("/history/reciever");
+      console.log(data);
     } catch (error) {
       const e = error as AxiosError;
       console.log(e.response);
@@ -72,7 +74,7 @@ const Request = () => {
           </div>
 
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-lg md:max-w-2xl font-bold">
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={createRequest}>
               <div>
                 <label
                   htmlFor="type"
@@ -263,7 +265,6 @@ const Request = () => {
               <div className="my-16">
                 <button
                   type="submit"
-                  onClick={createRequest}
                   className={loading ? "loading-btn mt-6" : "active-btn mt-6"}
                   disabled={loading}
                 >
