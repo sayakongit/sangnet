@@ -159,15 +159,15 @@ const Header = () => {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              <DropdownMenuItem className="hover:bg-gray-300">
                 <Link href={"/"}>Home</Link>
                 <DropdownMenuShortcut>⇧⌘H</DropdownMenuShortcut>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem className="hover:bg-gray-300">
                 <Link href={"/profile"}>Edit Profile</Link>
                 <DropdownMenuShortcut>⌘P</DropdownMenuShortcut>
               </DropdownMenuItem>
-              <DropdownMenuItem>
+              <DropdownMenuItem className="hover:bg-gray-300">
                 {/* <button onClick={getUserCoordinates}>Update Location</button> */}
                 <button>Update Location</button>
                 <DropdownMenuShortcut>⌘L</DropdownMenuShortcut>
