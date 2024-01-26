@@ -6,7 +6,7 @@ import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import { ToastAction } from "@/components/ui/toast";
-import { OuterSidebar } from "@/components/Sidebar";
+import { OuterSidebar } from "@/components/sidebar/Sidebar";
 import { useToast } from "@/components/ui/use-toast";
 import { useLocalStorage } from "react-storage-complete";
 import { getUserData } from "@/components/server/UserManager";

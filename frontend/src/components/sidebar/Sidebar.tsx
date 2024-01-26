@@ -1,8 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Home, History, UserRoundCog } from "lucide-react";
+import { Home, History, UserRoundCog, RefreshCw } from "lucide-react";
+import userDetails from "../state/GlobalState";
+import StatusBtn from "./StatusBtn";
 
 export const OuterSidebar = () => {
   return (
@@ -19,6 +21,42 @@ export const DashboardSideBar = (props: {
   donor: boolean;
   reciever: boolean;
 }) => {
+  const router = useRouter();
+  const { user } = userDetails();
+
+  const [btnProperty, setBtnProperty] = useState<any>({
+    text: props.donor ? "Donor" : "Receiver",
+    color: "white",
+    applied: false,
+    verified: false,
+  });
+
+  const donorApplication = (
+    user: { donor_application_status: string } | undefined
+  ) => {
+    if (user?.donor_application_status === "AP") {
+      setBtnProperty({
+        ...btnProperty,
+        text: "Applied",
+        color: "yellow-600",
+        applied: true,
+      });
+    } else if (user?.donor_application_status == "NA") {
+      setBtnProperty({
+        ...btnProperty,
+        color: "red-600",
+      });
+    } else if (user?.donor_application_status == "VR") {
+      setBtnProperty({
+        ...btnProperty,
+        color: "green-400",
+        applied: true,
+        verified: true,
+      });
+    }
+    console.log(btnProperty);
+  };
+
   const RecieverList = [
     { icon: Home, entry: props.home, text: "Home", url: "/" },
     {
@@ -47,14 +85,16 @@ export const DashboardSideBar = (props: {
 
   const CurrentList = props.donor ? DonorList : RecieverList;
 
-  const router = useRouter();
+  useEffect(() => {
+    donorApplication(user);
+  }, [user]);
 
   return (
-    <section className="h-[100vh] w-[20vw] text-center bg-primary text-white fixed">
-      <div className="mt-6 mb-20">
+    <section className="flex flex-col justify-between h-[100vh] w-[20vw] text-center bg-primary text-white fixed">
+      <div className="mt-2">
         <h1 id="logo">Sangnet</h1>
       </div>
-      <div className="mx-2 flex flex-col items-center justify-center">
+      <div className="mx-2 flex flex-col items-center justify-center mb-24">
         {CurrentList.map((btn, index) => {
           const Icon = btn.icon;
           return (
@@ -79,6 +119,7 @@ export const DashboardSideBar = (props: {
           );
         })}
       </div>
+      <StatusBtn btnProperty={btnProperty} is_donor={props.donor} />
     </section>
   );
 };

@@ -1,7 +1,7 @@
 "use client";
 
 import Header from "@/components/Header";
-import { DashboardSideBar } from "@/components/Sidebar";
+import { DashboardSideBar } from "@/components/sidebar/Sidebar";
 import React, { useEffect, useState } from "react";
 
 import { columns, Request } from "./Columns";

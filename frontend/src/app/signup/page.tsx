@@ -5,7 +5,7 @@ import { Loader2 } from "lucide-react";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { OuterSidebar } from "@/components/Sidebar";
+import { OuterSidebar } from "@/components/sidebar/Sidebar";
 import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/use-toast";
 import { useLocalStorage } from "react-storage-complete";

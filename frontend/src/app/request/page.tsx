@@ -44,7 +44,7 @@ const Request = () => {
   const [inputErrorUnits, setinputErrorUnits] = useState(false);
 
   const createRequest = async (event: { preventDefault: () => void; }) => {
-    event.preventDefault();
+    event.preventDefault(); // prevent from page reload
     setLoading(true);
     try {
       const { data } = await axios.post(donation_request, request, {
@@ -164,6 +164,32 @@ const Request = () => {
 
               <div>
                 <label
+                  htmlFor="place_ofdonation"
+                  className="block text-sm font-bold leading-6"
+                >
+                  Place of Donation
+                </label>
+                <div className="mt-2">
+                  <input
+                    id="place_of_donation"
+                    name="place_of_donation"
+                    type="text"
+                    autoComplete="place_of_donation"
+                    required={true}
+                    placeholder="Enter Patinet Address"
+                    onChange={(e) => {
+                      setRequest({
+                        ...request,
+                        place_of_donation: e.target.value,
+                      });
+                    }}
+                    className="block bg-yellow-100/70 w-full rounded-lg border-0 py-1.5 px-2 shadow-sm placeholder:text-gray-400 focus:ring-primary-foreground sm:text-sm sm:leading-6"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label
                   htmlFor="unit"
                   className="block text-sm font-bold leading-6"
                 >
@@ -265,7 +291,7 @@ const Request = () => {
               <div className="my-16">
                 <button
                   type="submit"
-                  className={loading ? "loading-btn mt-6" : "active-btn mt-6"}
+                  className={loading ? "loading-btn mt-8" : "active-btn mt-8"}
                   disabled={loading}
                 >
                   {loading ? <Loader2 className="animate-spin mr-2" /> : null}
