@@ -1,7 +1,20 @@
 "use client";
 
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+} from "@radix-ui/react-dropdown-menu";
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronsUpDown, MoreHorizontal } from "lucide-react";
+import {
+  ArrowUpDown,
+  ChevronsUpDown,
+  CircleEllipsis,
+  MoreHorizontal,
+} from "lucide-react";
 
 export type Request = {
   request_id: string;
@@ -144,5 +157,39 @@ export const columns: ColumnDef<Request>[] = [
         {row.getValue("current_status")}
       </div>
     ),
+  },
+  {
+    id: "actions",
+    enableHiding: false,
+    cell: ({ row }) => {
+
+      const required_on: string = row.getValue("required_on");
+      const isoDateString = required_on;
+      const date = new Date(isoDateString);
+      const hmrDate = date.toDateString();
+
+      // TODO: Enable "Mark Complete" and "Mark Cancelled" only for requested user
+
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button className="h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+              <CircleEllipsis className="h-4 w-4" />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="bg-white shadow-md shadow-black/40 rounded-md p-4">
+            <DropdownMenuItem className="p-2 hover:bg-gray-300 rounded-sm"
+              onClick={() => navigator.clipboard.writeText(`${row.getValue("blood_group")} on ${hmrDate}`)}
+            >
+              Copy Details
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="p-2 hover:bg-gray-300 rounded-sm">Mark Complete</DropdownMenuItem>
+            <DropdownMenuItem className="p-2 hover:bg-gray-300 rounded-sm">Mark Cancelled</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      );
+    },
   },
 ];
