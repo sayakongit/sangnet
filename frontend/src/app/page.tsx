@@ -14,7 +14,7 @@ import {
 } from "@/components/constants/Const";
 import axios, { AxiosError } from "axios";
 import { getUserData } from "@/components/server/UserManager";
-import { DashboardSideBar } from "@/components/Sidebar";
+import { DashboardSideBar } from "@/components/sidebar/Sidebar";
 import Header from "@/components/Header";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -42,23 +42,8 @@ const Dashboard = () => {
     latitude: 22.518,
     zoom: 15,
   });
-  const [buttonText, setButtonText] = useState(
-    user ? user.donor_application_status : ""
-  );
+  
   const [donorLocations, setDonorLocations] = useState<any[][]>([]);
-
-  const donorApplication = (
-    user: { donor_application_status: string } | undefined
-  ) => {
-    if (user?.donor_application_status === "AP") {
-      setButtonText("Applied for Donor");
-    } else if (user?.donor_application_status == "NA") {
-      setButtonText("Be a donor");
-    } else if (user?.donor_application_status == "VR") {
-      setButtonText("Go to Donor Dashboard");
-    }
-    console.log("changed button text");
-  };
 
   const fetchNearbyDonorData = async (user_id: any) => {
     try {
@@ -153,10 +138,6 @@ const Dashboard = () => {
     //   });
     // }
   }, []);
-
-  useEffect(() => {
-    donorApplication(user);
-  }, [user]);
 
   return (
     <main className="min-h-[100vh] grid place-content-center">
