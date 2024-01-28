@@ -36,4 +36,9 @@ export const fulfill_request = `${backend}/donation/fullfill-donation/receiver/`
 export const donor_apply = `${backend}/donor/apply/`;
 
 
+// Other Constants
+
+export const blood_groups = ["A+", "B+", "O+", "AB+", "A-", "B-", "O-", "AB-"];
+
+
 // Database URL will be added later

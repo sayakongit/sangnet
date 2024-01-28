@@ -22,13 +22,13 @@ import {
 import { useState } from "react";
 
 import { Separator } from "@/components/ui/separator";
+import { blood_groups } from "@/components/constants/Const";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
-const blood_groups = ["A+", "B+", "O+", "AB+", "A-", "B-", "O-", "AB-"];
 const statuses = ["pending", "active", "fullfilled", "cancelled"];
 
 export function DataTable<TData, TValue>({

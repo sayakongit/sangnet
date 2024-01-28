@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
 import { Loader2 } from "lucide-react";
 import { useLocalStorage } from "react-storage-complete";
-import { donation_request, json_header } from "@/components/constants/Const";
+import { blood_groups, donation_request, json_header } from "@/components/constants/Const";
 
 type req = {
   requested_by: string | null | undefined;
@@ -18,8 +18,6 @@ type req = {
   reason: string;
   is_urgent: boolean;
 };
-
-const blood_groups = ["A+", "B+", "O+", "AB+", "A-", "B-", "O-", "AB-"];
 
 const Request = () => {
   const router = useRouter();
