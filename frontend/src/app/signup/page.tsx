@@ -156,7 +156,7 @@ const Signup = () => {
 
   return (
     <main className="flex flex-row">
-      <OuterSidebar></OuterSidebar>
+      <OuterSidebar />
 
       <section className="ml-[35vw] w-[65vw] min-h-[100vh] grid place-content-center">
         <div className="mx-auto p-6 items-center justify-center">
