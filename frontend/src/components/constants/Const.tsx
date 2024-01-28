@@ -11,7 +11,7 @@ export const json_header = {
 };
 
 //TODO:  export const backend = `${URL}:8000`;
-export const backend = `http://192.168.0.107:8000`;
+export const backend = `http://192.168.0.108:8000`;
 
 export const apply_donor = `${backend}/donor/apply/`;
 
