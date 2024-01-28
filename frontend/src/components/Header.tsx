@@ -211,7 +211,7 @@ const Header = () => {
         <div className="place-content-center grid">
           <h2 className="text-4xl my-auto font-medium">
             <span className="text-primary font-semibold">Hi, </span>
-            {user?.first_name + " " + user?.last_name}
+            {user && user?.first_name + " " + user?.last_name}
           </h2>
         </div>
         <div className="flex flex-row">
