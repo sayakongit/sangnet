@@ -141,7 +141,7 @@ const Donor = () => {
         <Header />
 
         <section className="grid grid-cols-3 px-12">
-          <div id="requests" className="py-8 col-span-2 px-4">
+          <div id="requests" className="py-8 2xl:py-14 col-span-2 px-4">
             <h3 className="text-gray-700 text-2xl font-bold mb-8 text-center">
               Donation Requests
             </h3>
@@ -241,7 +241,7 @@ const Donor = () => {
               </div>
             )}
           </div>
-          <div id="level" className="py-8 px-14">
+          <div id="level" className="py-8 2xl:py-14 px-14 2xl:px-28">
             <h3 className="text-gray-700 text-2xl font-bold mb-8 text-center">
               Profile Level
             </h3>
