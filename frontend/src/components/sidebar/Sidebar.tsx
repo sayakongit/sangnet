@@ -38,7 +38,7 @@ export const DashboardSideBar = (props: {
     {
       icon: History,
       entry: props.history,
-      text: "Requests",
+      text: "Donations",
       url: "/history/donor",
     },
   ];

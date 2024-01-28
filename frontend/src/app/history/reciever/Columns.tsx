@@ -1,23 +1,18 @@
 "use client";
 
-import { fulfill_request, json_header } from "@/components/constants/Const";
+import { fill_receiver_request, json_header } from "@/components/constants/Const";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
-  DropdownMenuLabel,
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "@radix-ui/react-dropdown-menu";
 import { ColumnDef } from "@tanstack/react-table";
 import axios, { AxiosError } from "axios";
-import { useRouter } from "next/router";
 import {
-  ArrowUpDown,
   ChevronsUpDown,
   CircleEllipsis,
-  MoreHorizontal,
-  User,
 } from "lucide-react";
 
 export type Request = {
@@ -65,7 +60,7 @@ const fulfillRequest = async (request_id: any) => {
 
   try {
     const { data } = await axios.post(
-      `${fulfill_request}${request_id}/`,
+      `${fill_receiver_request}${request_id}/`,
       {
         user_id: user_id,
       },
@@ -168,8 +163,7 @@ export const columns: ColumnDef<Request>[] = [
     },
     cell: ({ row }) => {
       const required_on: string = row.getValue("required_on");
-      const isoDateString = required_on;
-      const date = new Date(isoDateString);
+      const date = new Date(required_on);
       const humanReadableDateString = date.toDateString();
       return (
         <div className="text-left font-medium">{humanReadableDateString}</div>
