@@ -64,14 +64,8 @@
 
 /* width */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 10px;
 }
-
-/* Track */
-/* ::-webkit-scrollbar-track {
-  margin-top: 5px;
-  margin-bottom: 5px;
-} */
  
 /* Handle */
 ::-webkit-scrollbar-thumb {
