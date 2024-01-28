@@ -1,17 +1,20 @@
 "use client";
 
+
+import { DataTable } from "./DataTable";
 import Header from "@/components/Header";
-import { DashboardSideBar } from "@/components/sidebar/Sidebar";
-import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { columns } from "../reciever/Columns";
-import { DataTable } from "../reciever/DataTable";
+import { DonorColumns } from "./Columns";
 import axios, { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import userDetails from "@/components/state/GlobalState";
+import { DashboardSideBar } from "@/components/sidebar/Sidebar";
 import { donor_history, json_header } from "@/components/constants/Const";
 
 const ReceiverHistory = () => {
   const router = useRouter();
   const [data, setData] = useState<[]>([]);
+  const { user } = userDetails();
 
   const fetchDonorHistory = async (user_id: any) => {
     try {
@@ -32,6 +35,7 @@ const ReceiverHistory = () => {
       }
     } catch (error) {
       const e = error as AxiosError;
+      console.error(e.response?.data);
       if (e.response?.status === 400) {
         // toast.error(error.response.data.message);
       } else {
@@ -39,6 +43,19 @@ const ReceiverHistory = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if (user === null) {
+      return;
+    }
+    if (user.donor_id !== null) {
+      console.log("calling api");
+      fetchDonorHistory(user.donor_id);
+    } else {
+      // TODO: toast.error("Donor not found!");
+      router.replace("/");
+    }
+  }, [user]);
   
   return (
     <main className="overflow-x-hidden">
@@ -60,7 +77,7 @@ const ReceiverHistory = () => {
                   Donation History
                 </h2>
               </div>
-              <DataTable columns={columns} data={data} />
+              <DataTable columns={DonorColumns} data={data} />
             </div>
             {/* <div className="mt-12"> */}
             {/* </div> */}

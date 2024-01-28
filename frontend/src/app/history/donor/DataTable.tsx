@@ -58,12 +58,12 @@ export function DataTable<TData, TValue>({
     <div>
       <div className="flex justify-between items-center py-4 px-4">
         <input
-          placeholder="Filter By Donor..."
+          placeholder="Filter By Receiver..."
           value={
-            (table.getColumn("donor_id")?.getFilterValue() as string) ?? ""
+            (table.getColumn("requested_by")?.getFilterValue() as string) ?? ""
           }
           onChange={(event: { target: { value: any } }) =>
-            table.getColumn("donor_id")?.setFilterValue(event.target.value)
+            table.getColumn("requested_by")?.setFilterValue(event.target.value)
           }
           className="max-w-md focus:outline-none p-2 rounded-lg focus:border border-black"
         />
@@ -152,7 +152,7 @@ export function DataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No Requests.
+                  No Donations.
                 </TableCell>
               </TableRow>
             )}
