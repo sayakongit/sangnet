@@ -5,14 +5,14 @@ import { DataTable } from "./DataTable";
 import Header from "@/components/Header";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
-import { columns, Request } from "./Columns";
+import { ReceiverColumns, ReceiverRequest } from "./Columns";
 import React, { useEffect, useState } from "react";
 import { DashboardSideBar } from "@/components/sidebar/Sidebar";
 import { json_header, receiver_history } from "@/components/constants/Const";
 
 const Reciever = () => {
   const router = useRouter();
-  const [data, setData] = useState<Request[]>([]);
+  const [data, setData] = useState<ReceiverRequest[]>([]);
 
 
   const fetchRecieverHistory = async (user_id: string | null) => {
@@ -73,7 +73,7 @@ const Reciever = () => {
                   Add New Request
                 </button>
               </div>
-              <DataTable columns={columns} data={data} />
+              <DataTable columns={ReceiverColumns} data={data} />
             </div>
             {/* <div className="mt-12"> */}
             {/* </div> */}

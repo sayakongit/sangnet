@@ -9,6 +9,7 @@ import {
   useReactTable,
   getSortedRowModel,
   getFilteredRowModel,
+  VisibilityState,
 } from "@tanstack/react-table";
 
 import {
@@ -19,7 +20,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Separator } from "@/components/ui/separator";
 import { blood_groups } from "@/components/constants/Const";
@@ -37,7 +38,7 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const table = useReactTable({
     data,
     columns,
@@ -46,11 +47,24 @@ export function DataTable<TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
     state: {
       sorting,
       columnFilters,
+      columnVisibility,
     },
   });
+
+  useEffect(() => {
+    table
+      .getAllColumns()
+      .filter((column) => column.getCanHide())
+      .map((column) => {
+        if (column.id === "request_id") {
+          column.toggleVisibility(false);
+        }
+      });
+  }, []);
 
   // TODO Highlight expired, fulfilled and urgent requests with different colors
 

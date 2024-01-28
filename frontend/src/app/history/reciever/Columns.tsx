@@ -1,6 +1,5 @@
 "use client";
 
-import { fill_receiver_request, json_header } from "@/components/constants/Const";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -8,14 +7,15 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "@radix-ui/react-dropdown-menu";
-import { ColumnDef } from "@tanstack/react-table";
 import axios, { AxiosError } from "axios";
+import { ColumnDef } from "@tanstack/react-table";
 import {
-  ChevronsUpDown,
-  CircleEllipsis,
-} from "lucide-react";
+  fill_receiver_request,
+  json_header,
+} from "@/components/constants/Const";
+import { ChevronsUpDown, CircleEllipsis } from "lucide-react";
 
-export type Request = {
+export type ReceiverRequest = {
   request_id: string;
   donor_id: number | null;
   requested_by: {
@@ -56,8 +56,6 @@ export type Request = {
 const fulfillRequest = async (request_id: any) => {
   const user_id = localStorage.getItem("user_id");
 
-  // const router = useRouter();
-
   try {
     const { data } = await axios.post(
       `${fill_receiver_request}${request_id}/`,
@@ -72,7 +70,7 @@ const fulfillRequest = async (request_id: any) => {
     // fetchRecieverHistory(user?.id);
     // router.reload(); // Reload page
 
-    // console.log(data);
+    console.log(data);
   } catch (error) {
     console.log(error);
     const e = error as AxiosError;
@@ -86,7 +84,7 @@ const fulfillRequest = async (request_id: any) => {
   }
 };
 
-export const columns: ColumnDef<Request>[] = [
+export const ReceiverColumns: ColumnDef<ReceiverRequest>[] = [
   {
     accessorKey: "donor_id",
     header: ({ column }) => {
@@ -190,6 +188,11 @@ export const columns: ColumnDef<Request>[] = [
     ),
   },
   {
+    id: "request_id",
+    accessorKey: "request_id",
+    enableHiding: true,
+  },
+  {
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
@@ -197,6 +200,9 @@ export const columns: ColumnDef<Request>[] = [
       const isoDateString = required_on;
       const date = new Date(isoDateString);
       const hmrDate = date.toDateString();
+
+      const bld_grp = row.getValue("blood_group");
+      const donation_location = row.getValue("place_of_donation");
 
       // TODO: Enable "Mark Complete" and "Mark Cancelled" only for requested user
 
@@ -213,12 +219,10 @@ export const columns: ColumnDef<Request>[] = [
             className="bg-white shadow-md shadow-black/40 rounded-md p-4"
           >
             <DropdownMenuItem
-              className="p-2 hover:bg-gray-300 rounded-sm"
+              className="p-2 hover:bg-yellow-200 rounded-sm hover:outline-none"
               onClick={() =>
                 navigator.clipboard.writeText(
-                  `Need ${row.getValue(
-                    "blood_group"
-                  )} on ${hmrDate} at ${row.getValue("place_of_donation")}`
+                  `Need ${bld_grp} on ${hmrDate} at ${donation_location}`
                 )
               }
             >
@@ -226,12 +230,12 @@ export const columns: ColumnDef<Request>[] = [
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
-              // onClick={() => fulfillRequest(row.getValue("request_id"))}
-              className="p-2 hover:bg-gray-300 rounded-sm"
+              onClick={() => fulfillRequest(row.getValue("request_id"))}
+              className="p-2 hover:bg-green-400 rounded-sm hover:outline-none"
             >
               Mark Complete
             </DropdownMenuItem>
-            <DropdownMenuItem className="p-2 hover:bg-gray-300 rounded-sm">
+            <DropdownMenuItem className="p-2 hover:bg-red-400 rounded-sm hover:outline-none">
               Mark Cancelled
             </DropdownMenuItem>
           </DropdownMenuContent>
