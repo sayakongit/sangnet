@@ -1,31 +1,62 @@
 "use client";
 
-import React, { useState } from "react";
-import { RefreshCw } from "lucide-react";
-import { useRouter } from "next/navigation";
-
 import {
   AlertDialog,
+  AlertDialogTitle,
   AlertDialogAction,
   AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogTitle,
+  AlertDialogContent,
   AlertDialogTrigger,
+  AlertDialogDescription,
 } from "@/components/ui/alert-dialog";
+import { RefreshCw } from "lucide-react";
 import axios, { AxiosError } from "axios";
-import { toast } from "../ui/use-toast";
-import { useLocalStorage } from "react-storage-complete";
-import { donor_apply, json_header } from "../constants/Const";
+import { useRouter } from "next/navigation";
 import userDetails from "../state/GlobalState";
+import React, { useEffect, useState } from "react";
+import { useLocalStorage } from "react-storage-complete";
+import { blood_groups, donor_apply, json_header } from "../constants/Const";
 
-const StatusBtn = (props: { btnProperty: any; is_donor: boolean }) => {
+const StatusBtn = (props: { is_donor: boolean }) => {
   const router = useRouter();
-  const [userId, setUserId] = useLocalStorage("user_id", null);
+  const [userId] = useLocalStorage("user_id", null);
 
   const { user, setUser } = userDetails();
+
+  const [btnProperty, setBtnProperty] = useState<any>({
+    text: props.is_donor ? "Donor" : "Receiver",
+    color: "green-400",
+    applied: false,
+    verified: false,
+  });
+
+  const donorApplication = (
+    user: { donor_application_status: string } | undefined
+  ) => {
+    if (user?.donor_application_status === "AP") {
+      setBtnProperty({
+        ...btnProperty,
+        text: "Applied",
+        color: "yellow-600",
+        applied: true,
+      });
+    } else if (user?.donor_application_status == "NA") {
+      setBtnProperty({
+        ...btnProperty,
+        color: "red-600",
+      });
+    } else if (user?.donor_application_status == "VR") {
+      setBtnProperty({
+        ...btnProperty,
+        color: "green-400",
+        applied: true,
+        verified: true,
+      });
+    }
+    console.log(btnProperty);
+  };
 
   const [reqData, setReqData] = useState({
     blood_group: "",
@@ -63,7 +94,7 @@ const StatusBtn = (props: { btnProperty: any; is_donor: boolean }) => {
     if (props.is_donor) {
       router.push("/");
       return;
-    } else if (props.btnProperty.verified) {
+    } else if (btnProperty.verified) {
       router.push("/donor");
       return;
     }
@@ -87,12 +118,16 @@ const StatusBtn = (props: { btnProperty: any; is_donor: boolean }) => {
     );
   };
 
+  console.log(reqData);
+
   const ApplicationForm = () => {
     return (
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle className="">Do You want to be a Donor ?</AlertDialogTitle>
-          <AlertDialogDescription className="px-8">
+          <AlertDialogTitle className="px-8">
+            Do You want to be a Donor ?
+          </AlertDialogTitle>
+          <div className="px-8">
             <div>
               <form onSubmit={handleDonorRequest} className="my-8">
                 <div>
@@ -100,24 +135,33 @@ const StatusBtn = (props: { btnProperty: any; is_donor: boolean }) => {
                     htmlFor="blood_group"
                     className="block text-sm font-bold leading-6"
                   >
-                    Blood Group
+                    Your Blood Group
                   </label>
-                  <div className="mt-2">
-                    <input
-                      id="blood_group"
+                  <div className="mt-3">
+                    <select
                       name="blood_group"
-                      type="text"
-                      autoComplete="blood_group"
+                      id="blood_group"
+                      className="w-full focus:outline-none bg-yellow-100/70 rounded-lg border-0 py-1.5 px-2 text-md font-normal"
                       required={true}
+                      value={reqData.blood_group}
                       onChange={(e) => {
                         setReqData({
                           ...reqData,
                           blood_group: e.target.value,
                         });
                       }}
-                      placeholder="Enter"
-                      className="block bg-yellow-100/70 w-full rounded-lg border-0 py-1.5 px-2 shadow-sm placeholder:text-gray-400 focus:ring-primary-foreground sm:text-sm sm:leading-6"
-                    />
+                    >
+                      <option value={""}>Select Blood Group</option>
+                      {blood_groups.map((option, index) => (
+                        <option
+                          key={index}
+                          value={option}
+                          className="focus:bg-white"
+                        >
+                          {option}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
 
@@ -139,17 +183,24 @@ const StatusBtn = (props: { btnProperty: any; is_donor: boolean }) => {
                       onChange={(e) => {
                         setReqData({
                           ...reqData,
-                          last_donated: new Date(e.target.value).toISOString(),
+                          last_donated: e.target.value,
                         });
                       }}
                       className="block bg-yellow-100/70 w-full rounded-lg border-0 py-1.5 px-2 shadow-sm placeholder:text-gray-400 focus:ring-primary-foreground sm:text-sm sm:leading-6"
                     />
                   </div>
                 </div>
-                <button type="submit" className="mx-auto p-3 bg-primary text-white rounded-md mt-6">Submit Request</button>
+                <div className="w-full mt-8">
+                  <button
+                    type="submit"
+                    className="mx-auto p-2 px-3 bg-primary text-white rounded-md"
+                  >
+                    Submit Request
+                  </button>
+                </div>
               </form>
             </div>
-          </AlertDialogDescription>
+          </div>
         </AlertDialogHeader>
       </AlertDialogContent>
     );
@@ -173,34 +224,48 @@ const StatusBtn = (props: { btnProperty: any; is_donor: boolean }) => {
 
   var Component;
 
-  if (props.btnProperty.verified) {
+  if (btnProperty.verified) {
     Component = VisitPage;
-  } else if (props.btnProperty.applied) {
+  } else if (btnProperty.applied) {
     Component = ApplicationDiag;
   } else {
     Component = ApplicationForm;
   }
 
+  useEffect(() => {
+    donorApplication(user);
+  }, [user]);
+
   return (
-    <div className="mb-12 px-8">
-      <h2
-        className={`text-xl 2xl:text-2xl font-bold p-1 2xl:p-2 bg-white/20 rounded-3xl border border-${props.btnProperty.color} text-${props.btnProperty.color}`}
-      >
-        {props.btnProperty.text}
-      </h2>
+    <div className="mb-12 px-4">
+      <div className="px-4">
+        <h2
+          className={`text-xl 2xl:text-2xl font-bold p-1 2xl:p-2 bg-white/20 rounded-3xl border ${
+            btnProperty.applied
+              ? `${
+                  btnProperty.verified
+                    ? "border-red-600 text-red-600"
+                    : "border-yellow-500 text-yellow-500"
+                }`
+              : "border-green-500 text-green-500"
+          }`}
+        >
+          {btnProperty.text}
+        </h2>
+      </div>
 
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <button className="flex items-center gap-2 mx-auto text-xl mt-2 py-2 px-4 2xl:px-16 rounded-3xl hover:bg-white/20">
-            <RefreshCw
-              className={`${
-                props.btnProperty.applied
-                  ? "hover:animate-spin"
-                  : "animate-spin"
-              }  bg-white/40 p-1 rounded-lg text-2xl`}
-            />
-            Change Mode
-          </button>
+          <div className="w-full items-center text-center">
+            <button className="flex items-center gap-2 mx-auto text-xl mt-2 py-2 px-4 2xl:px-8 rounded-3xl hover:bg-white/20">
+              <RefreshCw
+                className={`${
+                  !btnProperty.applied || btnProperty.verified ? "animate-spin" : "hover:animate-spin"
+                }  bg-white/40 p-1 rounded-lg text-2xl`}
+              />
+              Change Mode
+            </button>
+          </div>
         </AlertDialogTrigger>
         <Component />
       </AlertDialog>

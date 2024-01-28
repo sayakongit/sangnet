@@ -2,8 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Home, History, UserRoundCog, RefreshCw } from "lucide-react";
-import userDetails from "../state/GlobalState";
+import { Home, History, UserRoundCog } from "lucide-react";
 import StatusBtn from "./StatusBtn";
 
 export const OuterSidebar = () => {
@@ -22,40 +21,7 @@ export const DashboardSideBar = (props: {
   reciever: boolean;
 }) => {
   const router = useRouter();
-  const { user } = userDetails();
-
-  const [btnProperty, setBtnProperty] = useState<any>({
-    text: props.donor ? "Donor" : "Receiver",
-    color: "white",
-    applied: false,
-    verified: false,
-  });
-
-  const donorApplication = (
-    user: { donor_application_status: string } | undefined
-  ) => {
-    if (user?.donor_application_status === "AP") {
-      setBtnProperty({
-        ...btnProperty,
-        text: "Applied",
-        color: "yellow-600",
-        applied: true,
-      });
-    } else if (user?.donor_application_status == "NA") {
-      setBtnProperty({
-        ...btnProperty,
-        color: "red-600",
-      });
-    } else if (user?.donor_application_status == "VR") {
-      setBtnProperty({
-        ...btnProperty,
-        color: "green-400",
-        applied: true,
-        verified: true,
-      });
-    }
-    console.log(btnProperty);
-  };
+  
 
   const RecieverList = [
     { icon: Home, entry: props.home, text: "Home", url: "/" },
@@ -75,19 +41,9 @@ export const DashboardSideBar = (props: {
       text: "Requests",
       url: "/history/donor",
     },
-    {
-      icon: UserRoundCog,
-      entry: props.reciever,
-      text: "Reciever",
-      url: "/",
-    },
   ];
 
   const CurrentList = props.donor ? DonorList : RecieverList;
-
-  useEffect(() => {
-    donorApplication(user);
-  }, [user]);
 
   return (
     <section className="flex flex-col justify-between h-[100vh] w-[20vw] text-center bg-primary text-white fixed">
@@ -119,7 +75,7 @@ export const DashboardSideBar = (props: {
           );
         })}
       </div>
-      <StatusBtn btnProperty={btnProperty} is_donor={props.donor} />
+      <StatusBtn is_donor={props.donor} />
     </section>
   );
 };
