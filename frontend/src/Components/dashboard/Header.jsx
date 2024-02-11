@@ -128,13 +128,15 @@ const Header = () => {
     }
   }, [user]);
   const googleTranslateElementInit = () => {
-    new window.google.translate.TranslateElement(
+    const language = new window.google.translate.TranslateElement(
       {
         pageLanguage: "en",
+       
         layout: window.google.translate.TranslateElement.FloatPosition.TOP_LEFT,
       },
       "google_translate_element"
     );
+    console.log(language)
   };
 
   useEffect(() => {
@@ -206,13 +208,21 @@ const Header = () => {
       }
     }
   };
+
+  const themeColor = localStorage.getItem("theme");
+
   return (
     <>
       <Box sx={{bgcolor : "background.default"}} className="headerContainer">
         <Box className="profile">
           {/* <img src={profileimage} alt="profile image" className="profileImage" /> */}
           <Box className="profileContent">
-            <Typography variant="h4">
+            <Typography variant="h4" style={{
+                color:
+                  themeColor === null || themeColor === "light"
+                    ? "black"
+                    : "white",
+              }}>
               <span style={{ color: "#40339f" }}>Hi, </span>
               {user && user.first_name && user.last_name
                 ? user.first_name + " " + user.last_name
@@ -233,7 +243,16 @@ const Header = () => {
         </Box>
         <Box className="lastUpdate">
           <Box className="updateBox">
-            <Box id="google_translate_element"></Box>
+            <Box id="google_translate_element"
+             sx={{
+              backgroundColor : !(themeColor === null || themeColor === "light")?"#121212":"white",
+              border : "0.05px solid rgba(155,155,155,0.35)",
+              color : (themeColor === null || themeColor === "light")?"#121212":"white",
+    display : "flex", // Adjust background color as needed
+    border: "1px solid #ccc", // Add border for better visibility
+    padding: "10", // Add padding for spacing
+    borderRadius: "5px", // Add border radius for rounded corners
+  }}></Box>
             {/* <Box className="updateText">
             <button className="refresh" onClick={getUserCoordinates}>
               <UpdateIcon className="updateIcon" />

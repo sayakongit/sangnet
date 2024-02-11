@@ -37,14 +37,14 @@
   outline: none;
   border-radius: 6px;
   padding: 14px 16px;
-  background-color: #ecebeb;
-  color: black;
+  background-color: transparent;
+  /* color: black; */
   border: 1px solid #ffffff;
   transition: all 0.3s linear;
 }
 
 .form-container input:focus {
-  background-color: white;
+  background-color: transparent;
   color: black;
   transition: 100ms ease-in-out;
   border: 1px solid #40339f;

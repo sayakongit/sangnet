@@ -1,18 +1,36 @@
 import React from "react";
 import "./Error.css";
 import { useNavigate } from "react-router";
+import { Box } from "@mui/material";
 
 const Error = () => {
   const navigate = useNavigate();
+  const themeColor = localStorage.getItem("theme");
 
   return (
-    <div className="container">
-      <div className="lock"> </div>
-      <div className="message">
-        <h1 className="errortype">404</h1>
-        <p className="errormsg">Opps! Some Error Occurred.</p>
-      </div>
-      <div className="button">
+    <Box sx={{ backgroundColor: "background.default" }} className="container">
+      <Box className="lock"> </Box>
+      <Box className="message">
+        <h1
+          style={{
+            color:
+              themeColor === null || themeColor === "light" ? "black" : "white",
+          }}
+          className="errortype"
+        >
+          404
+        </h1>
+        <p
+          style={{
+            color:
+              themeColor === null || themeColor === "light" ? "black" : "white",
+          }}
+          className="errormsg"
+        >
+          Opps! Some Error Occurred.
+        </p>
+      </Box>
+      <Box className="button">
         <button
           className="errorButton"
           onClick={() => {
@@ -21,8 +39,8 @@ const Error = () => {
         >
           Home
         </button>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

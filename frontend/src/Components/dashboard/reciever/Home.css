@@ -122,12 +122,12 @@
   width: 40px;
 }
 .form-group select {
-  background-color: #f6f6f6;
+  background-color: transparent;
   border: none;
   outline: none;
 }
 .form-group input {
-  background-color: #f6f6f6;
+  background-color: transparent;
   border: none;
 }
 .requestDonorButton {

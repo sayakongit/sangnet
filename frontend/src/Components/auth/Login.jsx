@@ -142,12 +142,14 @@ const Login = () => {
           <h1 className="logo-h1"> Sangnet </h1>
           <p>"Connecting Lives, Saving Futures."</p>
         </div>
-        <div style={{ display: "flex", flex : 2, flexDirection: "column-reverse" }}>
+        <div
+          style={{ display: "flex", flex: 2, flexDirection: "column-reverse" }}
+        >
           <div
             style={{
               // paddingLeft: "30px",
-              display : "grid",
-              placeItems : "center",
+              display: "grid",
+              placeItems: "center",
 
               // position: "fixed",
               // top: "100px",
@@ -197,6 +199,11 @@ const Login = () => {
                     value={values.email}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    style={{
+                      backgroundColor : !(themeColor === null || themeColor === "light")?"#121212":"white",
+                      border : "0.05px solid rgba(155,155,155,0.35)",
+                      color : (themeColor === null || themeColor === "light")?"#121212":"white",
+                    }}
                   />
                 </Box>
                 {errors.email && touched.email ? (
@@ -226,6 +233,11 @@ const Login = () => {
                     value={values.password}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                    style={{
+                      backgroundColor : !(themeColor === null || themeColor === "light")?"#121212":"white",
+                      border : "0.05px solid rgba(155,155,155,0.35)",
+                      color : (themeColor === null || themeColor === "light")?"#121212":"white",
+                    }}
                   />
                 </Box>
                 {errors.password && touched.password ? (
@@ -260,7 +272,15 @@ const Login = () => {
               </form>
             </Box>
           </div>
-          <div style={{display : "flex" , flex : 1 , justifyContent : "flex-end" , alignItems : "flex-start" , padding : "1.5rem"}}>
+          <div
+            style={{
+              display: "flex",
+              flex: 1,
+              justifyContent: "flex-end",
+              alignItems: "flex-start",
+              padding: "1.5rem",
+            }}
+          >
             <ThemeToggleButton />
           </div>
         </div>
