@@ -49,7 +49,7 @@ class ApplyAsDonorView(APIView):
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         except Exception as e:
-            # Handle exceptions appropriately
+            logging.error("Unable to send donor application", exc_info=True)
             return Response({'message': 'Something went wrong'}, status=status.HTTP_400_BAD_REQUEST)
 
 
