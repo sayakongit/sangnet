@@ -25,26 +25,41 @@ class ApplyAsDonorView(APIView):
 
                 user = User.objects.get(id=user_id)
 
-                # Check if last donation date is within the last 3 months
-                if last_donated_on:
-                    today = date.today()
-                    three_months_ago = today - timedelta(days=90)
-                    if last_donated_on > three_months_ago:
-                        return Response({'message': 'You cannot donate within the last 3 months'},
-                                        status=status.HTTP_400_BAD_REQUEST)
+                # Check if last donation date is within the last 6 months
+                if serializer.is_valid():
+                user_id = serializer.data['user_id']
+                blood_group = serializer.data['blood_group']
+                last_donated_on = serializer.data.get('last_donated_on', None)
 
-                if Donor.objects.filter(user=user).exists():
-                     donor = Donor(user=user, blood_group=blood_group, last_donated_on=last_donated_on)
-                     user.donor_application_status = 'AP'
+                try :
+                    if last_donated_on:
+                        today = datetime.now().date()
+                        six_months_ago = today - timedelta(days=180)
+                        if last_donated_on > six_months_ago:
+                            is_available = False
+                            return Response({'message':'You can donate after 6 months'})
+                        else:
+                            is_available = True
+                    else:
+                        is_available = True
+                    user = User.objects.get(id=user_id)
+                    if Donor.objects.filter(user=user).exists():
+                        application_status = user.donor_application_status
+                        return Response({'message': 'You have already applied as a donor',
+                                     'status': application_status}, status=status.HTTP_400_BAD_REQUEST)
 
-                     donor.save()
-                     user.donor_id = donor.pk
-                     user.save()
+                    donor = Donor(user=user, blood_group=blood_group, last_donated_on=last_donated_on,
+                              is_available=is_available)
+                    user.donor_application_status = 'AP'
 
-                     response = {
-                          'message': 'Donor application submitted successfully'
-                       }
-                     return Response(response, status=status.HTTP_201_CREATED)
+                    donor.save()
+                    user.donor_id = donor.pk
+                    user.save()
+
+                    response = {'message': 'Donor application submitted successfully'}
+                    return Response(response, status=status.HTTP_201_CREATED)
+                except:
+                    last_donated_on = None
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
