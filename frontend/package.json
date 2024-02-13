@@ -21,7 +21,7 @@
     "formik": "^2.4.5",
     "geolib": "^3.3.4",
     "mapbox-gl": "^3.0.1",
-    "moment": "^2.29.4",
+    "moment": "^2.30.1",
     "otp-input-react": "^0.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
