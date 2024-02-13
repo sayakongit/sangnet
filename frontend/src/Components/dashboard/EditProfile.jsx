@@ -6,6 +6,16 @@ import "react-toastify/dist/ReactToastify.css";
 import LoadingButton from "../UI/LoadingButton";
 import "./EditProfile.css";
 import { useAuthContext } from "../../Hooks/useAuthContext";
+import { Box  , Typography} from "@mui/material";
+import ThemeToggleButton from "../UI/ThemeToggleButton";
+
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from "dayjs";
+
+
 
 const EditProfile = () => {
   const navigate = useNavigate();
@@ -16,6 +26,8 @@ const EditProfile = () => {
   const [inputErrorPhone, setinputErrorPhone] = useState(false);
   const [inputErrorAddress, setinputErrorAddress] = useState(false);
   const { user, dispatch } = useAuthContext();
+  
+  const [value, setValue] = useState(dayjs());
 
   // const fetchProfileData = async (user_id) => {
   //   try {
@@ -105,49 +117,68 @@ const EditProfile = () => {
     setprevData(user);
     console.log("hye");
   }, [user]);
+
+  
+  const themeColor = localStorage.getItem("theme");
+
   return (
-    <div className="editContainer">
-      <div className="editContainerLeft">
+    <Box bgcolor={"background.default"}  className="editContainer">
+      <Box className="editContainerLeft">
         <h1 className="logo-h1">Sangnet</h1>
-      </div>
-      <div className="editContainerRight">
-        <div className="form-container sign-up">
-          <div className="edit_text">
-            <h1>Edit your profile </h1>
-          </div>
+      </Box>
+      <Box className="editContainerRight" sx={{display : "flex" , flexDirection : "column"}}>
+        <div style={{display : "flex" , justifyContent : "flex-end" , width : "100%" , paddingRight : "1rem"}}>
+
+            <ThemeToggleButton/>  
+        </div>
+        <Box className="form-container sign-up">
+          <Box className="edit_text">
+          <h6
+              style={{flex : "100%" ,fontSize : "1.25rem" ,color : (themeColor === null || themeColor === "light")?"black":"white"}}
+            >
+              Edit your profile
+            </h6>
+          </Box>
+          
           <form
+          style={{gap : 5 , display : "flex" , flexDirection : "column"}}
             onSubmit={(e) => {
               handleSubmit(e);
             }}
             autoComplete="off"
           >
             {/* name */}
-            <div className="name_container">
+            <Box className="name_container">
               {/* FirstName */}
-              <div className="form-group">
-                <label htmlFor="fname" className="input-label">
+              <Box className="form-group">
+                <label style={{color : (themeColor === null || themeColor === "light")?"black":"white"}} htmlFor="fname" className="input-label">
                   First Name{" "}
                 </label>
                 <input
                   type="text"
                   name="fname"
-                  id="fname"
                   autoComplete="off"
                   value={prevData?.first_name}
+                  placeholder="Enter your first name :"
                   onChange={(e) => {
                     setprevData({ ...prevData, first_name: e.target.value });
                     handleChange(e);
                   }}
                   className="class_fname"
+                  style={{
+                    backgroundColor : !(themeColor === null || themeColor === "light")?"#121212":"white",
+                    border : "0.05px solid rgba(155,155,155,0.35)",
+                    color : (themeColor === null || themeColor === "light")?"#121212":"white",
+                  }}
                 />
                 {inputErrorFname && (
                   <p className="errorProfileMsg">enter a valid name</p>
                 )}
-              </div>
+              </Box>
 
               {/* LastName */}
-              <div className="form-group">
-                <label htmlFor="lname" className="input-label">
+              <Box className="form-group">
+                <label style={{color : (themeColor === null || themeColor === "light")?"black":"white"}}   htmlFor="lname" className="input-label">
                   Last Name{" "}
                 </label>
                 <input
@@ -155,20 +186,26 @@ const EditProfile = () => {
                   name="lname"
                   id="lname"
                   autoComplete="off"
+                  placeholder="Enter your last name :"
                   value={prevData?.last_name}
                   onChange={(e) => {
                     setprevData({ ...prevData, last_name: e.target.value });
                     handleChange(e);
                   }}
+                  style={{
+                    backgroundColor : !(themeColor === null || themeColor === "light")?"#121212":"white",
+                    border : "0.05px solid rgba(155,155,155,0.35)",
+                    color : (themeColor === null || themeColor === "light")?"#121212":"white",
+                  }}
                 />
                 {inputErrorLname && (
                   <p className="errorProfileMsg">enter a valid name</p>
                 )}
-              </div>
-            </div>
+              </Box>
+            </Box>
             {/* Email */}
-            <div className="form-group">
-              <label htmlFor="email" className="input-label">
+            <Box className="form-group">
+              <label style={{color : (themeColor === null || themeColor === "light")?"black":"white"}}  htmlFor="email" className="input-label">
                 Email{" "}
               </label>
               <input
@@ -177,13 +214,19 @@ const EditProfile = () => {
                 id="email"
                 autoComplete="off"
                 value={prevData?.email}
+                placeholder="Enter your email"
                 readOnly
+                style={{
+                  backgroundColor : !(themeColor === null || themeColor === "light")?"#121212":"white",
+                  border : "0.05px solid rgba(155,155,155,0.35)",
+                  color : (themeColor === null || themeColor === "light")?"#121212":"white",
+                }}
               />
-            </div>
+            </Box>
 
             {/* address */}
-            <div className="form-group">
-              <label htmlFor="address" className="input-label">
+            <Box className="form-group">
+              <label style={{color : (themeColor === null || themeColor === "light")?"black":"white"}}  htmlFor="address" className="input-label">
                 Address{" "}
               </label>
               <input
@@ -196,15 +239,21 @@ const EditProfile = () => {
                   setprevData({ ...prevData, address: e.target.value });
                   handleChange(e);
                 }}
+                placeholder="Enter the address : "
+                style={{
+                  backgroundColor : !(themeColor === null || themeColor === "light")?"#121212":"white",
+                  border : "0.05px solid rgba(155,155,155,0.35)",
+                  color : (themeColor === null || themeColor === "light")?"#121212":"white",
+                }}
               />
               {inputErrorAddress && (
                 <p className="errorProfileMsg">enter a valid address</p>
               )}
-            </div>
+            </Box>
 
             {/* Date of Birth */}
-            <div className="form-group">
-              <label htmlFor="date" className="input-label">
+            {/* <Box className="form-group">
+              <label style={{color : (themeColor === null || themeColor === "light")?"black":"white"}}  htmlFor="date" className="input-label">
                 Date of Birth{" "}
               </label>
               <input
@@ -212,15 +261,70 @@ const EditProfile = () => {
                 name="date"
                 id="date"
                 autoComplete="off"
-                style={{ color: "black" }}
+                // style={{ color: "black" }}
                 value={prevData?.date_of_birth}
                 readOnly
+                placeholder="Enter the data of birth"
+                style={{
+                  color:
+                  themeColor === null || themeColor === "light"
+                    ? "black"
+                    : "lightgray",
+                backgroundColor:
+                  themeColor === null || themeColor === "light"
+                    ? ""
+                    : "rgba(150,150,150,0.3)",
+              }}
               />
-            </div>
+            </Box> */}
+
+            <Box className="form-group">
+                  <label
+                    style={{
+                      color:
+                        themeColor === null || themeColor === "light"
+                          ? "black"
+                          : "white",
+                    }}
+                    htmlFor="date"
+                    className="input-label"
+                  >
+                    Date of Birth{" "}
+                  </label>
+                  {/* <input
+                    type="date"
+                    name="date"
+                    id="date"
+                    autoComplete="off"
+                    placeholder="Enter your Date of Birth"
+                    // style={{ color: "black" }}
+                    value={values.date}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    style={{
+                      backgroundColor : !(themeColor === null || themeColor === "light")?"#121212":"white",
+                      border : "0.05px solid rgba(155,155,155,0.35)",
+                      color : (themeColor === null || themeColor === "light")?"#121212":"white",
+                    }}
+                  /> */}
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DatePicker
+                  name="date"
+                  sx={{color : "white"}}
+                  value={value}
+                  onChange={handleChange}
+/>
+    </LocalizationProvider>
+                  {/* {errors.date && touched.date ? (
+                    <Box className="errors">
+                      <p>{errors.date}</p>
+                    </Box>
+                  ) : null} */}
+                </Box>
 
             {/* Phone Number */}
-            <div className="form-group">
-              <label htmlFor="number" className="input-label">
+            <Box className="form-group">
+              <label style={{color : (themeColor === null || themeColor === "light")?"black":"white"}} htmlFor="number" className="input-label">
                 Phone Number{" "}
               </label>
               <input
@@ -233,14 +337,20 @@ const EditProfile = () => {
                   setprevData({ ...prevData, phone: e.target.value });
                   handleChange(e);
                 }}
+                placeholder="Enter your phone number : "
+                style={{
+                  backgroundColor : !(themeColor === null || themeColor === "light")?"#121212":"white",
+                  border : "0.05px solid rgba(155,155,155,0.35)",
+                  color : (themeColor === null || themeColor === "light")?"#121212":"white",
+                }}
               />
               {inputErrorPhone && (
                 <p className="errorProfileMsg">enter a valid number</p>
               )}
-            </div>
+            </Box>
             {/* Adhaar card number */}
-            <div className="form-group">
-              <label htmlFor="adhaar_number" className="input-label">
+            <Box className="form-group">
+              <label style={{color : (themeColor === null || themeColor === "light")?"black":"white"}}  htmlFor="adhaar_number" className="input-label">
                 Adhaar Card Number{" "}
               </label>
               <input
@@ -250,11 +360,17 @@ const EditProfile = () => {
                 autoComplete="off"
                 value={prevData?.adhaar_number}
                 readOnly
+                placeholder="Enter the Adhaar Number : "
+                style={{
+                  backgroundColor : !(themeColor === null || themeColor === "light")?"#121212":"white",
+                  border : "0.05px solid rgba(155,155,155,0.35)",
+                  color : (themeColor === null || themeColor === "light")?"#121212":"white",
+                }}
               />
-            </div>
+            </Box>
 
             {/* Submit button  */}
-            <div className="buttons">
+            <Box className="buttons">
               <LoadingButton
                 text={"Edit Profile"}
                 loading={loading}
@@ -263,11 +379,11 @@ const EditProfile = () => {
                   console.log(prevData);
                 }}
               />
-            </div>
+            </Box>
           </form>
-        </div>
-      </div>
-    </div>
+        </Box>
+      </Box>
+    </Box>
   );
 };
 

@@ -292,28 +292,34 @@ const Home = () => {
   };
 
   return (
-    <div className="homeContainer">
-      <div className="homeLeft">
-        <div className="sidebarComponent">
+    <Box className="homeContainer" sx={{
+    
+      bgcolor: 'background.default',
+      color: 'text.primary',
+      height : "100vh",
+    }}>
+      <Box className="homeLeft">
+        <Box className="sidebarComponent">
           <Sidebar {...sidebarProp} />
-        </div>
-      </div>
-      <div className="homeRight">
-        <div className="headerComponent">
+        </Box>
+      </Box>
+      <Box className="homeRight">
+        <Box className="headerComponent">
           {/* */}
           <Header />
-        </div>
-        <div className="donor">
-          <div className="donorList">
+        </Box>
+        <Box className="donor" >
+          <Box className="donorList" >
             <Box
               sx={{
                 width: "95%",
                 typography: "body1",
+                bgcolor : "background.default"
               }}
               className="tabBox"
             >
-              <TabContext value={value}>
-                <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+              <TabContext value={value}  >
+                <Box sx={{ borderBottom: 1, borderColor: "Boxider", bgcolor : "background.default" }}>
                   <TabList
                     onChange={handleChange}
                     aria-label="lab API tabs example"
@@ -326,25 +332,25 @@ const Home = () => {
                 <TabPanel value="1">
                   {nearByData && nearByData.length !== 0 ? (
                     nearByData.map((data) => (
-                      <div className="donorContainer" key={data.donor_id}>
-                        <div className="detailbox">
-                          <div className="donorDetails">
-                            <div className="donorName">
+                      <Box className="donorContainer" key={data.donor_id}>
+                        <Box className="detailbox">
+                          <Box className="donorDetails">
+                            <Box className="donorName">
                               <h2>{data.name}</h2>
-                            </div>
-                            <div className="donorAddress">
+                            </Box>
+                            <Box className="donorAddress">
                               <h4>Blood Group - {data.blood_group}</h4>
                               <h4>
                                 {data.donation_count} donations made till now
                               </h4>
-                            </div>
-                          </div>
-                          <div className="donorDistance">
+                            </Box>
+                          </Box>
+                          <Box className="donorDistance">
                             <LocationOnIcon />
                             <p>{data.distance} Kms away</p>
-                          </div>
-                        </div>
-                      </div>
+                          </Box>
+                        </Box>
+                      </Box>
                     ))
                   ) : (
                     <p>
@@ -355,25 +361,25 @@ const Home = () => {
                 <TabPanel value="2" className="tab-panel">
                   {nearbyBloodBanks && nearbyBloodBanks.length !== 0 ? (
                     nearbyBloodBanks.map((data, index) => (
-                      <div className="donorContainer" key={index}>
-                        <div className="detailbox hospital">
-                          <div className="donorDetails">
-                            <div className="donorName">
+                      <Box className="donorContainer" key={index}>
+                        <Box className="detailbox hospital">
+                          <Box className="donorDetails">
+                            <Box className="donorName">
                               <h2>{data.name}</h2>
-                            </div>
-                            <div className="donorAddress">
+                            </Box>
+                            <Box className="donorAddress">
                               <h4>
                                 Blood Types Available: <br />
                                 {data["blood"]?.join(", ")}
                               </h4>
-                            </div>
-                          </div>
-                          <div className="donorDistance">
+                            </Box>
+                          </Box>
+                          <Box className="donorDistance">
                             <LocationOnIcon />
                             <p>{data.distance.toFixed(1)} Kms away</p>
-                          </div>
-                        </div>
-                      </div>
+                          </Box>
+                        </Box>
+                      </Box>
                     ))
                   ) : (
                     <p>
@@ -384,8 +390,8 @@ const Home = () => {
                 </TabPanel>
               </TabContext>
             </Box>
-          </div>
-          <div className="map-area">
+          </Box>
+          <Box className="map-area">
             <h3 className="map-area-heading">Nearby Donors & Bloodbanks</h3>
 
             {user?.coordinates?.longitude && user?.coordinates?.latitude ? (
@@ -433,17 +439,17 @@ const Home = () => {
             ) : (
               "Loading"
             )}
-          </div>
-        </div>
-        <div className="home-footer">
-          <div className="footer-card">
-            <div>
-              <div className="footer-card-content">
+          </Box>
+        </Box>
+        <Box className="home-footer">
+          <Box className="footer-card">
+            <Box>
+              <Box className="footer-card-content">
                 <h3>Want to be a Donor?</h3>
-              </div>
-              <div className="footer-card-button">
+              </Box>
+              <Box className="footer-card-button">
                 <button onClick={donorOptions}>{buttonText}</button>
-              </div>
+              </Box>
               <Modal
                 open={open}
                 onClose={handleClose}
@@ -456,7 +462,7 @@ const Home = () => {
                       handleSubmit(e);
                     }}
                   >
-                    <div className="form-group">
+                    <Box className="form-group">
                       <label htmlFor="bloodGroup">Blood Group *</label>
                       <select
                         id="bloodGroup"
@@ -473,8 +479,8 @@ const Home = () => {
                         <option value="O-">O-</option>
                         <option value="AB-">AB-</option>
                       </select>
-                    </div>
-                    <div className="form-group">
+                    </Box>
+                    <Box className="form-group">
                       <label htmlFor="requiredOn">Last donated on</label>
                       <input
                         id="requiredOn"
@@ -488,7 +494,7 @@ const Home = () => {
                           Future dates cannot be entered
                         </p>
                       )}
-                    </div>
+                    </Box>
                     <button
                       onClick={handleDonorRequest}
                       className="requestDonorButton"
@@ -498,13 +504,13 @@ const Home = () => {
                   </form>
                 </Box>
               </Modal>
-            </div>
-            <div>
+            </Box>
+            <Box>
               <img src={donorImage} alt="donor" />
-            </div>
-          </div>
-        </div>
-        {/* <div className="submitRequest">
+            </Box>
+          </Box>
+        </Box>
+        {/* <Box className="submitRequest">
               <LoadingButton
                 text={"Submit Request"}
                 loading={loading}
@@ -526,7 +532,7 @@ const Home = () => {
                       handleSubmit(e);
                     }}
                   >
-                    <div className="form-group">
+                    <Box className="form-group">
                       <label htmlFor="bloodGroup">Blood Group *</label>
                       <select
                         id="bloodGroup"
@@ -543,8 +549,8 @@ const Home = () => {
                         <option value="O-">O-</option>
                         <option value="AB-">AB-</option>
                       </select>
-                    </div>
-                    <div className="form-group">
+                    </Box>
+                    <Box className="form-group">
                       <label htmlFor="requiredOn">Last donated on</label>
                       <input
                         id="requiredOn"
@@ -558,7 +564,7 @@ const Home = () => {
                           Future dates cannot be entered
                         </p>
                       )}
-                    </div>
+                    </Box>
                     <button
                       onClick={handleDonorRequest}
                       className="requestDonorButton"
@@ -568,9 +574,9 @@ const Home = () => {
                   </form>
                 </Box>
               </Modal>
-        </div> */}
-      </div>
-    </div>
+        </Box> */}
+      </Box>
+    </Box>
   );
 };
 

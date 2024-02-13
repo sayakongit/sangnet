@@ -6,6 +6,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import LoadingButton from "../UI/LoadingButton";
+import { Box } from "@mui/material";
+import ThemeToggleButton from "../UI/ThemeToggleButton";
 
 const Otp = () => {
   const [OTP, setOTP] = useState("");
@@ -50,48 +52,105 @@ const Otp = () => {
   };
 
   useEffect(() => {
-    if (!location.state) {
-      return navigate("/login");
-    } else {
-      setEmail(location.state.email);
-    }
+    // if (!location.state) {
+    //   return navigate("/login");
+    // } else {
+    //   setEmail(location.state.email);
+    // }
   }, []);
+
+  const themeColor = localStorage.getItem("theme");
 
   return (
     <>
-      <div className="wrapper_otp">
-        <div className="container_left_otp">
+      <Box sx={{ bgcolor: "background.default", display: "flex" }}>
+        <Box className="container_left_otp">
           <h1 className="logo-h1"> Sangnet </h1>
-        </div>
-        <div className="container_right_otp">
-          <div className="form_container">
-            <div className="auth-heading otp">
-              <h2>Verify your account</h2>
-              <p>Enter the OTP sent on {email}</p>
-            </div>
-            <div className="auth_body">
-              <OTPInput
-                value={OTP}
-                onChange={setOTP}
-                autoFocus
-                OTPLength={4}
-                otpType="number"
-                disabled={false}
-                secure={false}
-              />
-            </div>
-            <div className="verify-button">
-              <LoadingButton
-                text={"Verify"}
-                loading={loading}
-                onClick={() => {
-                  verifyOTP();
-                }}
-              />
-            </div>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            // alignItems: "center",
+            // justifyContent: "center",
+            flexDirection: "column",
+          }}
+        >
+          <div
+            style={{
+              width: "100%",
+              justifyContent: "flex-end",
+              display: "flex",
+              padding: "1rem",
+            }}
+          >
+            <ThemeToggleButton />
           </div>
-        </div>
-      </div>
+
+          <div
+            style={{
+              height: "100%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Box className="form_container">
+              <Box className="auth-heading otp">
+                <p>Enter the OTP sent on {email}</p>
+                <h2
+                  style={{
+                    flex: "100%",
+                    fontSize: "1.25rem",
+                    color:
+                      themeColor === null || themeColor === "light"
+                        ? "black"
+                        : "white",
+                  }}
+                >
+                  Verify your account
+                </h2>
+                {/* <Box className="auth_body">
+                <OTPInput
+                  value={OTP}
+                  onChange={setOTP}
+                  autoFocus
+                  OTPLength={4}
+                  otpType="number"
+                  disabled={false}
+                  secure={false}
+                  />
+              </Box> */}
+                <Box
+                  className="auth_body"
+                  sx={{ "& > div > input": { backgroundColor : !(themeColor === null || themeColor === "light")?"#121212":"white",
+                  border : "0.05px solid rgba(155,155,155,0.35)",
+                  color : (themeColor === null || themeColor === "light")?"#121212":"white",} }}
+                >
+                  <OTPInput
+                    value={OTP}
+                    onChange={setOTP}
+                    autoFocus
+                    OTPLength={4}
+                    otpType="number"
+                    disabled={false}
+                    secure={false}
+                  />
+                </Box>
+                <Box className="verify-button">
+                  <LoadingButton
+                    text={"Verify"}
+                    loading={loading}
+                    onClick={() => {
+                      verifyOTP();
+                    }}
+                  />
+                </Box>
+              </Box>
+            </Box>
+          </div>
+        </Box>
+      </Box>
     </>
   );
 };

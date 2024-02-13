@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Signin from "./Components/auth/Signin";
 import Login from "./Components/auth/Login";
@@ -19,31 +19,67 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContextProvider } from "./context/AuthContext";
 
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import ColorModeContext from "./Context/ColorContext";
+
 function App() {
   const [count, setCount] = useState(0);
+  const [mode, setMode] = React.useState(
+    localStorage.getItem("theme") == null
+      ? "light"
+      : localStorage.getItem("theme")
+  );
+  localStorage.setItem("theme", mode);
+
+  const colorMode = React.useMemo(
+    () => ({
+      toggleColorMode: () => {
+        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+        localStorage.setItem("theme", mode);
+      },
+    }),
+    []
+  );
+
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode,
+        },
+      }),
+    [mode]
+  );
 
   return (
     <>
       <div className="app">
-        <AuthContextProvider>
-          <BrowserRouter>
-            <Routes>
-              <Route path="/signup" element={<Signin />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/otp" element={<Otp />} />
-              {/* <Route path="/error" element={<Error />} /> */}
-              <Route path="/" element={<Home />} />
-              <Route path="/header" element={<Header />} />
-              <Route path="/history-donor" element={<HistoryDonor />} />
-              <Route path="/history-reciever" element={<HistoryReciever />} />
-              <Route path="/rewards" element={<Rewards />} />
-              <Route path="/edit-profile" element={<EditProfile />} />
-              <Route path="/donor-dashboard" element={<DonorDashboard />} />
-              <Route path="/request" element={<Request />} />
-              <Route path="*" element={<Error />} />
-            </Routes>
-          </BrowserRouter>
-        </AuthContextProvider>
+        <ColorModeContext.Provider value={colorMode}>
+          <ThemeProvider theme={theme}>
+            <AuthContextProvider>
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/signup" element={<Signin />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/otp" element={<Otp />} />
+                  {/* <Route path="/error" element={<Error />} /> */}
+                  <Route path="/" element={<Home />} />
+                  <Route path="/header" element={<Header />} />
+                  <Route path="/history-donor" element={<HistoryDonor />} />
+                  <Route
+                    path="/history-reciever"
+                    element={<HistoryReciever />}
+                  />
+                  <Route path="/rewards" element={<Rewards />} />
+                  <Route path="/edit-profile" element={<EditProfile />} />
+                  <Route path="/donor-dashboard" element={<DonorDashboard />} />
+                  <Route path="/request" element={<Request />} />
+                  <Route path="*" element={<Error />} />
+                </Routes>
+              </BrowserRouter>
+            </AuthContextProvider>
+          </ThemeProvider>
+        </ColorModeContext.Provider>
       </div>
       <ToastContainer />
     </>

@@ -3,9 +3,13 @@
 </p>
 
 <div align="center">
-  <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
+
 </div>
 
 # 🚀 Sangnet | Connecting blood, saving life
@@ -110,6 +114,7 @@ For detailed information about the available API endpoints and their usage, refe
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
+
 <table>
   <tbody>
     <tr>
@@ -124,7 +129,6 @@ For detailed information about the available API endpoints and their usage, refe
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## Credits 👏
@@ -133,6 +137,5 @@ For detailed information about the available API endpoints and their usage, refe
 - Django REST Framework: [https://www.django-rest-framework.org/](https://www.django-rest-framework.org/)
 - React: [https://reactjs.org/](https://reactjs.org/)
 - Vite: [https://vitejs.dev/](https://vitejs.dev/)
-- Material UI: [https://mui.com/](https://mui.com/)
 - Material UI: [https://mui.com/](https://mui.com/)
 - Formik: [https://formik.org/](https://formik.org/)
