@@ -10,14 +10,14 @@
 
 # 🚀 Sangnet | Connecting blood, saving life
 
-This repository contains a project that combines Django, Django REST Framework, React, and Vite to create a web application with a robust backend and a dynamic frontend.
+This repository contains a project that combines Django, Django REST Framework, Next.js to create a web application with a robust backend and a dynamic frontend.
 
 ## Project Structure
 
 The project is organized into two main folders:
 
 - `backend`: Contains the Django application responsible for handling API requests and database interactions.
-- `frontend`: Contains the React application built using Vite, providing a modern and efficient development experience for the frontend.
+- `frontend`: Contains the React application built using Next.js, providing a modern and efficient development experience for the frontend.
 
 ## Backend (Django) 📦
 
@@ -81,9 +81,9 @@ The backend is built using Django and Django REST Framework, providing a RESTful
    ```
 7. Use `http://localhost:8000` as the API base URL.
 
-## Frontend (React with Vite) ⚛️
+## Frontend Next.js 14 ▲
 
-The frontend is built using React and Vite, providing fast development and hot module replacement for efficient code changes. The frontend offers a user-friendly interface to interact with the API provided by the Django backend.
+The frontend is built using Next Js. The frontend offers a user-friendly interface to interact with the API provided by the Django backend.
 
 ### Setting Up the Frontend 🛠️
 
@@ -93,13 +93,13 @@ The frontend is built using React and Vite, providing fast development and hot m
    ```
 2. Install the required Node packages:
    ```bash
-    npm install
+    yarn install | npm install ( yarn recommended )
    ```
-3. Start the Vite development server:
+3. Start the development server:
    ```bash
-    npm run dev
+    yarn dev | npm run dev ( yarn recommended )
    ```
-4. Navigate to `http://localhost:5173` to view the frontend.
+4. Navigate to `http://localhost:3000` to view the frontend.
 
 ## Postman API Public Workspace 📚
 
@@ -131,8 +131,7 @@ For detailed information about the available API endpoints and their usage, refe
 
 - Django: [https://www.djangoproject.com/](https://www.djangoproject.com/)
 - Django REST Framework: [https://www.django-rest-framework.org/](https://www.django-rest-framework.org/)
-- React: [https://reactjs.org/](https://reactjs.org/)
-- Vite: [https://vitejs.dev/](https://vitejs.dev/)
-- Material UI: [https://mui.com/](https://mui.com/)
-- Material UI: [https://mui.com/](https://mui.com/)
+- NEXT.js: [https://nextjs.org/](https://nextjs.org/)
+- Tailwind CSS [https://tailwindcss.com/](https://tailwindcss.com/)
+- Shadcn UI: [https://ui.shadcn.com/](https://ui.shadcn.com/)
 - Formik: [https://formik.org/](https://formik.org/)
